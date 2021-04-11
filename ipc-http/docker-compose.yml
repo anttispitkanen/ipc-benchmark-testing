@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  main_process:
+    build:
+      context: ./
+      dockerfile: ./mainProcess.Dockerfile
+    working_dir: /usr/src/app
+
+  the_operation:
+    build:
+      context: ./
+      dockerfile: ./TheOperation.Dockerfile
+    working_dir: /usr/src/app

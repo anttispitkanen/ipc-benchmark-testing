@@ -1,0 +1,20 @@
+{
+  "include": ["./**/*"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "ES2016",
+    "module": "commonjs",
+    "allowJs": true,
+    "checkJs": false,
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2019", "esnext.asynciterable", "dom"]
+  }
+}
