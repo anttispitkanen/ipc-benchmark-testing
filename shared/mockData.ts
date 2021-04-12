@@ -3,7 +3,8 @@
  */
 const MOCK_DATA_SIZE = (process.env.MOCK_DATA_SIZE || "medium") as
   | "small"
-  | "medium";
+  | "medium"
+  | "large";
 
 export interface IMockData {
   postId: number;
