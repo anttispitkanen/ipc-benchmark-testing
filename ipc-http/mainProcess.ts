@@ -3,18 +3,25 @@
  * in a different container using HTTP.
  */
 import * as http from "http";
-import mockData from "../shared/mockData";
+import { mockDataCreator } from "../shared/mockData";
 import { timestamp } from "../shared/timestamp";
+
+const {
+  THE_OPERATION_ENDPOINT_HOSTNAME,
+  THE_OPERATION_ENDPOINT_PORT,
+} = process.env;
 
 console.log(`Starting HTTP run.`);
 
 const options: http.RequestOptions = {
-  hostname: "localhost",
-  port: 3000,
+  hostname: THE_OPERATION_ENDPOINT_HOSTNAME,
+  port: THE_OPERATION_ENDPOINT_PORT,
   path: "/",
   method: "POST",
   headers: { "Content-Type": "application/json" },
 };
+
+const mockData = mockDataCreator();
 
 /**
  * Do a dumb wait so that the server has some time to start before

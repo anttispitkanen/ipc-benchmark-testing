@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "benchmark": "npm run tsc && node benchmark.js"
+    "benchmark": "npm run tsc && node benchmark.js",
+    "test:http": "npm run tsc && docker-compose -f ./ipc-http/docker-compose.yml up"
   },
   "repository": {
     "type": "git",

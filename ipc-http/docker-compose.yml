@@ -4,11 +4,23 @@ services:
   main_process:
     build:
       context: ./
-      dockerfile: ./mainProcess.Dockerfile
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/usr/src/app
+      - ../shared/:/usr/src/shared
     working_dir: /usr/src/app
+    environment:
+      - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
+      - THE_OPERATION_ENDPOINT_PORT=3000
+      - MOCK_DATA_SIZE
+    command: "node mainProcess.js"
 
   the_operation:
     build:
       context: ./
-      dockerfile: ./TheOperation.Dockerfile
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/usr/src/app
+      - ../shared/:/usr/src/shared
     working_dir: /usr/src/app
+    command: "node server.js"

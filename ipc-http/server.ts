@@ -23,6 +23,8 @@ const handler = (req: http.IncomingMessage, res: http.ServerResponse) => {
 
           res.writeHead(200);
           res.end(JSON.stringify({ result: result }));
+          console.log("My work here is done.");
+          process.exit(0);
         } catch (err) {
           res.writeHead(500);
           res.end(JSON.stringify({ error: "Something went wrong :/" }));
@@ -37,4 +39,6 @@ const handler = (req: http.IncomingMessage, res: http.ServerResponse) => {
 };
 
 const server = http.createServer(handler);
-server.listen(3000);
+server.listen(3000, undefined, undefined, () => {
+  console.log("Listening for HTTP on port 3000");
+});
