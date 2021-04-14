@@ -2,7 +2,9 @@
  * Define a unified interface for TheOperation creator so that different
  * methods can be ran as sort of a dependency injection.
  */
-import { TheOperation } from "./TheOperation";
+import { httpTransportMethod } from "../ipc-http/mainProcess";
+import { IMockData } from "./mockData";
+import { TheOperation, ITheOperationResults } from "./TheOperation";
 
 // TODO: define more input types if more methods are tested
 export enum EDataTransportMethod {
@@ -11,8 +13,8 @@ export enum EDataTransportMethod {
 }
 
 export type TTheOperationCreator = (
-  methodToTest: EDataTransportMethod
-) => typeof TheOperation;
+  dataTransportMethod: EDataTransportMethod
+) => (data: IMockData[]) => Promise<ITheOperationResults>;
 
 export const TheOperationCreator: TTheOperationCreator = (
   dataTransportMethod: EDataTransportMethod
@@ -20,8 +22,14 @@ export const TheOperationCreator: TTheOperationCreator = (
   switch (dataTransportMethod) {
     case EDataTransportMethod.BENCHMARK:
       // The benchmark just runs TheOperation "raw" in the same process
-      return TheOperation;
+      return (data: IMockData[]) => Promise.resolve(TheOperation(data));
+
+    case EDataTransportMethod.HTTP:
+      return httpTransportMethod;
+
     default:
-      throw Error(`Unsupported methodToTest ${dataTransportMethod} provided`);
+      throw Error(
+        `Unsupported dataTransportMethod ${dataTransportMethod} provided`
+      );
   }
 };

@@ -4,23 +4,24 @@ services:
   main_process:
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ../shared/Dockerfile
     volumes:
-      - ./:/usr/src/app
-      - ../shared/:/usr/src/shared
+      - ./:/usr/src/app/ipc-http
+      - ../shared/:/usr/src/app/shared
     working_dir: /usr/src/app
     environment:
+      - DATA_TRANSPORT_METHOD=http
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
       - THE_OPERATION_ENDPOINT_PORT=3000
       - MOCK_DATA_SIZE
-    command: "node mainProcess.js"
+    command: "node ./shared/mainProcess.js"
 
   the_operation:
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ../shared/Dockerfile
     volumes:
-      - ./:/usr/src/app
-      - ../shared/:/usr/src/shared
+      - ./:/usr/src/app/ipc-http
+      - ../shared/:/usr/src/app/shared
     working_dir: /usr/src/app
-    command: "node server.js"
+    command: "node ./ipc-http/server.js"

@@ -22,7 +22,7 @@ const handler = (req: http.IncomingMessage, res: http.ServerResponse) => {
           const result = TheOperation(requestData as IMockData[]);
 
           res.writeHead(200);
-          res.end(JSON.stringify({ result: result }));
+          res.end(JSON.stringify(result));
           console.log("My work here is done.");
           process.exit(0);
         } catch (err) {

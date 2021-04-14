@@ -6,7 +6,6 @@
  * the outcome. The only thing that varies is whether TheOperation is running as a
  * separate process, and how the data is transferred between the processes.
  */
-
 import { mockDataCreator } from "./mockData";
 import { timestamp } from "./timestamp";
 import {
@@ -42,4 +41,8 @@ const main = async () => {
   );
 };
 
-main();
+// Wait five seconds before launching main process, to give potential
+// side processess / sidecar containers some time to start.
+setTimeout(() => {
+  main();
+}, 5000);

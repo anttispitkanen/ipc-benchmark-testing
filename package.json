@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "benchmark": "npm run tsc && node benchmark.js",
+    "benchmark": "npm run tsc && DATA_TRANSPORT_METHOD=benchmark node ./shared/mainProcess.js",
+    "test:benchmark": "npm run tsc && docker-compose -f ./benchmark/docker-compose.yml up",
     "test:http": "npm run tsc && docker-compose -f ./ipc-http/docker-compose.yml up"
   },
   "repository": {

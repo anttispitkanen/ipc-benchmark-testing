@@ -1,10 +1,14 @@
 /**
  * Mock data from https://jsonplaceholder.typicode.com/comments as of 11.4.2021
  */
-const MOCK_DATA_SIZE = (process.env.MOCK_DATA_SIZE || "medium") as
-  | "small"
-  | "medium"
-  | "large";
+enum EMockDataSize {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
+}
+
+const MOCK_DATA_SIZE = (process.env.MOCK_DATA_SIZE ||
+  "medium") as EMockDataSize;
 
 export interface IMockData {
   postId: number;

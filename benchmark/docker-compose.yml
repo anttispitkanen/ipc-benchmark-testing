@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  main_process:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./:/usr/src/app/benchmark
+      - ../shared/:/usr/src/app/shared
+      - ../ipc-http/:/usr/src/app/ipc-http
+    working_dir: /usr/src/app
+    environment:
+      - DATA_TRANSPORT_METHOD=benchmark
+      - MOCK_DATA_SIZE
+    command: "node ./shared/mainProcess.js"
