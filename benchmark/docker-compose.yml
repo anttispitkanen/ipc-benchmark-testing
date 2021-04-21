@@ -8,6 +8,7 @@ services:
     volumes:
       - ./:/usr/src/app/benchmark
       - ../shared/:/usr/src/app/shared
+      - ../results/:/usr/src/app/results
       - ../ipc-http/:/usr/src/app/ipc-http
     working_dir: /usr/src/app
     environment:

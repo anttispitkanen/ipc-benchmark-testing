@@ -8,6 +8,7 @@ services:
     volumes:
       - ./:/usr/src/app/ipc-http
       - ../shared/:/usr/src/app/shared
+      - ../results/:/usr/src/app/results
     working_dir: /usr/src/app
     environment:
       - DATA_TRANSPORT_METHOD=http
