@@ -2,7 +2,7 @@
  * Define a unified interface for TheOperation creator so that different
  * methods can be ran as sort of a dependency injection.
  */
-import { httpTransportMethod } from "../ipc-http/mainProcess";
+import { httpTransportMethod } from "../ipc-http/client";
 import { IMockData } from "./mockData";
 import { TheOperation, ITheOperationResults } from "./TheOperation";
 

@@ -51,7 +51,7 @@ export const TheOperation = (
     comment.body
       // Strip newlines
       .replace("\n", " ")
-      // This can be dumb as there are no commast, dots etc. Besides we're not actually
+      // This can be dumb as there are no commas, dots etc. Besides we're not actually
       // interested in the results.
       .split(" ")
       // The mockData JSON is weirdly formatted with line breaks, so strip them off again

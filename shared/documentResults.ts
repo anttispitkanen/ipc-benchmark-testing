@@ -8,7 +8,7 @@ import { EDataTransportMethod } from "./TheOperationInterface";
 
 export type TStatistics = {
   duration: number;
-  TheProcessDuration: number;
+  TheOperationDuration: number;
   overheadDuration: number;
   overheadPercentage: number;
 };
@@ -75,7 +75,7 @@ const calculateAverages = (
 ): TStatistics => {
   const averages: TStatistics = {
     duration: 0,
-    TheProcessDuration: 0,
+    TheOperationDuration: 0,
     overheadDuration: 0,
     overheadPercentage: 0,
   };
@@ -84,14 +84,14 @@ const calculateAverages = (
   // aggregate sums...
   statisticsArr.forEach((stats) => {
     averages.duration += stats.duration;
-    averages.TheProcessDuration += stats.TheProcessDuration;
+    averages.TheOperationDuration += stats.TheOperationDuration;
     averages.overheadDuration += stats.overheadDuration;
     averages.overheadPercentage += stats.overheadPercentage;
   });
 
   // ...and divide to averages
   averages.duration /= length;
-  averages.TheProcessDuration /= length;
+  averages.TheOperationDuration /= length;
   averages.overheadDuration /= length;
   averages.overheadPercentage /= length;
 

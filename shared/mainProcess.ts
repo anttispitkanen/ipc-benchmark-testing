@@ -34,8 +34,8 @@ const main = async (): Promise<TStatistics> => {
   console.log(result);
 
   const duration = endMainProcess - startMainProcess;
-  const TheProcessDuration = result.duration;
-  const overheadDuration = duration - TheProcessDuration;
+  const TheOperationDuration = result.duration;
+  const overheadDuration = duration - TheOperationDuration;
   const overheadPercentage = (overheadDuration / duration) * 100;
 
   console.log(`mainProcess took in total ${duration} seconds.`);
@@ -46,14 +46,14 @@ const main = async (): Promise<TStatistics> => {
 
   return {
     duration,
-    TheProcessDuration,
+    TheOperationDuration,
     overheadDuration,
     overheadPercentage,
   };
 };
 
 // Wait five seconds before launching main process, to give potential
-// side processess / sidecar containers some time to start.
+// side processes / sidecar containers some time to start.
 setTimeout(async () => {
   const statistics = await main();
 
