@@ -21,7 +21,7 @@ export type TResultsSchema = {
   [key in EDataTransportMethod]: {
     [key in EMockDataSize]: {
       runs: TStatisticsWithTimestamp[];
-      averages: TStatistics[];
+      averages: TStatistics;
     };
   };
 };
