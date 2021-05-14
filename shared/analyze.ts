@@ -45,43 +45,51 @@ type TResultAnalysis = {
 
 type TResultAnalysisWithMetadata = TResultAnalysis;
 
+/**
+ * Helper for a typed Object.entries() use, see
+ * https://github.com/microsoft/TypeScript/issues/35101
+ */
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
+const entries = <T>(obj: T): Entries<T> => Object.entries(obj) as any;
+
 export const analyze = (
   resultsData: TResultsSchema
 ): TResultAnalysisWithMetadata => {
   // Grab timestamp from any individual run
   const timestamp = resultsData.benchmark.small.runs[0].timestamp;
 
-  const benchmarkAverages: TBenchmarkAverages = {
-    small: resultsData.benchmark.small.averages,
-    medium: resultsData.benchmark.medium.averages,
-    large: resultsData.benchmark.large.averages,
-  };
+  const { benchmark, ...resultsWithoutAverages } = resultsData;
 
-  const comparisons: TResultComparisons = {
-    http: {
-      small: {
-        averageValues: resultsData.http.small.averages,
-        comparisonToBenchmark: compareToBenchmark(
-          resultsData.http.small.averages,
-          benchmarkAverages.small
-        ),
-      },
-      medium: {
-        averageValues: resultsData.http.medium.averages,
-        comparisonToBenchmark: compareToBenchmark(
-          resultsData.http.medium.averages,
-          benchmarkAverages.medium
-        ),
-      },
-      large: {
-        averageValues: resultsData.http.large.averages,
-        comparisonToBenchmark: compareToBenchmark(
-          resultsData.http.large.averages,
-          benchmarkAverages.large
-        ),
-      },
-    },
-  };
+  const benchmarkAverages = entries(benchmark).reduce(
+    (averagesByMockDataSize, [mockDataSize, { averages }]) => ({
+      ...averagesByMockDataSize,
+      [mockDataSize]: averages,
+    }),
+    {} as TBenchmarkAverages
+  );
+
+  const comparisons = entries(resultsWithoutAverages).reduce(
+    (resultsComparison, [dataTransportMethod, comparisonData]) => ({
+      ...resultsComparison,
+      [dataTransportMethod]: entries(comparisonData).reduce(
+        (analysisByMockDataSize, [mockDataSize, { averages }]) => ({
+          ...analysisByMockDataSize,
+          [mockDataSize]: {
+            averageValues: averages,
+            comparisonToBenchmark: compareToBenchmark(
+              averages,
+              benchmarkAverages[mockDataSize]
+            ),
+          },
+        }),
+        {} as { [key in EMockDataSize]: TAnalysis }
+      ),
+    }),
+    {} as TResultComparisons
+  );
 
   return {
     timestamp,
