@@ -17,14 +17,18 @@ export type TStatisticsWithTimestamp = TStatistics & {
   timestamp: Date;
 };
 
-export type TResultsSchema = {
-  [key in EDataTransportMethod]: {
-    [key in EMockDataSize]: {
-      runs: TStatisticsWithTimestamp[];
-      averages: TStatistics;
-    };
-  };
+export type TStatisticsForMockDataSize = {
+  mockDataSize: EMockDataSize;
+  runs: TStatisticsWithTimestamp[];
+  averages: TStatistics;
 };
+
+export type TStatisticsForDataTransportMethod = {
+  dataTransportMethod: EDataTransportMethod;
+  statisticsByMockDataSize: TStatisticsForMockDataSize[];
+};
+
+// export type TResultsSchema = TStatisticsForDataTransportMethod[];
 
 export const documentResults = (
   date: Date,
@@ -34,35 +38,53 @@ export const documentResults = (
 ) => {
   const fileName = `${date.getFullYear()}-${
     date.getMonth() + 1
-  }-${date.getDate()}.json`;
+  }-${date.getDate()}.raw.json`;
 
-  let previousResults: TResultsSchema;
+  let results: TStatisticsForDataTransportMethod[];
 
   try {
-    previousResults = require(`../results/${fileName}`);
+    results = require(`../results/${fileName}`);
   } catch (err) {
-    previousResults = {} as TResultsSchema;
+    // If there are no previous results, create the result scaffold to make
+    // appending individual results more convenient.
+    results = Object.values(EDataTransportMethod).map(
+      (dataTransportMethod) => ({
+        dataTransportMethod,
+        statisticsByMockDataSize: Object.values(EMockDataSize).map(
+          (mockDataSize) => ({
+            mockDataSize,
+            runs: [] as TStatisticsWithTimestamp[],
+            averages: {} as TStatistics,
+          })
+        ),
+      })
+    );
   }
 
-  // TODO: refactor, this is terrible to read
-  const appendedResults: TResultsSchema = {
-    ...previousResults,
-    [dataTransportMethod]: {
-      ...previousResults[dataTransportMethod],
-      [mockDataSize]: {
-        runs: [
-          ...(previousResults?.[dataTransportMethod]?.[mockDataSize]?.runs ||
-            []),
-          { ...statistics, timestamp: date },
-        ],
-        averages: calculateAverages([
-          ...(previousResults?.[dataTransportMethod]?.[mockDataSize]?.runs ||
-            []),
-          { ...statistics, timestamp: date },
-        ]),
-      },
-    },
+  const statisticsWithTimestamp: TStatisticsWithTimestamp = {
+    ...statistics,
+    timestamp: date,
   };
+
+  const appendedResults = results.map((r) =>
+    r.dataTransportMethod === dataTransportMethod
+      ? {
+          ...r,
+          statisticsByMockDataSize: r.statisticsByMockDataSize.map((s) =>
+            s.mockDataSize === mockDataSize
+              ? {
+                  ...s,
+                  runs: [...s.runs, statisticsWithTimestamp],
+                  averages: calculateAverages([
+                    ...s.runs,
+                    statisticsWithTimestamp,
+                  ]),
+                }
+              : s
+          ),
+        }
+      : r
+  );
 
   fs.writeFileSync(
     path.join(__dirname, "..", "results", fileName),
