@@ -21,7 +21,7 @@ I started asking around inside my company (https://github.com/futurice) and an o
 - Instead of those, one could consider using **Unix sockets**
 - Instead of those, one could consider using **shared memory**
 
-> This project tries out the different methods to see what kind of actual latencies appear.
+**This project tries out the different methods to see what kind of actual latencies appear.**
 
 To add to those, there are some completely different approaches, such as child processes and C++ addons, that are left outside the scope of this project, but something to consider if you find yourself in a similar situation.
 
@@ -39,7 +39,7 @@ To simulate whatever the computationally intensive operation would be, there's [
 
 The actual test runs a "main process" script, that loads the mock data into memory, passes it to ["TheOperationInterface"](/shared/TheOperationInterface.ts), which chooses the desired data transport method based on the given environment variable. All the different methods run the same TheOperation script, the difference is in how the data is passed to TheOperation (i.e. over HTTP).
 
-"Main process" and takes time of the whole thing. It calculates the results:
+"Main process" runs and takes time of the whole thing. It calculates the results:
 
 - The whole process duration including data transfer latency _and_ running TheOperation
 - The duration of TheOperation
@@ -48,9 +48,13 @@ The actual test runs a "main process" script, that loads the mock data into memo
 
 "Main process" also writes the results into a file per data transport method and mock data size for further analysis and comparison.
 
-`npm run full-test-suite` runs all the mock data size & data transport method permutations 5 times. Averages are calculated.
+`npm run full-test-suite` runs all the mock data size & data transport method permutations 5 times. Averages are calculated. Results are saved in a file named `<date>.raw.json`.
 
-All the different processes are run as Nodejs Docker containers and orchestrated using `docker-compose`. At the time of writing I'm using Docker Desktop for Mac at 1 CPU and 4GB RAM.
+There's a separate [analysis script](/shared/analyze.ts) that takes the raw data file as input, and adds the analysis, i.e. comparing the results to the benchmark. Analyzed results are saved in a file named `<date>.analyzed.json`.
+
+By default the results are .gitignored, with the exception of naming them explicitly as `<something>.publish.json`. See example of raw results and analyzed results in [results directory](/results).
+
+All the different processes are run as Nodejs Docker containers and orchestrated using `docker-compose`. At the time of writing I'm using Docker Desktop for Mac at **1 CPU** and **4GB RAM**.
 
 ### Benchmark
 
@@ -64,17 +68,26 @@ All the tested methods are run as two Nodejs containers: one for the main proces
 
 [`ipc-http`](/ipc-http) uses "raw" HTTP, meaning the Nodejs built-in `http` library, to transport the data between a client (main process) and a server (TheOperation). The data is serialized using JSON.
 
-#### TODO: Implementing other data transport methods
+#### `ipc-http-express-axios` – HTTP using Express and Axios
 
-- "Nicer HTTP", using e.g. express and axios, as one often would in Nodejs development
-- Raw TCP
-- UDP
-- gRPC
-- Unix socket
+[`ipc-http-express-axios`](/ipc-http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
 
-## Results and conclusions
+#### TODO: Implementing data transport methods and such
 
-TODO: nothing to report yet
+- [x] "Raw HTTP" ([`ipc-http`](/ipc-http)) using the Nodejs native `http` module
+- [x] "Nicer HTTP" using express and axios ([`ipc-http-express-axios`](/ipc-http-express-axios)), as one often would in Nodejs development
+- [ ] Raw TCP
+- [ ] UDP
+- [ ] gRPC
+- [ ] Unix socket
+- [ ] Build a web UI for viewing and comparing results
+
+## Results and conclusions (to be continued)
+
+Initial testing suggests that
+
+- "Raw HTTP" adds an overhead of 3,000 % - 5,000 % (25 - 40 ms) depending on the mock data size compared to benchmark.
+- Express and Axios add an overhead of 10,000 % - 13,000 % (80 - 95 ms) depending on the mock data size compared to benchmark. Perhaps surprisingly this is ~3x of what "raw HTTP" adds.
 
 ## How to run this locally
 
