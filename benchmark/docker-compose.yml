@@ -4,12 +4,13 @@ services:
   main_process:
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ../shared/Dockerfile
     volumes:
       - ./:/usr/src/app/benchmark
       - ../shared/:/usr/src/app/shared
       - ../results/:/usr/src/app/results
       - ../ipc-http/:/usr/src/app/ipc-http
+      - ../ipc-http-express-axios/:/usr/src/app/ipc-http-express-axios
     working_dir: /usr/src/app
     environment:
       - DATA_TRANSPORT_METHOD=benchmark

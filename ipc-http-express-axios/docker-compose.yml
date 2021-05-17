@@ -4,15 +4,16 @@ services:
   main_process:
     build:
       context: ./
-      dockerfile: ../shared/Dockerfile
+      dockerfile: ./Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http
-      - ../ipc-http-express-axios/:/usr/src/app/ipc-http-express-axios
+      - ./:/usr/src/app/ipc-http-express-axios
+      - ../ipc-http/:/usr/src/app/ipc-http
       - ../shared/:/usr/src/app/shared
       - ../results/:/usr/src/app/results
+      - /usr/src/app/ipc-http-express-axios/node_modules/
     working_dir: /usr/src/app
     environment:
-      - DATA_TRANSPORT_METHOD=http
+      - DATA_TRANSPORT_METHOD=http-express-axios
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
       - THE_OPERATION_ENDPOINT_PORT=3000
       - MOCK_DATA_SIZE
@@ -21,9 +22,9 @@ services:
   the_operation:
     build:
       context: ./
-      dockerfile: ../shared/Dockerfile
+      dockerfile: ./Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http
+      - ./:/usr/src/app/ipc-http-express-axios
       - ../shared/:/usr/src/app/shared
     working_dir: /usr/src/app
-    command: "node ./ipc-http/server.js"
+    command: "node ./ipc-http-express-axios/server.js"
