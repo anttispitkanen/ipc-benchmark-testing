@@ -1,4 +1,5 @@
-import { mainProcess, EDataTransportMethod } from '../shared/mainProcess';
+import type { EIPCMethod } from 'ipc-benchmark-testing-types';
+import { mainProcess } from '../shared/mainProcess';
 import { httpTransportMethod } from './client';
 
-mainProcess(httpTransportMethod, EDataTransportMethod.HTTP);
+mainProcess(httpTransportMethod, 'http' as EIPCMethod.HTTP);

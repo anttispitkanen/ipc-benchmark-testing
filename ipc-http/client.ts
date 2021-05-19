@@ -3,13 +3,13 @@
  * in a different container using HTTP.
  */
 import * as http from 'http';
-import { IMockData } from '../shared/mockData';
-import { ITheOperationResults } from '../shared/TheOperation';
+import type {
+  TMockData,
+  TTheOperationResults,
+} from 'ipc-benchmark-testing-types';
 
-const {
-  THE_OPERATION_ENDPOINT_HOSTNAME,
-  THE_OPERATION_ENDPOINT_PORT,
-} = process.env;
+const { THE_OPERATION_ENDPOINT_HOSTNAME, THE_OPERATION_ENDPOINT_PORT } =
+  process.env;
 
 const options: http.RequestOptions = {
   hostname: THE_OPERATION_ENDPOINT_HOSTNAME,
@@ -20,8 +20,8 @@ const options: http.RequestOptions = {
 };
 
 export const httpTransportMethod = (
-  data: IMockData[],
-): Promise<ITheOperationResults> =>
+  data: TMockData[],
+): Promise<TTheOperationResults> =>
   new Promise(resolve => {
     const req = http.request(options, res => {
       let responseData = '';
@@ -31,7 +31,7 @@ export const httpTransportMethod = (
       });
 
       res.on('end', () => {
-        resolve(JSON.parse(responseData) as ITheOperationResults);
+        resolve(JSON.parse(responseData) as TTheOperationResults);
       });
     });
 

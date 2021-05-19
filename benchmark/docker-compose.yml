@@ -9,7 +9,8 @@ services:
       - ./:/usr/src/app/benchmark
       - ../shared/:/usr/src/app/shared
       - ../results/:/usr/src/app/results
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/benchmark
     environment:
+      - NODE_ENV=production
       - MOCK_DATA_SIZE
-    command: 'node ./benchmark/main.js'
+    command: 'node ./main.js'

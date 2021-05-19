@@ -9,12 +9,13 @@ services:
       - ./:/usr/src/app/ipc-http
       - ../shared/:/usr/src/app/shared
       - ../results/:/usr/src/app/results
-    working_dir: /usr/src/app
+    working_dir: /usr/src/app/ipc-http
     environment:
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
       - THE_OPERATION_ENDPOINT_PORT=3000
+      - NODE_ENV=production
       - MOCK_DATA_SIZE
-    command: 'node ./ipc-http/main.js'
+    command: 'node ./main.js'
 
   the_operation:
     build:
@@ -23,5 +24,7 @@ services:
     volumes:
       - ./:/usr/src/app/ipc-http
       - ../shared/:/usr/src/app/shared
-    working_dir: /usr/src/app
-    command: 'node ./ipc-http/server.js'
+    working_dir: /usr/src/app/ipc-http
+    environment:
+      - NODE_ENV=production
+    command: 'node ./server.js'

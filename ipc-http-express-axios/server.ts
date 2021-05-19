@@ -1,4 +1,5 @@
 import * as express from 'express';
+import type { TMockData } from 'ipc-benchmark-testing-types';
 import { TheOperation } from '../shared/TheOperation';
 
 const app = express();
@@ -6,7 +7,7 @@ const app = express();
 app.use(express.json({ limit: '10mb' }));
 
 app.post('/', (req, res) => {
-  const rawData = req.body;
+  const rawData = req.body as TMockData[];
 
   res.json(TheOperation(rawData));
 

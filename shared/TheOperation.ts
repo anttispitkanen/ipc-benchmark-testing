@@ -2,32 +2,14 @@
  * This is a function that simulates The Operation that could be outsourced
  * to another container and/or another language. The contents don't really
  * matter as this whole thing is more about benchmarking the different ways
- * of moving data between services.
+ * of moving data between services. TheOperation is intentionally slow.
  */
+import { TMockData, TTheOperationResults } from 'ipc-benchmark-testing-types';
 import { timestamp } from './timestamp';
-import { IMockData } from './mockData';
-
-type bodyWordStats = {
-  word: string;
-  numberOfAppearances: number;
-  // Which comments the word appeared in
-  sourceCommentIds: number[];
-};
-
-export interface ITheOperationResults {
-  durationMs: number;
-  commentWithShortestName: IMockData;
-  commentWithLongestName: IMockData;
-  topFiveWordsInBody: bodyWordStats[];
-}
-
-export type TTheOperationWrapper = (
-  data: IMockData[],
-) => Promise<ITheOperationResults>;
 
 export const TheOperation = (
-  commentsArray: IMockData[],
-): ITheOperationResults => {
+  commentsArray: TMockData[],
+): TTheOperationResults => {
   const start = timestamp();
 
   const commentWithShortestName = commentsArray.sort((c1, c2) =>

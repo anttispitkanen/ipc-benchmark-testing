@@ -3,34 +3,32 @@
  */
 import * as fs from 'fs';
 import * as path from 'path';
-import { EMockDataSize } from './mockData';
-import { EDataTransportMethod } from './mainProcess';
+import type {
+  EIPCMethod,
+  EMockDataSize,
+  TStatistics,
+  TStatisticsForIPCMethod,
+  TStatisticsWithTimestamp,
+} from 'ipc-benchmark-testing-types';
 
-export type TStatistics = {
-  durationMs: number;
-  TheOperationDurationMs: number;
-  overheadDurationMs: number;
-  overheadPercentage: number;
-};
+/**
+ * Helper arrays for looping through
+ */
+const IPC_METHODS: EIPCMethod[] = [
+  'benchmark' as EIPCMethod.BENCHMARK,
+  'http' as EIPCMethod.HTTP,
+  'http-express-axios' as EIPCMethod.HTTP_EXPRESS_AXIOS,
+];
 
-export type TStatisticsWithTimestamp = TStatistics & {
-  timestamp: Date;
-};
-
-export type TStatisticsForMockDataSize = {
-  mockDataSize: EMockDataSize;
-  runs: TStatisticsWithTimestamp[];
-  averages: TStatistics;
-};
-
-export type TStatisticsForDataTransportMethod = {
-  dataTransportMethod: EDataTransportMethod;
-  statisticsByMockDataSize: TStatisticsForMockDataSize[];
-};
+const MOCK_DATA_SIZES: EMockDataSize[] = [
+  'small' as EMockDataSize.SMALL,
+  'medium' as EMockDataSize.MEDIUM,
+  'large' as EMockDataSize.LARGE,
+];
 
 export const documentResults = (
   date: Date,
-  dataTransportMethod: EDataTransportMethod,
+  ipcMethod: EIPCMethod,
   mockDataSize: EMockDataSize,
   statistics: TStatistics,
 ) => {
@@ -38,22 +36,20 @@ export const documentResults = (
     date.getMonth() + 1
   }-${date.getDate()}.raw.json`;
 
-  let results: TStatisticsForDataTransportMethod[];
+  let results: TStatisticsForIPCMethod[];
 
   try {
     results = require(`../results/${fileName}`);
   } catch (err) {
     // If there are no previous results, create the result scaffold to make
     // appending individual results more convenient.
-    results = Object.values(EDataTransportMethod).map(dataTransportMethod => ({
-      dataTransportMethod,
-      statisticsByMockDataSize: Object.values(EMockDataSize).map(
-        mockDataSize => ({
-          mockDataSize,
-          runs: [] as TStatisticsWithTimestamp[],
-          averages: {} as TStatistics,
-        }),
-      ),
+    results = IPC_METHODS.map(ipcMethod => ({
+      ipcMethod,
+      statisticsByMockDataSize: MOCK_DATA_SIZES.map(mockDataSize => ({
+        mockDataSize,
+        runs: [] as TStatisticsWithTimestamp[],
+        averages: {} as TStatistics,
+      })),
     }));
   }
 
@@ -63,7 +59,7 @@ export const documentResults = (
   };
 
   const appendedResults = results.map(r =>
-    r.dataTransportMethod === dataTransportMethod
+    r.ipcMethod === ipcMethod
       ? {
           ...r,
           statisticsByMockDataSize: r.statisticsByMockDataSize.map(s =>

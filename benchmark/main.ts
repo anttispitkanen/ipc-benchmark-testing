@@ -1,11 +1,11 @@
-import { mainProcess, EDataTransportMethod } from '../shared/mainProcess';
-import { IMockData } from '../shared/mockData';
+import type { TMockData, EIPCMethod } from 'ipc-benchmark-testing-types';
+import { mainProcess } from '../shared/mainProcess';
 import { TheOperation } from '../shared/TheOperation';
 
 /**
  * Run TheOperation in the same process.
  */
-const runTheOperation = (data: IMockData[]) =>
+const runTheOperation = (data: TMockData[]) =>
   Promise.resolve(TheOperation(data));
 
-mainProcess(runTheOperation, EDataTransportMethod.BENCHMARK);
+mainProcess(runTheOperation, 'benchmark' as EIPCMethod.BENCHMARK);

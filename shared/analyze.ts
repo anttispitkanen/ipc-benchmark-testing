@@ -4,43 +4,24 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import {
-  TStatisticsForDataTransportMethod,
+  TStatisticsForIPCMethod,
   TStatistics,
-  TStatisticsForMockDataSize,
-} from './documentResults';
-import { EDataTransportMethod } from './mainProcess';
+  TStatisticsForIPCMethodWithComparisons,
+  TComparisonToBenchmark,
+} from 'ipc-benchmark-testing-types';
 
 const { INPUT_FILE } = process.env;
 
-const results =
-  require(INPUT_FILE as string) as TStatisticsForDataTransportMethod[];
-
-type TComparisonToBenchmark = {
-  durationToBenchmarkMs: number;
-  durationToBenchmarkPct: number;
-  TheOperationDurationToBenchmarkMs: number;
-  TheOperationDurationToBenchmarkPct: number;
-  overheadDurationToBenchmarkMs: number;
-  overheadDurationToBenchmarkPct: number;
-};
-
-type TStatisticsForMockDataSizeWithComparisons = TStatisticsForMockDataSize & {
-  comparisonToBenchmark: TComparisonToBenchmark;
-};
-
-type TStatisticsForDataTransportMethodWithComparisons = {
-  dataTransportMethod: EDataTransportMethod;
-  statisticsByMockDataSize: TStatisticsForMockDataSizeWithComparisons[];
-};
+const results = require(INPUT_FILE as string) as TStatisticsForIPCMethod[];
 
 export const analyze = (
-  resultsData: TStatisticsForDataTransportMethod[],
-): TStatisticsForDataTransportMethodWithComparisons[] => {
+  resultsData: TStatisticsForIPCMethod[],
+): TStatisticsForIPCMethodWithComparisons[] => {
   return resultsData.map(r => ({
     ...r,
     statisticsByMockDataSize: r.statisticsByMockDataSize.map(s => {
       const correspondingBenchmarkAverages = resultsData
-        .find(r => r.dataTransportMethod === EDataTransportMethod.BENCHMARK)
+        .find(r => r.ipcMethod === 'benchmark')
         ?.statisticsByMockDataSize.find(
           stats => stats.mockDataSize === s.mockDataSize,
         )?.averages;

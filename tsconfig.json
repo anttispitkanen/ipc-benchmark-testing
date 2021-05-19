@@ -1,6 +1,6 @@
 {
   "include": ["./**/*"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "visualization-ui"],
   "compilerOptions": {
     "target": "ES2016",
     "module": "commonjs",

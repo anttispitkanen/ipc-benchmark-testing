@@ -1,7 +1,8 @@
-import { mainProcess, EDataTransportMethod } from '../shared/mainProcess';
+import type { EIPCMethod } from 'ipc-benchmark-testing-types';
+import { mainProcess } from '../shared/mainProcess';
 import { httpExpressAxiosTransportMethod } from './client';
 
 mainProcess(
   httpExpressAxiosTransportMethod,
-  EDataTransportMethod.HTTP_EXPRESS_AXIOS,
+  'http-express-axios' as EIPCMethod.HTTP_EXPRESS_AXIOS,
 );

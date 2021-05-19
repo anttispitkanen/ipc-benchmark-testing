@@ -3,8 +3,8 @@
  * TheOperation on incoming requests.
  */
 import * as http from 'http';
+import type { TMockData } from 'ipc-benchmark-testing-types';
 import { TheOperation } from '../shared/TheOperation';
-import { IMockData } from '../shared/mockData';
 
 const handler = (req: http.IncomingMessage, res: http.ServerResponse) => {
   res.setHeader('Content-Type', 'application/json');
@@ -17,9 +17,9 @@ const handler = (req: http.IncomingMessage, res: http.ServerResponse) => {
       });
       req.on('end', () => {
         try {
-          const requestData = JSON.parse(body);
+          const requestData = JSON.parse(body) as TMockData[];
 
-          const result = TheOperation(requestData as IMockData[]);
+          const result = TheOperation(requestData);
 
           res.writeHead(200);
           res.end(JSON.stringify(result));

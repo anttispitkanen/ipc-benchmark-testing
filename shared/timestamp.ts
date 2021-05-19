@@ -1,4 +1,4 @@
-import { performance } from "perf_hooks";
+import { performance } from 'perf_hooks';
 /**
  * Use performance.now() to create timestamps that can be used
  * for logging operation times. Returns the value in milliseconds.
