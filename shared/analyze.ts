@@ -28,7 +28,7 @@ type TStatisticsForMockDataSizeWithComparisons = TStatisticsForMockDataSize & {
   comparisonToBenchmark: TComparisonToBenchmark;
 };
 
-type TStatisticsForDataTransportMethodWithComparisons = {
+export type TStatisticsForDataTransportMethodWithComparisons = {
   dataTransportMethod: EDataTransportMethod;
   statisticsByMockDataSize: TStatisticsForMockDataSizeWithComparisons[];
 };
