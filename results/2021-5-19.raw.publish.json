@@ -1,0 +1,431 @@
+[
+  {
+    "dataTransportMethod": "benchmark",
+    "statisticsByMockDataSize": [
+      {
+        "mockDataSize": "small",
+        "runs": [
+          {
+            "durationMs": 1.670300006866455,
+            "TheOperationDurationMs": 0.9249999523162842,
+            "overheadDurationMs": 0.7453000545501709,
+            "overheadPercentage": 44.620729898000874,
+            "timestamp": "2021-05-19T18:07:51.361Z"
+          },
+          {
+            "durationMs": 1.9359999895095825,
+            "TheOperationDurationMs": 1.1430999636650085,
+            "overheadDurationMs": 0.792900025844574,
+            "overheadPercentage": 40.95558006926577,
+            "timestamp": "2021-05-19T18:08:02.514Z"
+          },
+          {
+            "durationMs": 2.1032000184059143,
+            "TheOperationDurationMs": 1.2102999687194824,
+            "overheadDurationMs": 0.8929000496864319,
+            "overheadPercentage": 42.45435725904903,
+            "timestamp": "2021-05-19T18:08:13.704Z"
+          },
+          {
+            "durationMs": 1.5924000144004822,
+            "TheOperationDurationMs": 0.9460000395774841,
+            "overheadDurationMs": 0.646399974822998,
+            "overheadPercentage": 40.59281392724423,
+            "timestamp": "2021-05-19T18:08:25.175Z"
+          },
+          {
+            "durationMs": 2.1369999647140503,
+            "TheOperationDurationMs": 1.1604999899864197,
+            "overheadDurationMs": 0.9764999747276306,
+            "overheadPercentage": 45.69489896357088,
+            "timestamp": "2021-05-19T18:08:36.399Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 1.887779998779297,
+          "TheOperationDurationMs": 1.0769799828529358,
+          "overheadDurationMs": 0.8108000159263611,
+          "overheadPercentage": 42.86367602342616
+        }
+      },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 19.090200006961823,
+            "TheOperationDurationMs": 18.52310001850128,
+            "overheadDurationMs": 0.5670999884605408,
+            "overheadPercentage": 2.970634085833205,
+            "timestamp": "2021-05-19T18:08:47.631Z"
+          },
+          {
+            "durationMs": 18.363499999046326,
+            "TheOperationDurationMs": 17.66069996356964,
+            "overheadDurationMs": 0.7028000354766846,
+            "overheadPercentage": 3.827157325745001,
+            "timestamp": "2021-05-19T18:08:58.704Z"
+          },
+          {
+            "durationMs": 20.823400020599365,
+            "TheOperationDurationMs": 20.048700034618378,
+            "overheadDurationMs": 0.7746999859809875,
+            "overheadPercentage": 3.720333784178484,
+            "timestamp": "2021-05-19T18:09:09.852Z"
+          },
+          {
+            "durationMs": 20.521600008010864,
+            "TheOperationDurationMs": 19.717900037765503,
+            "overheadDurationMs": 0.8036999702453613,
+            "overheadPercentage": 3.91636115084412,
+            "timestamp": "2021-05-19T18:09:21.279Z"
+          },
+          {
+            "durationMs": 20.75129997730255,
+            "TheOperationDurationMs": 19.954299986362457,
+            "overheadDurationMs": 0.796999990940094,
+            "overheadPercentage": 3.840723192338987,
+            "timestamp": "2021-05-19T18:09:32.414Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 19.910000002384187,
+          "TheOperationDurationMs": 19.180940008163454,
+          "overheadDurationMs": 0.7290599942207336,
+          "overheadPercentage": 3.6550419077879597
+        }
+      },
+      {
+        "mockDataSize": "large",
+        "runs": [
+          {
+            "durationMs": 66.80609995126724,
+            "TheOperationDurationMs": 65.82260000705719,
+            "overheadDurationMs": 0.9834999442100525,
+            "overheadPercentage": 1.4721708720124091,
+            "timestamp": "2021-05-19T18:09:43.681Z"
+          },
+          {
+            "durationMs": 64.1603000164032,
+            "TheOperationDurationMs": 63.57050001621246,
+            "overheadDurationMs": 0.5898000001907349,
+            "overheadPercentage": 0.9192600409286534,
+            "timestamp": "2021-05-19T18:09:55.042Z"
+          },
+          {
+            "durationMs": 70.48269999027252,
+            "TheOperationDurationMs": 69.74639999866486,
+            "overheadDurationMs": 0.736299991607666,
+            "overheadPercentage": 1.044653498956885,
+            "timestamp": "2021-05-19T18:10:06.400Z"
+          },
+          {
+            "durationMs": 66.78929996490479,
+            "TheOperationDurationMs": 66.05779999494553,
+            "overheadDurationMs": 0.731499969959259,
+            "overheadPercentage": 1.0952352702358523,
+            "timestamp": "2021-05-19T18:10:17.728Z"
+          },
+          {
+            "durationMs": 67.1952999830246,
+            "TheOperationDurationMs": 66.51190000772476,
+            "overheadDurationMs": 0.6833999752998352,
+            "overheadPercentage": 1.0170353811538622,
+            "timestamp": "2021-05-19T18:10:28.756Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 67.08673998117447,
+          "TheOperationDurationMs": 66.34184000492095,
+          "overheadDurationMs": 0.7448999762535096,
+          "overheadPercentage": 1.1096710126575324
+        }
+      }
+    ]
+  },
+  {
+    "dataTransportMethod": "http",
+    "statisticsByMockDataSize": [
+      {
+        "mockDataSize": "small",
+        "runs": [
+          {
+            "durationMs": 32.39379996061325,
+            "TheOperationDurationMs": 0.9352999925613403,
+            "overheadDurationMs": 31.45849996805191,
+            "overheadPercentage": 97.11271912002128,
+            "timestamp": "2021-05-19T18:10:40.324Z"
+          },
+          {
+            "durationMs": 27.893499970436096,
+            "TheOperationDurationMs": 0.7416000366210938,
+            "overheadDurationMs": 27.151899933815002,
+            "overheadPercentage": 97.3413159431154,
+            "timestamp": "2021-05-19T18:10:51.634Z"
+          },
+          {
+            "durationMs": 27.07660001516342,
+            "TheOperationDurationMs": 0.7540000081062317,
+            "overheadDurationMs": 26.32260000705719,
+            "overheadPercentage": 97.21530765426982,
+            "timestamp": "2021-05-19T18:11:02.859Z"
+          },
+          {
+            "durationMs": 31.482100009918213,
+            "TheOperationDurationMs": 0.9035000205039978,
+            "overheadDurationMs": 30.578599989414215,
+            "overheadPercentage": 97.1301151440998,
+            "timestamp": "2021-05-19T18:11:14.322Z"
+          },
+          {
+            "durationMs": 26.971400022506714,
+            "TheOperationDurationMs": 0.7703999876976013,
+            "overheadDurationMs": 26.201000034809113,
+            "overheadPercentage": 97.14364108998892,
+            "timestamp": "2021-05-19T18:11:25.458Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 29.16347999572754,
+          "TheOperationDurationMs": 0.820960009098053,
+          "overheadDurationMs": 28.342519986629487,
+          "overheadPercentage": 97.18861979029904
+        }
+      },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 145.04879999160767,
+            "TheOperationDurationMs": 117.49409997463226,
+            "overheadDurationMs": 27.554700016975403,
+            "overheadPercentage": 18.996847970179473,
+            "timestamp": "2021-05-19T18:11:36.915Z"
+          },
+          {
+            "durationMs": 150.22810000181198,
+            "TheOperationDurationMs": 118.78500002622604,
+            "overheadDurationMs": 31.443099975585938,
+            "overheadPercentage": 20.930238733769972,
+            "timestamp": "2021-05-19T18:11:48.340Z"
+          },
+          {
+            "durationMs": 146.32209998369217,
+            "TheOperationDurationMs": 117.46430003643036,
+            "overheadDurationMs": 28.85779994726181,
+            "overheadPercentage": 19.722106196178196,
+            "timestamp": "2021-05-19T18:11:59.657Z"
+          },
+          {
+            "durationMs": 145.13999998569489,
+            "TheOperationDurationMs": 117.17040002346039,
+            "overheadDurationMs": 27.969599962234497,
+            "overheadPercentage": 19.27077302259281,
+            "timestamp": "2021-05-19T18:12:11.102Z"
+          },
+          {
+            "durationMs": 146.18639999628067,
+            "TheOperationDurationMs": 118.22489994764328,
+            "overheadDurationMs": 27.96150004863739,
+            "overheadPercentage": 19.12729231265617,
+            "timestamp": "2021-05-19T18:12:22.534Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 146.58507999181748,
+          "TheOperationDurationMs": 117.82774000167846,
+          "overheadDurationMs": 28.75733999013901,
+          "overheadPercentage": 19.609451647075325
+        }
+      },
+      {
+        "mockDataSize": "large",
+        "runs": [
+          {
+            "durationMs": 199.2233999967575,
+            "TheOperationDurationMs": 158.83279997110367,
+            "overheadDurationMs": 40.39060002565384,
+            "overheadPercentage": 20.274024048536077,
+            "timestamp": "2021-05-19T18:12:34.003Z"
+          },
+          {
+            "durationMs": 198.11269998550415,
+            "TheOperationDurationMs": 159.32539999485016,
+            "overheadDurationMs": 38.78729999065399,
+            "overheadPercentage": 19.57840158328671,
+            "timestamp": "2021-05-19T18:12:45.468Z"
+          },
+          {
+            "durationMs": 202.7649000287056,
+            "TheOperationDurationMs": 160.7620000243187,
+            "overheadDurationMs": 42.0029000043869,
+            "overheadPercentage": 20.71507445245233,
+            "timestamp": "2021-05-19T18:12:57.014Z"
+          },
+          {
+            "durationMs": 203.8940999507904,
+            "TheOperationDurationMs": 164.12319999933243,
+            "overheadDurationMs": 39.77089995145798,
+            "overheadPercentage": 19.505664931479938,
+            "timestamp": "2021-05-19T18:13:08.568Z"
+          },
+          {
+            "durationMs": 201.8400999903679,
+            "TheOperationDurationMs": 161.70679998397827,
+            "overheadDurationMs": 40.13330000638962,
+            "overheadPercentage": 19.883709930932874,
+            "timestamp": "2021-05-19T18:13:20.083Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 201.1670399904251,
+          "TheOperationDurationMs": 160.95003999471663,
+          "overheadDurationMs": 40.21699999570846,
+          "overheadPercentage": 19.991374989337583
+        }
+      }
+    ]
+  },
+  {
+    "dataTransportMethod": "http-express-axios",
+    "statisticsByMockDataSize": [
+      {
+        "mockDataSize": "small",
+        "runs": [
+          {
+            "durationMs": 95.60740000009537,
+            "TheOperationDurationMs": 0.8564000129699707,
+            "overheadDurationMs": 94.7509999871254,
+            "overheadPercentage": 99.10425342288451,
+            "timestamp": "2021-05-19T18:13:31.511Z"
+          },
+          {
+            "durationMs": 91.40969997644424,
+            "TheOperationDurationMs": 0.7791000008583069,
+            "overheadDurationMs": 90.63059997558594,
+            "overheadPercentage": 99.1476834503788,
+            "timestamp": "2021-05-19T18:13:42.826Z"
+          },
+          {
+            "durationMs": 91.50089997053146,
+            "TheOperationDurationMs": 0.7870000004768372,
+            "overheadDurationMs": 90.71389997005463,
+            "overheadPercentage": 99.13989916959255,
+            "timestamp": "2021-05-19T18:13:54.201Z"
+          },
+          {
+            "durationMs": 94.11830002069473,
+            "TheOperationDurationMs": 0.6988999843597412,
+            "overheadDurationMs": 93.41940003633499,
+            "overheadPercentage": 99.25742391840262,
+            "timestamp": "2021-05-19T18:14:05.587Z"
+          },
+          {
+            "durationMs": 96.76320004463196,
+            "TheOperationDurationMs": 0.7383999824523926,
+            "overheadDurationMs": 96.02480006217957,
+            "overheadPercentage": 99.23689999699079,
+            "timestamp": "2021-05-19T18:14:17.181Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 93.87990000247956,
+          "TheOperationDurationMs": 0.7719599962234497,
+          "overheadDurationMs": 93.1079400062561,
+          "overheadPercentage": 99.17723199164986
+        }
+      },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 100.77180004119873,
+            "TheOperationDurationMs": 16.04969996213913,
+            "overheadDurationMs": 84.7221000790596,
+            "overheadPercentage": 84.0732229100031,
+            "timestamp": "2021-05-19T18:14:28.585Z"
+          },
+          {
+            "durationMs": 102.2791000008583,
+            "TheOperationDurationMs": 15.623099982738495,
+            "overheadDurationMs": 86.65600001811981,
+            "overheadPercentage": 84.72503181724576,
+            "timestamp": "2021-05-19T18:14:39.747Z"
+          },
+          {
+            "durationMs": 98.487399995327,
+            "TheOperationDurationMs": 15.871399998664856,
+            "overheadDurationMs": 82.61599999666214,
+            "overheadPercentage": 83.88484212252743,
+            "timestamp": "2021-05-19T18:14:51.113Z"
+          },
+          {
+            "durationMs": 103.2156999707222,
+            "TheOperationDurationMs": 14.49949997663498,
+            "overheadDurationMs": 88.71619999408722,
+            "overheadPercentage": 85.95223402956347,
+            "timestamp": "2021-05-19T18:15:02.423Z"
+          },
+          {
+            "durationMs": 102.92219996452332,
+            "TheOperationDurationMs": 16.918899953365326,
+            "overheadDurationMs": 86.00330001115799,
+            "overheadPercentage": 83.56146685632724,
+            "timestamp": "2021-05-19T18:15:13.704Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 101.53523999452591,
+          "TheOperationDurationMs": 15.792519974708558,
+          "overheadDurationMs": 85.74272001981736,
+          "overheadPercentage": 84.4393595471334
+        }
+      },
+      {
+        "mockDataSize": "large",
+        "runs": [
+          {
+            "durationMs": 159.2125000357628,
+            "TheOperationDurationMs": 58.000299990177155,
+            "overheadDurationMs": 101.21220004558563,
+            "overheadPercentage": 63.57051112371895,
+            "timestamp": "2021-05-19T18:15:24.954Z"
+          },
+          {
+            "durationMs": 163.05050003528595,
+            "TheOperationDurationMs": 59.91600000858307,
+            "overheadDurationMs": 103.13450002670288,
+            "overheadPercentage": 63.253102569071196,
+            "timestamp": "2021-05-19T18:15:36.319Z"
+          },
+          {
+            "durationMs": 170.70249998569489,
+            "TheOperationDurationMs": 59.32380002737045,
+            "overheadDurationMs": 111.37869995832443,
+            "overheadPercentage": 65.24725763691693,
+            "timestamp": "2021-05-19T18:15:48.014Z"
+          },
+          {
+            "durationMs": 161.08399999141693,
+            "TheOperationDurationMs": 55.914000034332275,
+            "overheadDurationMs": 105.16999995708466,
+            "overheadPercentage": 65.28891756020985,
+            "timestamp": "2021-05-19T18:15:59.389Z"
+          },
+          {
+            "durationMs": 164.39980000257492,
+            "TheOperationDurationMs": 56.26410001516342,
+            "overheadDurationMs": 108.1356999874115,
+            "overheadPercentage": 65.77605324685177,
+            "timestamp": "2021-05-19T18:16:10.904Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 163.6898600101471,
+          "TheOperationDurationMs": 57.88364001512527,
+          "overheadDurationMs": 105.80621999502182,
+          "overheadPercentage": 64.62716842735374
+        }
+      }
+    ]
+  }
+]

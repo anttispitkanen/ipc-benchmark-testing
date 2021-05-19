@@ -7,9 +7,9 @@ import { EMockDataSize } from "./mockData";
 import { EDataTransportMethod } from "./TheOperationInterface";
 
 export type TStatistics = {
-  duration: number;
-  TheOperationDuration: number;
-  overheadDuration: number;
+  durationMs: number;
+  TheOperationDurationMs: number;
+  overheadDurationMs: number;
   overheadPercentage: number;
 };
 
@@ -27,8 +27,6 @@ export type TStatisticsForDataTransportMethod = {
   dataTransportMethod: EDataTransportMethod;
   statisticsByMockDataSize: TStatisticsForMockDataSize[];
 };
-
-// export type TResultsSchema = TStatisticsForDataTransportMethod[];
 
 export const documentResults = (
   date: Date,
@@ -96,25 +94,25 @@ const calculateAverages = (
   statisticsArr: TStatisticsWithTimestamp[]
 ): TStatistics => {
   const averages: TStatistics = {
-    duration: 0,
-    TheOperationDuration: 0,
-    overheadDuration: 0,
+    durationMs: 0,
+    TheOperationDurationMs: 0,
+    overheadDurationMs: 0,
     overheadPercentage: 0,
   };
   const length = statisticsArr.length;
 
   // aggregate sums...
   statisticsArr.forEach((stats) => {
-    averages.duration += stats.duration;
-    averages.TheOperationDuration += stats.TheOperationDuration;
-    averages.overheadDuration += stats.overheadDuration;
+    averages.durationMs += stats.durationMs;
+    averages.TheOperationDurationMs += stats.TheOperationDurationMs;
+    averages.overheadDurationMs += stats.overheadDurationMs;
     averages.overheadPercentage += stats.overheadPercentage;
   });
 
   // ...and divide to averages
-  averages.duration /= length;
-  averages.TheOperationDuration /= length;
-  averages.overheadDuration /= length;
+  averages.durationMs /= length;
+  averages.TheOperationDurationMs /= length;
+  averages.overheadDurationMs /= length;
   averages.overheadPercentage /= length;
 
   return averages;

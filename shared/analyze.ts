@@ -15,11 +15,11 @@ const { INPUT_FILE } = process.env;
 const results = require(INPUT_FILE as string) as TStatisticsForDataTransportMethod[];
 
 type TComparisonToBenchmark = {
-  durationToBenchmarkValue: number;
+  durationToBenchmarkMs: number;
   durationToBenchmarkPct: number;
-  TheOperationDurationToBenchmarkValue: number;
+  TheOperationDurationToBenchmarkMs: number;
   TheOperationDurationToBenchmarkPct: number;
-  overheadDurationToBenchmarkValue: number;
+  overheadDurationToBenchmarkMs: number;
   overheadDurationToBenchmarkPct: number;
 };
 
@@ -59,34 +59,35 @@ const compareToBenchmark = (
   comparisonAverages: TStatistics,
   benchmarkAverages: TStatistics
 ): TComparisonToBenchmark => {
-  const durationToBenchmarkValue =
-    comparisonAverages.duration - benchmarkAverages.duration;
+  const durationToBenchmarkMs =
+    comparisonAverages.durationMs - benchmarkAverages.durationMs;
 
   const durationToBenchmarkPct =
-    (durationToBenchmarkValue / benchmarkAverages.duration) * 100;
+    (durationToBenchmarkMs / benchmarkAverages.durationMs) * 100;
 
-  const TheOperationDurationToBenchmarkValue =
-    comparisonAverages.TheOperationDuration -
-    benchmarkAverages.TheOperationDuration;
+  const TheOperationDurationToBenchmarkMs =
+    comparisonAverages.TheOperationDurationMs -
+    benchmarkAverages.TheOperationDurationMs;
 
   const TheOperationDurationToBenchmarkPct =
-    (TheOperationDurationToBenchmarkValue /
-      benchmarkAverages.TheOperationDuration) *
+    (TheOperationDurationToBenchmarkMs /
+      benchmarkAverages.TheOperationDurationMs) *
     100;
 
-  const overheadDurationToBenchmarkValue =
-    comparisonAverages.overheadDuration - benchmarkAverages.overheadDuration;
+  const overheadDurationToBenchmarkMs =
+    comparisonAverages.overheadDurationMs -
+    benchmarkAverages.overheadDurationMs;
 
   const overheadDurationToBenchmarkPct =
-    (overheadDurationToBenchmarkValue / benchmarkAverages.overheadDuration) *
+    (overheadDurationToBenchmarkMs / benchmarkAverages.overheadDurationMs) *
     100;
 
   return {
-    durationToBenchmarkValue,
+    durationToBenchmarkMs,
     durationToBenchmarkPct,
-    TheOperationDurationToBenchmarkValue,
+    TheOperationDurationToBenchmarkMs,
     TheOperationDurationToBenchmarkPct,
-    overheadDurationToBenchmarkValue,
+    overheadDurationToBenchmarkMs,
     overheadDurationToBenchmarkPct,
   };
 };

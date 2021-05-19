@@ -33,21 +33,21 @@ const main = async (): Promise<TStatistics> => {
 
   console.log(result);
 
-  const duration = endMainProcess - startMainProcess;
-  const TheOperationDuration = result.duration;
-  const overheadDuration = duration - TheOperationDuration;
-  const overheadPercentage = (overheadDuration / duration) * 100;
+  const durationMs = endMainProcess - startMainProcess;
+  const TheOperationDurationMs = result.durationMs;
+  const overheadDurationMs = durationMs - TheOperationDurationMs;
+  const overheadPercentage = (overheadDurationMs / durationMs) * 100;
 
-  console.log(`mainProcess took in total ${duration} seconds.`);
-  console.log(`TheOperation took ${TheOperationDuration} seconds.`);
+  console.log(`mainProcess took in total ${durationMs} milliseconds.`);
+  console.log(`TheOperation took ${TheOperationDurationMs} milliseconds.`);
   console.log(
-    `The "overhead" was ${overheadDuration} seconds, or ${overheadPercentage} %`
+    `The "overhead" was ${overheadDurationMs} milliseconds, or ${overheadPercentage} %`
   );
 
   return {
-    duration,
-    TheOperationDuration,
-    overheadDuration,
+    durationMs,
+    TheOperationDurationMs,
+    overheadDurationMs,
     overheadPercentage,
   };
 };

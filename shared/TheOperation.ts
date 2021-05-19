@@ -15,7 +15,7 @@ type bodyWordStats = {
 };
 
 export interface ITheOperationResults {
-  duration: number;
+  durationMs: number;
   commentWithShortestName: IMockData;
   commentWithLongestName: IMockData;
   topFiveWordsInBody: bodyWordStats[];
@@ -84,10 +84,10 @@ export const TheOperation = (
 
   const end = timestamp();
 
-  const duration = end - start;
+  const durationMs = end - start;
 
   return {
-    duration,
+    durationMs,
     commentWithShortestName,
     commentWithLongestName,
     topFiveWordsInBody,
