@@ -2,9 +2,9 @@
  * Mock data from https://jsonplaceholder.typicode.com/comments as of 11.4.2021
  */
 export enum EMockDataSize {
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large",
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
 }
 export interface IMockData {
   postId: number;
@@ -14,7 +14,7 @@ export interface IMockData {
   body: string;
 }
 
-export const mockDataCreator = (mockDataSize: EMockDataSize): IMockData[] => {
+export const loadMockData = (mockDataSize: EMockDataSize): IMockData[] => {
   try {
     console.log(`Using ${mockDataSize} size mock data.`);
     return require(`./mockData.${mockDataSize}.json`);

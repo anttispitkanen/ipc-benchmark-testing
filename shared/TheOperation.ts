@@ -4,8 +4,8 @@
  * matter as this whole thing is more about benchmarking the different ways
  * of moving data between services.
  */
-import { timestamp } from "./timestamp";
-import { IMockData } from "./mockData";
+import { timestamp } from './timestamp';
+import { IMockData } from './mockData';
 
 type bodyWordStats = {
   word: string;
@@ -21,17 +21,21 @@ export interface ITheOperationResults {
   topFiveWordsInBody: bodyWordStats[];
 }
 
+export type TTheOperationWrapper = (
+  data: IMockData[],
+) => Promise<ITheOperationResults>;
+
 export const TheOperation = (
-  commentsArray: IMockData[]
+  commentsArray: IMockData[],
 ): ITheOperationResults => {
   const start = timestamp();
 
   const commentWithShortestName = commentsArray.sort((c1, c2) =>
-    c1.name.length > c2.name.length ? 1 : -1
+    c1.name.length > c2.name.length ? 1 : -1,
   )[0];
 
   const commentWithLongestName = commentsArray.sort((c1, c2) =>
-    c1.name.length > c2.name.length ? -1 : 1
+    c1.name.length > c2.name.length ? -1 : 1,
   )[0];
 
   // Record word appearances
@@ -47,17 +51,17 @@ export const TheOperation = (
     };
   };
 
-  commentsArray.forEach((comment) => {
+  commentsArray.forEach(comment => {
     comment.body
       // Strip newlines
-      .replace("\n", " ")
+      .replace('\n', ' ')
       // This can be dumb as there are no commas, dots etc. Besides we're not actually
       // interested in the results.
-      .split(" ")
+      .split(' ')
       // The mockData JSON is weirdly formatted with line breaks, so strip them off again
-      .map((w) => w.replace(/\n/, " ").split(" "))
+      .map(w => w.replace(/\n/, ' ').split(' '))
       .flat()
-      .forEach((word) => {
+      .forEach(word => {
         // If this is the first sighting of the word, add it to dictionary
         if (!dictionary[word]) {
           dictionary[word] = {
@@ -76,9 +80,9 @@ export const TheOperation = (
   });
 
   const topFiveWordsInBody = Object.keys(dictionary)
-    .map((word) => ({ word, ...dictionary[word] }))
+    .map(word => ({ word, ...dictionary[word] }))
     .sort((w1, w2) =>
-      w1.numberOfAppearances > w2.numberOfAppearances ? -1 : 1
+      w1.numberOfAppearances > w2.numberOfAppearances ? -1 : 1,
     )
     .slice(0, 5);
 

@@ -1,18 +1,19 @@
 /**
  * Run analysis on the results
  */
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs';
+import * as path from 'path';
 import {
   TStatisticsForDataTransportMethod,
   TStatistics,
   TStatisticsForMockDataSize,
-} from "./documentResults";
-import { EDataTransportMethod } from "./TheOperationInterface";
+} from './documentResults';
+import { EDataTransportMethod } from './mainProcess';
 
 const { INPUT_FILE } = process.env;
 
-const results = require(INPUT_FILE as string) as TStatisticsForDataTransportMethod[];
+const results =
+  require(INPUT_FILE as string) as TStatisticsForDataTransportMethod[];
 
 type TComparisonToBenchmark = {
   durationToBenchmarkMs: number;
@@ -33,22 +34,22 @@ type TStatisticsForDataTransportMethodWithComparisons = {
 };
 
 export const analyze = (
-  resultsData: TStatisticsForDataTransportMethod[]
+  resultsData: TStatisticsForDataTransportMethod[],
 ): TStatisticsForDataTransportMethodWithComparisons[] => {
-  return resultsData.map((r) => ({
+  return resultsData.map(r => ({
     ...r,
-    statisticsByMockDataSize: r.statisticsByMockDataSize.map((s) => {
+    statisticsByMockDataSize: r.statisticsByMockDataSize.map(s => {
       const correspondingBenchmarkAverages = resultsData
-        .find((r) => r.dataTransportMethod === EDataTransportMethod.BENCHMARK)
+        .find(r => r.dataTransportMethod === EDataTransportMethod.BENCHMARK)
         ?.statisticsByMockDataSize.find(
-          (stats) => stats.mockDataSize === s.mockDataSize
+          stats => stats.mockDataSize === s.mockDataSize,
         )?.averages;
 
       return {
         ...s,
         comparisonToBenchmark: compareToBenchmark(
           s.averages,
-          correspondingBenchmarkAverages as TStatistics
+          correspondingBenchmarkAverages as TStatistics,
         ),
       };
     }),
@@ -57,7 +58,7 @@ export const analyze = (
 
 const compareToBenchmark = (
   comparisonAverages: TStatistics,
-  benchmarkAverages: TStatistics
+  benchmarkAverages: TStatistics,
 ): TComparisonToBenchmark => {
   const durationToBenchmarkMs =
     comparisonAverages.durationMs - benchmarkAverages.durationMs;
@@ -95,9 +96,9 @@ const compareToBenchmark = (
 const analyzedResults = analyze(results);
 
 const fileName =
-  INPUT_FILE?.split("/").pop()?.replace("raw", "analyzed") || "missing.json";
+  INPUT_FILE?.split('/').pop()?.replace('raw', 'analyzed') || 'missing.json';
 
 fs.writeFileSync(
-  path.join(__dirname, "..", "results", fileName),
-  JSON.stringify(analyzedResults)
+  path.join(__dirname, '..', 'results', fileName),
+  JSON.stringify(analyzedResults),
 );

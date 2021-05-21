@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "benchmark": "npm run tsc && DATA_TRANSPORT_METHOD=benchmark node ./shared/mainProcess.js",
+    "benchmark": "npm run tsc && node ./benchmark/main.js",
     "full-test-suite": "bash ./run-test-suite.sh",
     "test:benchmark": "npm run tsc && docker-compose -f ./benchmark/docker-compose.yml up",
     "test:http": "npm run tsc && docker-compose -f ./ipc-http/docker-compose.yml up",
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/anttispitkanen/ipc-benchmark-testing#readme",
   "devDependencies": {
     "@types/node": "^14.14.37",
+    "prettier": "^2.3.0",
     "typescript": "^4.2.4"
   }
 }

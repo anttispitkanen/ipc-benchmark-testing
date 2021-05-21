@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   main_process:
@@ -9,10 +9,7 @@ services:
       - ./:/usr/src/app/benchmark
       - ../shared/:/usr/src/app/shared
       - ../results/:/usr/src/app/results
-      - ../ipc-http/:/usr/src/app/ipc-http
-      - ../ipc-http-express-axios/:/usr/src/app/ipc-http-express-axios
     working_dir: /usr/src/app
     environment:
-      - DATA_TRANSPORT_METHOD=benchmark
       - MOCK_DATA_SIZE
-    command: "node ./shared/mainProcess.js"
+    command: 'node ./benchmark/main.js'

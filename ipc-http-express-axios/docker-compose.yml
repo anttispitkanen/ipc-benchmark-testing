@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   main_process:
@@ -7,17 +7,15 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ./:/usr/src/app/ipc-http-express-axios
-      - ../ipc-http/:/usr/src/app/ipc-http
       - ../shared/:/usr/src/app/shared
       - ../results/:/usr/src/app/results
       - /usr/src/app/ipc-http-express-axios/node_modules/
     working_dir: /usr/src/app
     environment:
-      - DATA_TRANSPORT_METHOD=http-express-axios
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
       - THE_OPERATION_ENDPOINT_PORT=3000
       - MOCK_DATA_SIZE
-    command: "node ./shared/mainProcess.js"
+    command: 'node ./ipc-http-express-axios/main.js'
 
   the_operation:
     build:
@@ -27,4 +25,4 @@ services:
       - ./:/usr/src/app/ipc-http-express-axios
       - ../shared/:/usr/src/app/shared
     working_dir: /usr/src/app
-    command: "node ./ipc-http-express-axios/server.js"
+    command: 'node ./ipc-http-express-axios/server.js'

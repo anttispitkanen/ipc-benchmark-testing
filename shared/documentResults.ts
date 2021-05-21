@@ -1,10 +1,10 @@
 /**
  * A shared function that can be used to write the results in a file.
  */
-import * as fs from "fs";
-import * as path from "path";
-import { EMockDataSize } from "./mockData";
-import { EDataTransportMethod } from "./TheOperationInterface";
+import * as fs from 'fs';
+import * as path from 'path';
+import { EMockDataSize } from './mockData';
+import { EDataTransportMethod } from './mainProcess';
 
 export type TStatistics = {
   durationMs: number;
@@ -32,7 +32,7 @@ export const documentResults = (
   date: Date,
   dataTransportMethod: EDataTransportMethod,
   mockDataSize: EMockDataSize,
-  statistics: TStatistics
+  statistics: TStatistics,
 ) => {
   const fileName = `${date.getFullYear()}-${
     date.getMonth() + 1
@@ -45,18 +45,16 @@ export const documentResults = (
   } catch (err) {
     // If there are no previous results, create the result scaffold to make
     // appending individual results more convenient.
-    results = Object.values(EDataTransportMethod).map(
-      (dataTransportMethod) => ({
-        dataTransportMethod,
-        statisticsByMockDataSize: Object.values(EMockDataSize).map(
-          (mockDataSize) => ({
-            mockDataSize,
-            runs: [] as TStatisticsWithTimestamp[],
-            averages: {} as TStatistics,
-          })
-        ),
-      })
-    );
+    results = Object.values(EDataTransportMethod).map(dataTransportMethod => ({
+      dataTransportMethod,
+      statisticsByMockDataSize: Object.values(EMockDataSize).map(
+        mockDataSize => ({
+          mockDataSize,
+          runs: [] as TStatisticsWithTimestamp[],
+          averages: {} as TStatistics,
+        }),
+      ),
+    }));
   }
 
   const statisticsWithTimestamp: TStatisticsWithTimestamp = {
@@ -64,11 +62,11 @@ export const documentResults = (
     timestamp: date,
   };
 
-  const appendedResults = results.map((r) =>
+  const appendedResults = results.map(r =>
     r.dataTransportMethod === dataTransportMethod
       ? {
           ...r,
-          statisticsByMockDataSize: r.statisticsByMockDataSize.map((s) =>
+          statisticsByMockDataSize: r.statisticsByMockDataSize.map(s =>
             s.mockDataSize === mockDataSize
               ? {
                   ...s,
@@ -78,20 +76,20 @@ export const documentResults = (
                     statisticsWithTimestamp,
                   ]),
                 }
-              : s
+              : s,
           ),
         }
-      : r
+      : r,
   );
 
   fs.writeFileSync(
-    path.join(__dirname, "..", "results", fileName),
-    JSON.stringify(appendedResults)
+    path.join(__dirname, '..', 'results', fileName),
+    JSON.stringify(appendedResults),
   );
 };
 
 const calculateAverages = (
-  statisticsArr: TStatisticsWithTimestamp[]
+  statisticsArr: TStatisticsWithTimestamp[],
 ): TStatistics => {
   const averages: TStatistics = {
     durationMs: 0,
@@ -102,7 +100,7 @@ const calculateAverages = (
   const length = statisticsArr.length;
 
   // aggregate sums...
-  statisticsArr.forEach((stats) => {
+  statisticsArr.forEach(stats => {
     averages.durationMs += stats.durationMs;
     averages.TheOperationDurationMs += stats.TheOperationDurationMs;
     averages.overheadDurationMs += stats.overheadDurationMs;
