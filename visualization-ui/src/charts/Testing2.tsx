@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { TStatisticsForDataTransportMethodWithComparisons } from '../../../shared/analyze';
+import { Analyze, MockData } from 'ipc-benchmark-testing-types';
 
 const colors = [
   {
@@ -29,11 +29,11 @@ const colors = [
   },
 ];
 
-type TSize = 'small' | 'medium' | 'large';
+// type TSize = 'small' | 'medium' | 'large';
 
 const chartCompatibleDatasets = (
-  data: TStatisticsForDataTransportMethodWithComparisons[],
-  mockDataSize: TSize,
+  data: Analyze.TStatisticsForDataTransportMethodWithComparisons[],
+  mockDataSize: MockData.EMockDataSize,
 ) =>
   data.map((d, i) => {
     const averages = d.statisticsByMockDataSize.find(
@@ -50,8 +50,8 @@ const chartCompatibleDatasets = (
   });
 
 const chartCompatibleData = (
-  data: TStatisticsForDataTransportMethodWithComparisons[],
-  mockDataSize: TSize,
+  data: Analyze.TStatisticsForDataTransportMethodWithComparisons[],
+  mockDataSize: MockData.EMockDataSize,
 ) => ({
   labels: ['benchmark', 'http', 'http-express-axios'],
   datasets: [
@@ -100,9 +100,9 @@ const MockDataSelectorButton = ({
   selectFn,
   activeSize,
 }: {
-  size: TSize;
-  selectFn: (size: TSize) => void;
-  activeSize: TSize;
+  size: MockData.EMockDataSize;
+  selectFn: (size: MockData.EMockDataSize) => void;
+  activeSize: MockData.EMockDataSize;
 }) => (
   <button
     style={{ margin: '5px' }}
@@ -116,9 +116,11 @@ const MockDataSelectorButton = ({
 const VerticalBar = ({
   dataProp,
 }: {
-  dataProp: TStatisticsForDataTransportMethodWithComparisons[];
+  dataProp: Analyze.TStatisticsForDataTransportMethodWithComparisons[];
 }) => {
-  const [mockDataSize, setMockDataSize] = useState<TSize>('medium');
+  const [mockDataSize, setMockDataSize] = useState<MockData.EMockDataSize>(
+    MockData.EMockDataSize.MEDIUM,
+  );
   return (
     <>
       <div className="header">
@@ -137,17 +139,17 @@ const VerticalBar = ({
           Viewing mock data size: <b>{mockDataSize}</b>
         </p>
         <MockDataSelectorButton
-          size={'small'}
+          size={MockData.EMockDataSize.SMALL}
           selectFn={setMockDataSize}
           activeSize={mockDataSize}
         />
         <MockDataSelectorButton
-          size={'medium'}
+          size={MockData.EMockDataSize.MEDIUM}
           selectFn={setMockDataSize}
           activeSize={mockDataSize}
         />
         <MockDataSelectorButton
-          size={'large'}
+          size={MockData.EMockDataSize.LARGE}
           selectFn={setMockDataSize}
           activeSize={mockDataSize}
         />

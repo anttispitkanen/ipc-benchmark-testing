@@ -1,0 +1,12 @@
+{
+  "name": "ipc-benchmark-testing-types",
+  "version": "1.0.0",
+  "description": "Shared types for visualization-ui to use",
+  "main": "",
+  "types": "./index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antti Pitkänen",
+  "license": "MIT"
+}

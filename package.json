@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "emit-types": "rm -rf ./types/raw && tsc --declaration --emitDeclarationOnly --declarationDir ./types/raw && rollup -c",
     "benchmark": "npm run tsc && node ./benchmark/main.js",
     "sync-data": "mkdir -p visualization-ui/src/data && rm -f visualization-ui/src/data/* && cp results/*.publish.json visualization-ui/src/data",
     "full-test-suite": "bash ./run-test-suite.sh",
@@ -26,6 +27,8 @@
   "devDependencies": {
     "@types/node": "^14.14.37",
     "prettier": "^2.3.0",
+    "rollup": "^2.48.0",
+    "rollup-plugin-dts": "^3.0.2",
     "typescript": "^4.2.4"
   }
 }
