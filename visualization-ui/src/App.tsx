@@ -1,6 +1,5 @@
 import React from 'react';
-import data from './data/2021-5-19.analyzed.publish.json';
-import Testing from './charts/Testing';
+import data from './data/2021-5-21.analyzed.publish.json';
 import Testing2 from './charts/Testing2';
 import { TStatisticsForDataTransportMethodWithComparisons } from '../../shared/analyze';
 
@@ -8,7 +7,8 @@ function App() {
   console.log('Here are the raw results:');
   console.log(data);
 
-  const typedData = (data as unknown) as TStatisticsForDataTransportMethodWithComparisons[];
+  const typedData =
+    data as unknown as TStatisticsForDataTransportMethodWithComparisons[];
 
   console.log(typedData);
 
@@ -27,9 +27,7 @@ function App() {
         for context.
       </p>
 
-      <p>All tests run on Docker for Mac, 1 CPU and 4 BG RAM.</p>
-
-      <Testing dataProp={typedData} />
+      <p>All tests run on Docker for Mac, 1 CPU and 4 GB RAM.</p>
 
       <Testing2 dataProp={typedData} />
     </div>
