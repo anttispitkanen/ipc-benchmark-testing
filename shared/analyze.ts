@@ -4,6 +4,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import {
+  EIPCMethod,
   TStatisticsForIPCMethod,
   TStatistics,
   TStatisticsForIPCMethodWithComparisons,
@@ -21,7 +22,7 @@ export const analyze = (
     ...r,
     statisticsByMockDataSize: r.statisticsByMockDataSize.map(s => {
       const correspondingBenchmarkAverages = resultsData
-        .find(r => r.ipcMethod === 'benchmark')
+        .find(r => r.ipcMethod === EIPCMethod.BENCHMARK)
         ?.statisticsByMockDataSize.find(
           stats => stats.mockDataSize === s.mockDataSize,
         )?.averages;

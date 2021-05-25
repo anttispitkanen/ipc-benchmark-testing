@@ -1,5 +1,5 @@
 import React from 'react';
-import data from './data/2021-5-24.analyzed.publish.json';
+import data from './data/2021-5-31.analyzed.publish.json';
 import DurationsChart from './charts/DurationsChart';
 import type { TStatisticsForIPCMethodWithComparisons } from 'ipc-benchmark-testing-types';
 
@@ -25,7 +25,10 @@ function App() {
         for context.
       </p>
 
-      <p>All tests run on Docker for Mac, 1 CPU and 4 BG RAM.</p>
+      <p>
+        All tests run on Docker Desktop for Mac, Docker engine v20.10.6, at 8
+        CPU and 4GB RAM.
+      </p>
 
       <DurationsChart dataProp={typedData} />
     </div>

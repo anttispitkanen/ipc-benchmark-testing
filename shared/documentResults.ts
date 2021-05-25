@@ -3,28 +3,13 @@
  */
 import * as fs from 'fs';
 import * as path from 'path';
-import type {
+import {
   EIPCMethod,
   EMockDataSize,
   TStatistics,
   TStatisticsForIPCMethod,
   TStatisticsWithTimestamp,
 } from 'ipc-benchmark-testing-types';
-
-/**
- * Helper arrays for looping through
- */
-const IPC_METHODS: EIPCMethod[] = [
-  'benchmark' as EIPCMethod.BENCHMARK,
-  'http' as EIPCMethod.HTTP,
-  'http-express-axios' as EIPCMethod.HTTP_EXPRESS_AXIOS,
-];
-
-const MOCK_DATA_SIZES: EMockDataSize[] = [
-  'small' as EMockDataSize.SMALL,
-  'medium' as EMockDataSize.MEDIUM,
-  'large' as EMockDataSize.LARGE,
-];
 
 export const documentResults = (
   date: Date,
@@ -43,13 +28,15 @@ export const documentResults = (
   } catch (err) {
     // If there are no previous results, create the result scaffold to make
     // appending individual results more convenient.
-    results = IPC_METHODS.map(ipcMethod => ({
+    results = Object.values(EIPCMethod).map(ipcMethod => ({
       ipcMethod,
-      statisticsByMockDataSize: MOCK_DATA_SIZES.map(mockDataSize => ({
-        mockDataSize,
-        runs: [] as TStatisticsWithTimestamp[],
-        averages: {} as TStatistics,
-      })),
+      statisticsByMockDataSize: Object.values(EMockDataSize).map(
+        mockDataSize => ({
+          mockDataSize,
+          runs: [] as TStatisticsWithTimestamp[],
+          averages: {} as TStatistics,
+        }),
+      ),
     }));
   }
 

@@ -3,13 +3,12 @@ version: '3'
 services:
   main_process:
     build:
-      context: ./
-      dockerfile: ./Dockerfile
+      context: ../
+      dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http-express-axios
-      - ../shared/:/usr/src/app/shared
+      - ./:/usr/src/app/ipc-http-express-axios:ro
       - ../results/:/usr/src/app/results
-      - /usr/src/app/ipc-http-express-axios/node_modules/
+      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/ipc-http-express-axios
     environment:
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
@@ -20,12 +19,11 @@ services:
 
   the_operation:
     build:
-      context: ./
-      dockerfile: ./Dockerfile
+      context: ../
+      dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http-express-axios
-      - ../shared/:/usr/src/app/shared
-      - /usr/src/app/ipc-http-express-axios/node_modules/
+      - ./:/usr/src/app/ipc-http-express-axios:ro
+      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/ipc-http-express-axios
     environment:
       - NODE_ENV=production

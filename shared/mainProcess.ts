@@ -6,7 +6,7 @@
  * thing that varies is whether TheOperation is running as a separate process,
  * and how the data is transferred between the processes.
  */
-import type {
+import {
   EMockDataSize,
   TStatistics,
   EIPCMethod,
@@ -17,7 +17,7 @@ import { timestamp } from './timestamp';
 import { documentResults } from './documentResults';
 
 const MOCK_DATA_SIZE = (process.env.MOCK_DATA_SIZE ||
-  'medium') as EMockDataSize;
+  EMockDataSize.MEDIUM) as EMockDataSize;
 
 const DATE = new Date();
 

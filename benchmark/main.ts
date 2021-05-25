@@ -1,4 +1,4 @@
-import type { TMockData, EIPCMethod } from 'ipc-benchmark-testing-types';
+import { TMockData, EIPCMethod } from 'ipc-benchmark-testing-types';
 import { mainProcess } from '../shared/mainProcess';
 import { TheOperation } from '../shared/TheOperation';
 
@@ -8,4 +8,4 @@ import { TheOperation } from '../shared/TheOperation';
 const runTheOperation = (data: TMockData[]) =>
   Promise.resolve(TheOperation(data));
 
-mainProcess(runTheOperation, 'benchmark' as EIPCMethod.BENCHMARK);
+mainProcess(runTheOperation, EIPCMethod.BENCHMARK);

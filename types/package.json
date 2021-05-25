@@ -2,11 +2,15 @@
   "name": "ipc-benchmark-testing-types",
   "version": "1.0.0",
   "description": "Shared types for visualization-ui to use",
-  "main": "",
+  "main": "./index.js",
   "types": "./index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
   },
   "author": "Antti Pitkänen",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }

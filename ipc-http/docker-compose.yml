@@ -3,12 +3,12 @@ version: '3'
 services:
   main_process:
     build:
-      context: ./
-      dockerfile: ../shared/Dockerfile
+      context: ../
+      dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http
-      - ../shared/:/usr/src/app/shared
+      - ./:/usr/src/app/ipc-http:ro
       - ../results/:/usr/src/app/results
+      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/ipc-http
     environment:
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
@@ -19,11 +19,11 @@ services:
 
   the_operation:
     build:
-      context: ./
-      dockerfile: ../shared/Dockerfile
+      context: ../
+      dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http
-      - ../shared/:/usr/src/app/shared
+      - ./:/usr/src/app/ipc-http:ro
+      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/ipc-http
     environment:
       - NODE_ENV=production

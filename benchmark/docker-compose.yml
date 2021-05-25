@@ -3,12 +3,12 @@ version: '3'
 services:
   main_process:
     build:
-      context: ./
-      dockerfile: ../shared/Dockerfile
+      context: ../
+      dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/benchmark
-      - ../shared/:/usr/src/app/shared
+      - ./:/usr/src/app/benchmark:ro
       - ../results/:/usr/src/app/results
+      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/benchmark
     environment:
       - NODE_ENV=production
