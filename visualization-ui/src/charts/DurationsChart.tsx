@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import type {
   TStatisticsForIPCMethodWithComparisons,
   EMockDataSize,
   EIPCMethod,
 } from 'ipc-benchmark-testing-types';
+
+// FIXME: read values from enum once typing is fixed
+const ipcMethodsForLabels = [
+  'benchmark',
+  'http',
+  'http-express-axios',
+] as EIPCMethod[];
+
+// FIXME: read values from enum once typing is fixed
+const mockDataSizes = ['small', 'medium', 'large'] as EMockDataSize[];
 
 const colors = [
   {
@@ -33,54 +43,53 @@ const colors = [
   },
 ];
 
-const chartCompatibleDatasets = (
-  data: TStatisticsForIPCMethodWithComparisons[],
+const propDataToChartData = (
+  propData: TStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
-) =>
-  data.map((d, i) => {
-    const averages = d.statisticsByMockDataSize.find(
-      s => s.mockDataSize === mockDataSize,
-    )?.averages;
+): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => ({
+  TheOperationDurationMs: propData.map(
+    d =>
+      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
+        ?.averages.TheOperationDurationMs || 0,
+  ),
+  overheadDurationMs: propData.map(
+    d =>
+      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
+        ?.averages.overheadDurationMs || 0,
+  ),
+});
 
-    return {
-      label: d.ipcMethod,
-      data: [averages?.TheOperationDurationMs, averages?.overheadDurationMs],
-      backgroundColor: colors[i % colors.length].background,
-      borderColor: colors[i % colors.length].border,
-      borderWidth: 1,
-    };
-  });
+const datasetsBase: {
+  label: string;
+  dataProperty: 'TheOperationDurationMs' | 'overheadDurationMs';
+}[] = [
+  {
+    label: 'TheOperation duration (ms)',
+    dataProperty: 'TheOperationDurationMs',
+  },
+  {
+    label: 'Overhead duration (ms)',
+    dataProperty: 'overheadDurationMs',
+  },
+];
 
 const chartCompatibleData = (
   data: TStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
-) => ({
-  labels: ['benchmark', 'http', 'http-express-axios'],
-  datasets: [
-    {
-      label: 'TheOperation duration (ms)',
-      data: data.map(
-        d =>
-          d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
-            ?.averages.TheOperationDurationMs,
-      ),
-      backgroundColor: colors[0].background,
-      borderColor: colors[0].border,
+) => {
+  const chartData = propDataToChartData(data, mockDataSize);
+
+  return {
+    labels: ipcMethodsForLabels, // FIXME: read values from enum once typing is fixed
+    datasets: datasetsBase.map((d, i) => ({
+      label: d.label,
+      data: chartData[d.dataProperty],
+      backgroundColor: colors[i].background,
+      borderColor: colors[i].border,
       borderWidth: 1,
-    },
-    {
-      label: 'Overhead duration (ms)',
-      data: data.map(
-        d =>
-          d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
-            ?.averages.overheadDurationMs,
-      ),
-      backgroundColor: colors[1].background,
-      borderColor: colors[1].border,
-      borderWidth: 1,
-    },
-  ],
-});
+    })),
+  };
+};
 
 const options = {
   scales: {
@@ -123,38 +132,36 @@ const VerticalBar = ({
   const [mockDataSize, setMockDataSize] = useState<EMockDataSize>(
     'medium' as EMockDataSize.MEDIUM,
   );
+
+  const chartData = useMemo(
+    () => chartCompatibleData(dataProp, mockDataSize),
+    [mockDataSize],
+  );
+
   return (
     <>
       <div className="header">
-        <h1 className="title">Vertical Bar Chart</h1>
-        <div className="links"></div>
+        <h1 className="title">Durations by IPC method</h1>
       </div>
       <Bar
         type="bar"
         width={800}
         height={500}
-        data={chartCompatibleData(dataProp, mockDataSize)}
+        data={chartData}
         options={options}
       />
       <div>
         <p>
           Viewing mock data size: <b>{mockDataSize}</b>
         </p>
-        <MockDataSelectorButton
-          size={'small' as EMockDataSize.SMALL}
-          selectFn={setMockDataSize}
-          activeSize={mockDataSize}
-        />
-        <MockDataSelectorButton
-          size={'medium' as EMockDataSize.MEDIUM}
-          selectFn={setMockDataSize}
-          activeSize={mockDataSize}
-        />
-        <MockDataSelectorButton
-          size={'large' as EMockDataSize.LARGE}
-          selectFn={setMockDataSize}
-          activeSize={mockDataSize}
-        />
+
+        {mockDataSizes.map(mds => (
+          <MockDataSelectorButton
+            size={mds}
+            selectFn={setMockDataSize}
+            activeSize={mockDataSize}
+          />
+        ))}
       </div>
     </>
   );

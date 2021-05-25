@@ -1,6 +1,6 @@
 import React from 'react';
 import data from './data/2021-5-24.analyzed.publish.json';
-import Testing2 from './charts/Testing2';
+import DurationsChart from './charts/DurationsChart';
 import type { TStatisticsForIPCMethodWithComparisons } from 'ipc-benchmark-testing-types';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
 
       <p>All tests run on Docker for Mac, 1 CPU and 4 BG RAM.</p>
 
-      <Testing2 dataProp={typedData} />
+      <DurationsChart dataProp={typedData} />
     </div>
   );
 }
