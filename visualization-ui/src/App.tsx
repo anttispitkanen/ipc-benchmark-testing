@@ -30,6 +30,15 @@ function App() {
         CPU and 4GB RAM.
       </p>
 
+      <p>
+        Test suite run on{' '}
+        <b>
+          {new Date(
+            typedData[0].statisticsByMockDataSize[0].runs[0].timestamp,
+          ).toLocaleDateString()}
+        </b>
+      </p>
+
       <DurationsChart dataProp={typedData} />
     </div>
   );

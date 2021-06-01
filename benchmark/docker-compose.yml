@@ -6,11 +6,9 @@ services:
       context: ../
       dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/benchmark:ro
       - ../results/:/usr/src/app/results
-      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/benchmark
     environment:
       - NODE_ENV=production
       - MOCK_DATA_SIZE
-    command: 'node ./main.js'
+    command: 'node --max-old-space-size=1536 ./main.js'

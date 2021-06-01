@@ -54,7 +54,7 @@ There's a separate [analysis script](/shared/analyze.ts) that takes the raw data
 
 By default the results are .gitignored, with the exception of naming them explicitly as `<something>.publish.json`. See example of raw results and analyzed results in [results directory](/results).
 
-All the different processes are run as Nodejs Docker containers and orchestrated using `docker-compose`. At the time of writing I'm using Docker Desktop for Mac, Docker engine `v20.10.6`, at **8 CPU** and **4GB RAM**.
+All the different processes are run as Nodejs Docker containers and orchestrated using `docker compose`. At the time of writing I'm using Docker Desktop for Mac, Docker engine `v20.10.6`, at **8 CPU** and **4GB RAM**.
 
 ### Benchmark
 
@@ -62,7 +62,7 @@ The [benchmark](/benchmark) just runs main process and TheOperation in the same 
 
 ### Tested data transport methods
 
-All the tested methods are run as two Nodejs containers: one for the main process and one for TheOperation. The containers are run using `docker-compose` in the default network mode (bridge). The main process container references TheOperation container by service name, when the data transport method calls for IP.
+All the tested methods are run as two Nodejs containers: one for the main process and one for TheOperation. The containers are run using `docker compose` in the default network mode (bridge). The main process container references TheOperation container by service name, when the data transport method calls for IP.
 
 #### `ipc-http` – HTTP (Nodejs `http` library)
 
@@ -72,7 +72,9 @@ All the tested methods are run as two Nodejs containers: one for the main proces
 
 [`ipc-http-express-axios`](/ipc-http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
 
-#### TODO: Implementing data transport methods and such
+#### Implementing data transport methods and such
+
+See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas and their status.
 
 - [x] "Raw HTTP" ([`ipc-http`](/ipc-http)) using the Nodejs native `http` module
 - [x] "Nicer HTTP" using express and axios ([`ipc-http-express-axios`](/ipc-http-express-axios)), as one often would in Nodejs development
@@ -84,18 +86,13 @@ All the tested methods are run as two Nodejs containers: one for the main proces
 
 ## Results and conclusions (to be continued)
 
-Initial testing suggests that
-
-- "Raw HTTP" adds an overhead of 3,000 % - 5,000 % (25 - 40 ms) depending on the mock data size compared to benchmark.
-- Express and Axios add an overhead of 10,000 % - 13,000 % (80 - 95 ms) depending on the mock data size compared to benchmark. Perhaps surprisingly this is ~3x of what "raw HTTP" adds.
-
 ## How to run this locally
 
 Requirements:
 
 - Nodejs (I'm using Nodejs 14) and npm
 - Bash (only used in the loop running the whole test suite)
-- Docker and docker-compose
+- Docker (engine version `v20.10.6` is what I'm using) and docker compose, so Docker Desktop version `>= 3.2.1`
 
 1. Clone this repo and change into it
 

@@ -6,25 +6,20 @@ services:
       context: ../
       dockerfile: ./shared/Dockerfile
     volumes:
-      - ./:/usr/src/app/ipc-http-express-axios:ro
       - ../results/:/usr/src/app/results
-      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/ipc-http-express-axios
     environment:
       - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
       - THE_OPERATION_ENDPOINT_PORT=3000
       - NODE_ENV=production
       - MOCK_DATA_SIZE
-    command: 'node ./main.js'
+    command: 'node --max-old-space-size=1536 ./main.js'
 
   the_operation:
     build:
       context: ../
       dockerfile: ./shared/Dockerfile
-    volumes:
-      - ./:/usr/src/app/ipc-http-express-axios:ro
-      - /usr/src/app/node_modules/
     working_dir: /usr/src/app/ipc-http-express-axios
     environment:
       - NODE_ENV=production
-    command: 'node ./server.js'
+    command: 'node --max-old-space-size=1536 ./server.js'

@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "benchmark": "npm run tsc && node ./benchmark/main.js",
+    "benchmark": "npm run tsc && node --max-old-space-size=1536 ./benchmark/main.js",
     "sync-data": "mkdir -p visualization-ui/src/data && rm -f visualization-ui/src/data/* && cp results/*.publish.json visualization-ui/src/data",
     "full-test-suite": "bash ./run-test-suite.sh",
-    "test:benchmark": "docker-compose -f ./benchmark/docker-compose.yml up",
-    "test:http": "docker-compose -f ./ipc-http/docker-compose.yml up",
-    "test:http-express-axios": "docker-compose -f ./ipc-http-express-axios/docker-compose.yml up"
+    "test:benchmark": "docker compose -f ./benchmark/docker-compose.yml up",
+    "test:http": "docker compose -f ./ipc-http/docker-compose.yml up",
+    "test:http-express-axios": "docker compose -f ./ipc-http-express-axios/docker-compose.yml up"
   },
   "repository": {
     "type": "git",
