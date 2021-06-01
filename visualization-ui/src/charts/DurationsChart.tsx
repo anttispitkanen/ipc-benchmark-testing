@@ -1,20 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
-import type {
+import {
   TStatisticsForIPCMethodWithComparisons,
   EMockDataSize,
   EIPCMethod,
 } from 'ipc-benchmark-testing-types';
-
-// FIXME: read values from enum once typing is fixed
-const ipcMethodsForLabels = [
-  'benchmark',
-  'http',
-  'http-express-axios',
-] as EIPCMethod[];
-
-// FIXME: read values from enum once typing is fixed
-const mockDataSizes = ['small', 'medium', 'large'] as EMockDataSize[];
 
 const colors = [
   {
@@ -80,7 +70,7 @@ const chartCompatibleData = (
   const chartData = propDataToChartData(data, mockDataSize);
 
   return {
-    labels: ipcMethodsForLabels, // FIXME: read values from enum once typing is fixed
+    labels: Object.values(EIPCMethod),
     datasets: datasetsBase.map((d, i) => ({
       label: d.label,
       data: chartData[d.dataProperty],
@@ -133,10 +123,7 @@ const VerticalBar = ({
     'medium' as EMockDataSize.MEDIUM,
   );
 
-  const chartData = useMemo(
-    () => chartCompatibleData(dataProp, mockDataSize),
-    [mockDataSize],
-  );
+  const chartData = chartCompatibleData(dataProp, mockDataSize);
 
   return (
     <>
@@ -155,7 +142,7 @@ const VerticalBar = ({
           Viewing mock data size: <b>{mockDataSize}</b>
         </p>
 
-        {mockDataSizes.map(mds => (
+        {Object.values(EMockDataSize).map(mds => (
           <MockDataSelectorButton
             size={mds}
             selectFn={setMockDataSize}
