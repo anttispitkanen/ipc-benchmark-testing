@@ -1,5 +1,7 @@
 # ipc-benchmark-testing
 
+**See the results visualized at https://anttispitkanen.github.io/ipc-benchmark-testing/**
+
 ## tl;dr:
 
 This is a project that compares the latency cost of different methods of transferring data between two containers in the same loopback network interface, i.e. without having to worry about network latency. [See Wikipedia on inter-process communication (IPC).](https://en.wikipedia.org/wiki/Inter-process_communication)
@@ -37,7 +39,7 @@ This test doesn't aim to be highly generalizable, but rather very specific. Basi
 
 To simulate whatever the computationally intensive operation would be, there's ["TheOperation"](/shared/TheOperation.ts). It takes the mock data and runs some arbitrary synchronous blocking operations on it: finding out the shortest and longest comment names, and finding the top 5 most commonly used words in the comment bodies. It responds with this data, along with the time it took to process the data.
 
-The actual test runs a "main process" script, that loads the mock data into memory, passes it to ["TheOperationInterface"](/shared/TheOperationInterface.ts), which chooses the desired data transport method based on the given environment variable. All the different methods run the same TheOperation script, the difference is in how the data is passed to TheOperation (i.e. over HTTP).
+The actual test runs a "main process" script, that loads the mock data into memory and passes it to "TheOperation" with the desired data transport method given as a dependency injection. All the different methods run the same TheOperation script, the difference is in how the data is passed to TheOperation (i.e. over HTTP).
 
 "Main process" runs and takes time of the whole thing. It calculates the results:
 
@@ -84,7 +86,9 @@ See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas
 - [ ] Unix socket
 - [ ] Build a web UI for viewing and comparing results
 
-## Results and conclusions (to be continued)
+## Results and conclusions
+
+See the visualized results at https://anttispitkanen.github.io/ipc-benchmark-testing/
 
 ## How to run this locally
 
