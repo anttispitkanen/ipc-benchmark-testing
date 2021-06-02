@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
   TStatisticsForIPCMethodWithComparisons,
@@ -96,40 +96,18 @@ const options = {
   },
 };
 
-const MockDataSelectorButton = ({
-  size,
-  selectFn,
-  activeSize,
-}: {
-  size: EMockDataSize;
-  selectFn: (size: EMockDataSize) => void;
-  activeSize: EMockDataSize;
-}) => (
-  <button
-    style={{ margin: '5px' }}
-    disabled={size === activeSize}
-    onClick={() => selectFn(size)}
-  >
-    {size}
-  </button>
-);
-
 const VerticalBar = ({
   dataProp,
+  mockDataSizeProp,
 }: {
   dataProp: TStatisticsForIPCMethodWithComparisons[];
+  mockDataSizeProp: EMockDataSize;
 }) => {
-  const [mockDataSize, setMockDataSize] = useState<EMockDataSize>(
-    'medium' as EMockDataSize.MEDIUM,
-  );
-
-  const chartData = chartCompatibleData(dataProp, mockDataSize);
+  const chartData = chartCompatibleData(dataProp, mockDataSizeProp);
 
   return (
-    <>
-      <div className="header">
-        <h1 className="title">Durations by IPC method</h1>
-      </div>
+    <div id="durations-chart">
+      <h2 className="title">Durations by IPC method</h2>
       <Bar
         type="bar"
         width={800}
@@ -137,20 +115,7 @@ const VerticalBar = ({
         data={chartData}
         options={options}
       />
-      <div>
-        <p>
-          Viewing mock data size: <b>{mockDataSize}</b>
-        </p>
-
-        {Object.values(EMockDataSize).map(mds => (
-          <MockDataSelectorButton
-            size={mds}
-            selectFn={setMockDataSize}
-            activeSize={mockDataSize}
-          />
-        ))}
-      </div>
-    </>
+    </div>
   );
 };
 
