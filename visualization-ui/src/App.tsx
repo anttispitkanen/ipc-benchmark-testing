@@ -6,10 +6,8 @@ import {
 } from 'ipc-benchmark-testing-types';
 
 // Make all desired datasets available by importing here
-import data_2021_05_26 from './data/2021-5-26.analyzed.publish.json';
-import data_2021_05_31 from './data/2021-5-31.analyzed.publish.json';
-import data_2021_06_01 from './data/2021-6-1.analyzed.publish.json';
 import data_2021_06_09 from './data/2021-6-9.analyzed.publish.json';
+import data_2021_06_10 from './data/2021-6-10.analyzed.publish.json';
 
 type TDataAndDate = {
   data: TStatisticsForIPCMethodWithComparisons[];
@@ -18,20 +16,12 @@ type TDataAndDate = {
 
 const availableDatasets: TDataAndDate[] = [
   {
-    data: data_2021_05_26 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-05-26',
-  },
-  {
-    data: data_2021_05_31 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-05-31',
-  },
-  {
-    data: data_2021_06_01 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-01',
-  },
-  {
     data: data_2021_06_09 as unknown as TStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-09',
+  },
+  {
+    data: data_2021_06_10 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-10',
   },
 ];
 
@@ -65,10 +55,11 @@ function App() {
           {console.log(selectedDataset.data)}
 
           <p>
-            All tests run on Docker Desktop for Mac, Docker engine{' '}
-            <span className="monospace-highlight">v20.10.6</span>, at{' '}
-            <span className="monospace-highlight">8 CPU</span> and{' '}
-            <span className="monospace-highlight">4GB RAM</span>.
+            All tests run on MacBook Air M1 2020 16 GB, Docker Desktop for Mac,
+            Docker engine <span className="monospace-highlight">v20.10.7</span>,
+            at settings of <span className="monospace-highlight">4 CPU</span>,{' '}
+            <span className="monospace-highlight">2 GB RAM</span> and{' '}
+            <span className="monospace-highlight">1 GB Swap</span>.
           </p>
 
           <hr />

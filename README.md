@@ -58,7 +58,7 @@ There's a separate [analysis script](/shared/analyze.ts) that takes the raw data
 
 By default the results are .gitignored, with the exception of naming them explicitly as `<something>.publish.json`. See example of raw results and analyzed results in [results directory](/results).
 
-All the different processes are run as Nodejs Docker containers and orchestrated using `docker compose`. At the time of writing I'm using Docker Desktop for Mac, Docker engine `v20.10.6`, at **8 CPU** and **4GB RAM**.
+All the different processes are run as Nodejs Docker containers and orchestrated using `docker compose`. At the time of writing I'm using a **MacBook Air M1 2020 16 GB**, Docker Desktop for Mac, and Docker engine `v20.10.7`, at **4 CPU**, **2 GB RAM** and **1 GB Swap**.
 
 ### Benchmark
 
