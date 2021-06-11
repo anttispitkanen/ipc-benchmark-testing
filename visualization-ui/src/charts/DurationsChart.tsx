@@ -107,7 +107,8 @@ const VerticalBar = ({
 
   return (
     <div id="durations-chart">
-      <h2 className="title">Durations by IPC method</h2>
+      <h3 className="title">Durations by IPC method</h3>
+
       <Bar
         type="bar"
         width={800}
@@ -115,6 +116,43 @@ const VerticalBar = ({
         data={chartData}
         options={options}
       />
+
+      <p>
+        <i>
+          <b>Tip:</b> click dataset name to hide it from the chart, and hover
+          for tooltips.
+        </i>
+      </p>
+
+      <p>
+        <b>TheOperation duration</b> describes how many milliseconds it took to
+        run{' '}
+        <a
+          href="https://github.com/anttispitkanen/ipc-benchmark-testing/blob/main/shared/TheOperation.ts"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          TheOperation
+        </a>{' '}
+        for the given mock data size. The timing starts only when inside the
+        function, so the IPC method doesn't affect its running time.
+      </p>
+
+      <p>
+        <b>Overhead duration</b> describes how many milliseconds it took to pass
+        the data from{' '}
+        <a
+          href="https://github.com/anttispitkanen/ipc-benchmark-testing/blob/main/shared/mainProcess.ts"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          mainProcess
+        </a>{' '}
+        to TheOperation and back, excluding the time that running TheOperation
+        took. So basically it shows the cost of serializing the data and passing
+        it back and forth between the containers (or just between the two
+        functions in benchmark's case).
+      </p>
     </div>
   );
 };

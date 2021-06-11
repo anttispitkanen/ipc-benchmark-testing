@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  line-height: 1.4rem;
 }
 
 body {
@@ -25,12 +26,13 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   text-align: center;
 }
 
-.intro {
-  margin: 40px 0;
+section {
+  margin: 60px 0;
 }
 
 .monospace-highlight {
