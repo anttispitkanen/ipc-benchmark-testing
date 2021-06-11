@@ -71,7 +71,7 @@ function App() {
             >
               the repo
             </a>{' '}
-            for more information on how this work and how to run the tests
+            for more information on how this works and how to run the tests
             yourself.
           </p>
 
