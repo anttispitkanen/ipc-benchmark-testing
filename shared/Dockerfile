@@ -19,10 +19,8 @@ RUN npm ci
 WORKDIR /usr/src/app
 COPY shared ./shared
 
-# Copy the different ipc-methods, all of them need to be listed here
-COPY benchmark ./benchmark
-COPY ipc-http ./ipc-http
-COPY ipc-http-express-axios ./ipc-http-express-axios
+# Copy the different ipc-methods
+COPY ipc-methods ./ipc-methods
 
 
 # Transpile TypeScript to JavaScript

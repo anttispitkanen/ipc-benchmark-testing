@@ -1,6 +1,6 @@
 import * as express from 'express';
 import type { TMockData } from 'ipc-benchmark-testing-types';
-import { TheOperation } from '../shared/TheOperation';
+import { TheOperation } from '../../shared/TheOperation';
 
 const app = express();
 // Currently the largest mock data is only around 770K

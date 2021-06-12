@@ -3,11 +3,11 @@ version: '3'
 services:
   main_process:
     build:
-      context: ../
+      context: ../../
       dockerfile: ./shared/Dockerfile
     volumes:
-      - ../results/:/usr/src/app/results
-    working_dir: /usr/src/app/benchmark
+      - ../../results/:/usr/src/app/results
+    working_dir: /usr/src/app/ipc-methods/benchmark
     environment:
       - NODE_ENV=production
       - MOCK_DATA_SIZE

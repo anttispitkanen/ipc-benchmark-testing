@@ -1,6 +1,6 @@
 import { TMockData, EIPCMethod } from 'ipc-benchmark-testing-types';
-import { mainProcess } from '../shared/mainProcess';
-import { TheOperation } from '../shared/TheOperation';
+import { mainProcess } from '../../shared/mainProcess';
+import { TheOperation } from '../../shared/TheOperation';
 
 /**
  * Run TheOperation in the same process.

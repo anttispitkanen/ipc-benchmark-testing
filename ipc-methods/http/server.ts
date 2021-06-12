@@ -4,7 +4,7 @@
  */
 import * as http from 'http';
 import { TMockData } from 'ipc-benchmark-testing-types';
-import { TheOperation } from '../shared/TheOperation';
+import { TheOperation } from '../../shared/TheOperation';
 
 const handler = (req: http.IncomingMessage, res: http.ServerResponse) => {
   res.setHeader('Content-Type', 'application/json');
