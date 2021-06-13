@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ipc-benchmark-testing/static/css/main.e51d3181.chunk.css",
+    "main.css": "/ipc-benchmark-testing/static/css/main.9113cf39.chunk.css",
     "main.js": "/ipc-benchmark-testing/static/js/main.418bfc98.chunk.js",
     "main.js.map": "/ipc-benchmark-testing/static/js/main.418bfc98.chunk.js.map",
     "runtime-main.js": "/ipc-benchmark-testing/static/js/runtime-main.59067b89.js",
@@ -10,14 +10,14 @@
     "static/js/3.66e93c6c.chunk.js": "/ipc-benchmark-testing/static/js/3.66e93c6c.chunk.js",
     "static/js/3.66e93c6c.chunk.js.map": "/ipc-benchmark-testing/static/js/3.66e93c6c.chunk.js.map",
     "index.html": "/ipc-benchmark-testing/index.html",
-    "static/css/main.e51d3181.chunk.css.map": "/ipc-benchmark-testing/static/css/main.e51d3181.chunk.css.map",
+    "static/css/main.9113cf39.chunk.css.map": "/ipc-benchmark-testing/static/css/main.9113cf39.chunk.css.map",
     "static/js/2.ce55ba68.chunk.js.LICENSE.txt": "/ipc-benchmark-testing/static/js/2.ce55ba68.chunk.js.LICENSE.txt",
     "static/media/index.css": "/ipc-benchmark-testing/static/media/hero.4cd784fd.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.59067b89.js",
     "static/js/2.ce55ba68.chunk.js",
-    "static/css/main.e51d3181.chunk.css",
+    "static/css/main.9113cf39.chunk.css",
     "static/js/main.418bfc98.chunk.js"
   ]
 }
