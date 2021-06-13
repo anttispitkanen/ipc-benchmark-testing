@@ -249,7 +249,7 @@ const OptionsSelectors = ({
   setSelectedMockDataSize: (mockDataSize: EMockDataSize) => void;
 }) => (
   <div className="options-selectors">
-    <p>
+    <span>
       Viewing test suite run on:{' '}
       <select
         value={selectedDataset.date}
@@ -263,20 +263,22 @@ const OptionsSelectors = ({
           <option key={ds.date}>{ds.date}</option>
         ))}
       </select>
-    </p>
+    </span>
 
-    <p>
+    <span>
       Viewing mock data size: <b>{selectedMockDataSize}</b>
-    </p>
+    </span>
 
-    {Object.values(EMockDataSize).map(mds => (
-      <MockDataSelectorButton
-        key={mds}
-        size={mds}
-        selectFn={setSelectedMockDataSize}
-        activeSize={selectedMockDataSize}
-      />
-    ))}
+    <span>
+      {Object.values(EMockDataSize).map(mds => (
+        <MockDataSelectorButton
+          key={mds}
+          size={mds}
+          selectFn={setSelectedMockDataSize}
+          activeSize={selectedMockDataSize}
+        />
+      ))}
+    </span>
   </div>
 );
 
