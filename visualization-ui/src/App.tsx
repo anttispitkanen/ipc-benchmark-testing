@@ -160,7 +160,7 @@ function App() {
 
           <p>
             <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/benchmark"
+              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/benchmark"
               target="_blank"
               rel="noreferrer noopener"
             >
@@ -175,7 +175,7 @@ function App() {
 
           <p>
             <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-http"
+              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/http"
               target="_blank"
               rel="noreferrer noopener"
             >
@@ -188,7 +188,11 @@ function App() {
           </p>
 
           <p>
-            <a href="" target="_blank" rel="noreferrer noopener">
+            <a
+              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/http-express-axios"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               <b>http-express-axios</b>
             </a>{' '}
             uses the commonly used Nodejs HTTP server Express and the commonly

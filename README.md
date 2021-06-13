@@ -62,26 +62,26 @@ All the different processes are run as Nodejs Docker containers and orchestrated
 
 ### Benchmark
 
-The [benchmark](/benchmark) just runs main process and TheOperation in the same process, handling all the data in memory without need to (de)serialize it. There is no real overhead in transporting the data, but whatever "overhead" is spent is the baseline that the other methods are compared to.
+The [benchmark](/ipc-methods/benchmark) just runs main process and TheOperation in the same process, handling all the data in memory without need to (de)serialize it. There is no real overhead in transporting the data, but whatever "overhead" is spent is the baseline that the other methods are compared to.
 
 ### Tested data transport methods
 
 All the tested methods are run as two Nodejs containers: one for the main process and one for TheOperation. The containers are run using `docker compose` in the default network mode (bridge). The main process container references TheOperation container by service name, when the data transport method calls for IP.
 
-#### `ipc-http` – HTTP (Nodejs `http` library)
+#### `http` – Nodejs `http` library
 
-[`ipc-http`](/ipc-http) uses "raw" HTTP, meaning the Nodejs built-in `http` library, to transport the data between a client (main process) and a server (TheOperation). The data is serialized using JSON.
+[`http`](/ipc-methods/http) uses "raw" HTTP, meaning the Nodejs built-in `http` library, to transport the data between a client (main process) and a server (TheOperation). The data is serialized using JSON.
 
-#### `ipc-http-express-axios` – HTTP using Express and Axios
+#### `http-express-axios` – HTTP using Express and Axios
 
-[`ipc-http-express-axios`](/ipc-http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
+[`ipc-http-express-axios`](/ipc-methods/http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
 
 #### Implementing data transport methods and such
 
 See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas and their status.
 
-- [x] "Raw HTTP" ([`ipc-http`](/ipc-http)) using the Nodejs native `http` module
-- [x] "Nicer HTTP" using express and axios ([`ipc-http-express-axios`](/ipc-http-express-axios)), as one often would in Nodejs development
+- [x] "Raw HTTP" ([`http`](/ipc-methods/http)) using the Nodejs native `http` module
+- [x] "Nicer HTTP" using express and axios ([`http-express-axios`](/ipc-methods/http-express-axios)), as one often would in Nodejs development
 - [ ] Raw TCP
 - [ ] UDP
 - [ ] gRPC
