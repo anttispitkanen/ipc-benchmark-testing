@@ -8,6 +8,7 @@ import {
 // Make all desired datasets available by importing here
 import data_2021_06_09 from './data/2021-6-9.analyzed.publish.json';
 import data_2021_06_10 from './data/2021-6-10.analyzed.publish.json';
+import data_2021_06_13 from './data/2021-6-13.analyzed.publish.json';
 
 type TDataAndDate = {
   data: TStatisticsForIPCMethodWithComparisons[];
@@ -22,6 +23,10 @@ const availableDatasets: TDataAndDate[] = [
   {
     data: data_2021_06_10 as unknown as TStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-10',
+  },
+  {
+    data: data_2021_06_13 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-13',
   },
 ];
 
@@ -41,11 +46,7 @@ function App() {
         <section>
           <p>
             This is{' '}
-            <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://github.com/anttispitkanen/ipc-benchmark-testing">
               a project
             </a>{' '}
             that compares the latency cost of different methods of transferring
@@ -64,11 +65,7 @@ function App() {
 
           <p>
             See{' '}
-            <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://github.com/anttispitkanen/ipc-benchmark-testing">
               the repo
             </a>{' '}
             for more information on how this works and how to run the tests
@@ -159,11 +156,7 @@ function App() {
           <h2>Tested IPC methods</h2>
 
           <p>
-            <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/benchmark"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/benchmark">
               <b>benchmark</b>
             </a>{' '}
             just runs main process and TheOperation in the same process,
@@ -174,25 +167,28 @@ function App() {
           </p>
 
           <p>
-            <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/http"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/tcp">
+              <b>tcp</b>
+            </a>{' '}
+            uses TCP with the Nodejs built-in{' '}
+            <span className="monospace-highlight">net</span> library, to
+            transport the data between a client running main process and a
+            server running TheOperation. The data is serialized using JSON with
+            a custom delimiter character set.
+          </p>
+
+          <p>
+            <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/http">
               <b>http</b>
             </a>{' '}
             uses "raw" HTTP, meaning the Nodejs built-in{' '}
             <span className="monospace-highlight">http</span> library, to
-            transport the data between a client (main process) and a server
-            (TheOperation). The data is serialized using JSON.
+            transport the data between a client running main process and a
+            server running TheOperation. The data is serialized using JSON.
           </p>
 
           <p>
-            <a
-              href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/http-express-axios"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/http-express-axios">
               <b>http-express-axios</b>
             </a>{' '}
             uses the commonly used Nodejs HTTP server Express and the commonly

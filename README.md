@@ -68,13 +68,17 @@ The [benchmark](/ipc-methods/benchmark) just runs main process and TheOperation 
 
 All the tested methods are run as two Nodejs containers: one for the main process and one for TheOperation. The containers are run using `docker compose` in the default network mode (bridge). The main process container references TheOperation container by service name, when the data transport method calls for IP.
 
+#### `tcp` – Nodejs `net` library
+
+[`tcp`](/ipc-methods/tcp) uses TCP with the Nodejs built-in `net` library, to transport the data between a client and a server running TheOperation. The data is serialized using JSON, with a custom delimiter character set.
+
 #### `http` – Nodejs `http` library
 
-[`http`](/ipc-methods/http) uses "raw" HTTP, meaning the Nodejs built-in `http` library, to transport the data between a client (main process) and a server (TheOperation). The data is serialized using JSON.
+[`http`](/ipc-methods/http) uses "raw" HTTP, meaning the Nodejs built-in `http` library, to transport the data between a client and a server running TheOperation. The data is serialized using JSON.
 
 #### `http-express-axios` – HTTP using Express and Axios
 
-[`ipc-http-express-axios`](/ipc-methods/http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
+[`http-express-axios`](/ipc-methods/http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
 
 #### Implementing data transport methods and such
 
@@ -82,7 +86,7 @@ See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas
 
 - [x] "Raw HTTP" ([`http`](/ipc-methods/http)) using the Nodejs native `http` module
 - [x] "Nicer HTTP" using express and axios ([`http-express-axios`](/ipc-methods/http-express-axios)), as one often would in Nodejs development
-- [ ] Raw TCP
+- [x] TCP
 - [ ] UDP
 - [ ] gRPC
 - [ ] Unix socket

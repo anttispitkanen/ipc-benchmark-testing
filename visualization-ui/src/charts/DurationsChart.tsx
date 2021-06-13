@@ -67,10 +67,19 @@ const chartCompatibleData = (
   data: TStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
 ) => {
+  /**
+   * Not all methods that exist have data. This is because the methods are
+   * implemented one at a time, and when new EIPCMethods are added to the type,
+   * they aren't added to the old datasets.
+   */
+  const IPC_METHODS_WITH_DATA: EIPCMethod[] = Object.values(EIPCMethod).filter(
+    method => data.some(d => d.ipcMethod === method),
+  );
+
   const chartData = propDataToChartData(data, mockDataSize);
 
   return {
-    labels: Object.values(EIPCMethod),
+    labels: IPC_METHODS_WITH_DATA,
     datasets: datasetsBase.map((d, i) => ({
       label: d.label,
       data: chartData[d.dataProperty],
@@ -127,11 +136,7 @@ const VerticalBar = ({
       <p>
         <b>TheOperation duration</b> describes how many milliseconds it took to
         run{' '}
-        <a
-          href="https://github.com/anttispitkanen/ipc-benchmark-testing/blob/main/shared/TheOperation.ts"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/blob/main/shared/TheOperation.ts">
           TheOperation
         </a>{' '}
         for the given mock data size. The timing starts only when inside the
@@ -141,11 +146,7 @@ const VerticalBar = ({
       <p>
         <b>Overhead duration</b> describes how many milliseconds it took to pass
         the data from{' '}
-        <a
-          href="https://github.com/anttispitkanen/ipc-benchmark-testing/blob/main/shared/mainProcess.ts"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
+        <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/blob/main/shared/mainProcess.ts">
           mainProcess
         </a>{' '}
         to TheOperation and back, excluding the time that running TheOperation
