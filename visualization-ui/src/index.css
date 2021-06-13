@@ -17,17 +17,44 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content {
   max-width: 800px;
   width: 100%;
-  padding: 20px;
+  padding: 0 20px;
+}
+
+header {
+  background-image: url('./hero.jpg');
+  background-size: cover;
+  color: khaki;
+  text-shadow: 0px 0px 5px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 300px;
+}
+
+header p a {
+  color: khaki;
 }
 
 h1,
 h2,
 h3 {
+  line-height: 2rem;
   text-align: center;
 }
 
