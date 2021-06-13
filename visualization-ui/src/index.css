@@ -38,8 +38,7 @@ body {
 header {
   background-image: url('./hero.jpg');
   background-size: cover;
-  background-position-x: center;
-  background-position-y: top;
+  background-position: center;
   color: khaki;
   text-shadow: 0px 0px 5px black;
   display: flex;
