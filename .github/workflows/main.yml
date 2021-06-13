@@ -1,0 +1,34 @@
+name: Deploy UI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install top level dependencies
+        run: npm ci
+
+      - name: Transpile the types package
+        run: |
+          cd types
+          npm ci
+          npm run tsc
+
+      - name: Install UI dependencies
+        run: |
+          cd visualization-ui
+          npm ci
+
+      - name: Deploy UI to GitHub Pages
+        run: |
+          cd visualization-ui
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
