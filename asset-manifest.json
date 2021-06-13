@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/ipc-benchmark-testing/static/css/main.3705144c.chunk.css",
-    "main.js": "/ipc-benchmark-testing/static/js/main.7b82c8c5.chunk.js",
-    "main.js.map": "/ipc-benchmark-testing/static/js/main.7b82c8c5.chunk.js.map",
+    "main.js": "/ipc-benchmark-testing/static/js/main.38741cd1.chunk.js",
+    "main.js.map": "/ipc-benchmark-testing/static/js/main.38741cd1.chunk.js.map",
     "runtime-main.js": "/ipc-benchmark-testing/static/js/runtime-main.59067b89.js",
     "runtime-main.js.map": "/ipc-benchmark-testing/static/js/runtime-main.59067b89.js.map",
-    "static/js/2.b72d2d67.chunk.js": "/ipc-benchmark-testing/static/js/2.b72d2d67.chunk.js",
-    "static/js/2.b72d2d67.chunk.js.map": "/ipc-benchmark-testing/static/js/2.b72d2d67.chunk.js.map",
+    "static/js/2.ce55ba68.chunk.js": "/ipc-benchmark-testing/static/js/2.ce55ba68.chunk.js",
+    "static/js/2.ce55ba68.chunk.js.map": "/ipc-benchmark-testing/static/js/2.ce55ba68.chunk.js.map",
     "static/js/3.66e93c6c.chunk.js": "/ipc-benchmark-testing/static/js/3.66e93c6c.chunk.js",
     "static/js/3.66e93c6c.chunk.js.map": "/ipc-benchmark-testing/static/js/3.66e93c6c.chunk.js.map",
     "index.html": "/ipc-benchmark-testing/index.html",
     "static/css/main.3705144c.chunk.css.map": "/ipc-benchmark-testing/static/css/main.3705144c.chunk.css.map",
-    "static/js/2.b72d2d67.chunk.js.LICENSE.txt": "/ipc-benchmark-testing/static/js/2.b72d2d67.chunk.js.LICENSE.txt"
+    "static/js/2.ce55ba68.chunk.js.LICENSE.txt": "/ipc-benchmark-testing/static/js/2.ce55ba68.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.59067b89.js",
-    "static/js/2.b72d2d67.chunk.js",
+    "static/js/2.ce55ba68.chunk.js",
     "static/css/main.3705144c.chunk.css",
-    "static/js/main.7b82c8c5.chunk.js"
+    "static/js/main.38741cd1.chunk.js"
   ]
 }
