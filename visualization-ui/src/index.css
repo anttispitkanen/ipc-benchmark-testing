@@ -38,6 +38,8 @@ body {
 header {
   background-image: url('./hero.jpg');
   background-size: cover;
+  background-position-x: center;
+  background-position-y: top;
   color: khaki;
   text-shadow: 0px 0px 5px black;
   display: flex;
@@ -45,7 +47,7 @@ header {
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 300px;
+  height: 400px;
 }
 
 header p a {
