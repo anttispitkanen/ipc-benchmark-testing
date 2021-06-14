@@ -4,6 +4,7 @@
  */
 export declare enum EIPCMethod {
     BENCHMARK = "benchmark",
+    UNIX_SOCKET = "unix-socket",
     TCP = "tcp",
     HTTP = "http",
     HTTP_EXPRESS_AXIOS = "http-express-axios"

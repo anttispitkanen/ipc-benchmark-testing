@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  main_process:
+    build:
+      context: ../../
+      dockerfile: ./shared/Dockerfile
+    volumes:
+      - ../../results/:/usr/src/app/results
+      - socket_volume:/usr/src/app/socket
+    working_dir: /usr/src/app/ipc-methods/unix-socket
+    environment:
+      - THE_OPERATION_SOCKET_PATH=/usr/src/app/socket/common.sock
+      - NODE_ENV=production
+      - MOCK_DATA_SIZE
+    command: 'node --max-old-space-size=1536 ./main.js'
+
+  the_operation:
+    build:
+      context: ../../
+      dockerfile: ./shared/Dockerfile
+    volumes:
+      - socket_volume:/usr/src/app/socket
+    working_dir: /usr/src/app/ipc-methods/unix-socket
+    environment:
+      - THE_OPERATION_SOCKET_PATH=/usr/src/app/socket/common.sock
+      - NODE_ENV=production
+    command: sh -c "unlink /usr/src/app/socket/common.sock || true && node --max-old-space-size=1536 ./server.js"
+
+volumes:
+  socket_volume: {}

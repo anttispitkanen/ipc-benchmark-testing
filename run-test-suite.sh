@@ -1,6 +1,6 @@
 # !/bin/bash
 
-NPM_TEST_COMMANDS=('test:benchmark' 'test:tcp' 'test:http' 'test:http-express-axios')
+NPM_TEST_COMMANDS=('test:benchmark' 'test:unix-socket' 'test:tcp' 'test:http' 'test:http-express-axios')
 
 MOCK_DATA_SIZES=('small' 'medium' 'large')
 

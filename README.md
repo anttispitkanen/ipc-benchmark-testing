@@ -68,7 +68,11 @@ The [benchmark](/ipc-methods/benchmark) just runs main process and TheOperation 
 
 All the tested methods are run as two Nodejs containers: one for the main process and one for TheOperation. The containers are run using `docker compose` in the default network mode (bridge). The main process container references TheOperation container by service name, when the data transport method calls for IP.
 
-#### `tcp` – Nodejs `net` library
+#### `unix-socket` – Nodejs `net` library over Unix socket
+
+[`unix-socket`](/ipc-methods/unix-socket) uses the Nodejs built-in `net` library over a Unix socket to transport the data between a client and a server running TheOperation. The data is serialized using JSON, with a custom delimiter character set. The Unix socket file is shared to both containers using a named Docker Volume in the compose file.
+
+#### `tcp` – Nodejs `net` library over TCP
 
 [`tcp`](/ipc-methods/tcp) uses TCP with the Nodejs built-in `net` library, to transport the data between a client and a server running TheOperation. The data is serialized using JSON, with a custom delimiter character set.
 
@@ -89,7 +93,7 @@ See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas
 - [x] TCP
 - [ ] UDP
 - [ ] gRPC
-- [ ] Unix socket
+- [x] Unix socket
 - [ ] Build a web UI for viewing and comparing results
 
 ## Results and conclusions
