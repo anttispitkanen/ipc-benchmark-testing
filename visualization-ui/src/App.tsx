@@ -182,11 +182,12 @@ function App() {
               <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/unix-socket">
                 <b>unix-socket</b>
               </a>{' '}
-              uses the Nodejs built-in `net` library over a Unix socket to
-              transport the data between a client and a server running
-              TheOperation. The data is serialized using JSON, with a custom
-              delimiter character set. The Unix socket file is shared to both
-              containers using a named Docker Volume in the compose file.
+              uses the Nodejs built-in{' '}
+              <span className="monospace-highlight">net</span> library over a
+              Unix socket to transport the data between a client and a server
+              running TheOperation. The data is serialized using JSON, with a
+              custom delimiter character set. The Unix socket file is shared to
+              both containers using a named Docker Volume in the compose file.
             </p>
 
             <p>
