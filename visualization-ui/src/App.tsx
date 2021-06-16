@@ -10,6 +10,7 @@ import data_2021_06_09 from './data/2021-6-9.analyzed.publish.json';
 import data_2021_06_10 from './data/2021-6-10.analyzed.publish.json';
 import data_2021_06_13 from './data/2021-6-13.analyzed.publish.json';
 import data_2021_06_14 from './data/2021-6-14.analyzed.publish.json';
+import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
 
 type TDataAndDate = {
   data: TStatisticsForIPCMethodWithComparisons[];
@@ -32,6 +33,10 @@ const availableDatasets: TDataAndDate[] = [
   {
     data: data_2021_06_14 as unknown as TStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-14',
+  },
+  {
+    data: data_2021_06_16 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-16',
   },
 ];
 
@@ -219,6 +224,17 @@ function App() {
               used Nodejs HTTP client Axios. Data is serialized as JSON, and the
               parsing and serializing is handled by the libraries under the
               hood.
+            </p>
+
+            <p>
+              <a href="https://github.com/anttispitkanen/ipc-benchmark-testing/tree/main/ipc-methods/https">
+                <b>https</b>
+              </a>{' '}
+              uses self signed certificates to provide TLS for a HTTPS
+              connection, using the Nodejs built-in{' '}
+              <span className="monospace-highlight">https</span> library, to
+              transport the data between a client and a server running
+              TheOperation. The data is serialized using JSON.
             </p>
           </section>
 

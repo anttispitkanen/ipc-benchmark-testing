@@ -7,7 +7,8 @@ export declare enum EIPCMethod {
     UNIX_SOCKET = "unix-socket",
     TCP = "tcp",
     HTTP = "http",
-    HTTP_EXPRESS_AXIOS = "http-express-axios"
+    HTTP_EXPRESS_AXIOS = "http-express-axios",
+    HTTPS = "https"
 }
 /**
  * All the mock data sizes need to be listed here (in a sensible)

@@ -24,7 +24,11 @@
     "test:http-express-axios": "docker compose -f ./ipc-methods/http-express-axios/docker-compose.yml up",
     "test:http-express-axios:server": "node --max-old-space-size=1536 ./ipc-methods/http-express-axios/server.js",
     "test:http-express-axios:main": "THE_OPERATION_ENDPOINT_HOSTNAME=localhost THE_OPERATION_ENDPOINT_PORT=3000 node --max-old-space-size=1536 ./ipc-methods/http-express-axios/main.js",
-    "test:http-express-axios:raw": "npm run tsc && concurrently \"npm run test:http-express-axios:server\" \"npm run test:http-express-axios:main\""
+    "test:http-express-axios:raw": "npm run tsc && concurrently \"npm run test:http-express-axios:server\" \"npm run test:http-express-axios:main\"",
+    "test:https": "docker compose -f ./ipc-methods/https/docker-compose.yml up",
+    "test:https:server": "KEY_PATH=./ipc-methods/https/localhost.pem CERT_PATH=./ipc-methods/https/localhost-cert.pem node --max-old-space-size=1536 ./ipc-methods/https/server.js",
+    "test:https:main": "CERT_PATH=./ipc-methods/https/localhost-cert.pem THE_OPERATION_ENDPOINT_HOSTNAME=localhost THE_OPERATION_ENDPOINT_PORT=3000 node --max-old-space-size=1536 ./ipc-methods/https/main.js",
+    "test:https:raw": "npm run tsc && concurrently \"npm run test:https:server\" \"npm run test:https:main\""
   },
   "repository": {
     "type": "git",

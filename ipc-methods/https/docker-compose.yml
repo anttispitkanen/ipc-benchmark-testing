@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  main_process:
+    build:
+      context: ../../
+      dockerfile: ./shared/Dockerfile
+    volumes:
+      - ../../results/:/usr/src/app/results
+    working_dir: /usr/src/app/ipc-methods/https
+    environment:
+      - THE_OPERATION_ENDPOINT_HOSTNAME=the_operation
+      - THE_OPERATION_ENDPOINT_PORT=3000
+      - CERT_PATH=the_operation-cert.pem
+      - NODE_ENV=production
+      - MOCK_DATA_SIZE
+    command: 'node --max-old-space-size=1536 ./main.js'
+
+  the_operation:
+    build:
+      context: ../../
+      dockerfile: ./shared/Dockerfile
+    working_dir: /usr/src/app/ipc-methods/https
+    environment:
+      - KEY_PATH=the_operation.pem
+      - CERT_PATH=the_operation-cert.pem
+      - NODE_ENV=production
+    command: 'node --max-old-space-size=1536 ./server.js'

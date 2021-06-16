@@ -8,6 +8,7 @@ export enum EIPCMethod {
   TCP = 'tcp',
   HTTP = 'http',
   HTTP_EXPRESS_AXIOS = 'http-express-axios',
+  HTTPS = 'https',
 }
 
 /**

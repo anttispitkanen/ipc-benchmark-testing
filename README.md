@@ -84,12 +84,25 @@ All the tested methods are run as two Nodejs containers: one for the main proces
 
 [`http-express-axios`](/ipc-methods/http-express-axios) uses the commonly used Nodejs HTTP server [Express](https://github.com/expressjs/express) and the commonly used Nodejs HTTP client [Axios](https://github.com/axios/axios). Data is serialized as JSON, and the parsing and serializing is handled by the libraries under the hood.
 
+#### `https` – Nodejs `https` library
+
+[`https`](/ipc-methods/https) uses self signed certificates to provide TLS for a HTTPS connection, using the Nodejs built-in `https` library, to transport the data between a client and a server running TheOperation. The data is serialized using JSON.
+
+The certs are stored in version control (definitely not something you would do in a real situation!) and created with
+
+```bash
+openssl req -x509 -newkey rsa:4096 -keyout <hostname>.pem -out <hostname>-cert.pem -nodes -days 20000
+```
+
+There are separate key-cert-pairs for hostnames `localhost` and `the_operation`, used outside and inside Docker respectively.
+
 #### Implementing data transport methods and such
 
 See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas and their status.
 
 - [x] "Raw HTTP" ([`http`](/ipc-methods/http)) using the Nodejs native `http` module
 - [x] "Nicer HTTP" using express and axios ([`http-express-axios`](/ipc-methods/http-express-axios)), as one often would in Nodejs development
+- [x] HTTPS
 - [x] TCP
 - [ ] UDP
 - [ ] gRPC
