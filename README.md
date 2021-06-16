@@ -203,3 +203,9 @@ const availableDatasets: TDataAndDate[] = [
 ```
 
 This will hopefully be refactored into something less manual and bulky.
+
+### Deploying the UI
+
+Every commit pushed to `main` on GitHub is deployed to the UI (https://anttispitkanen.github.io/ipc-benchmark-testing/), hosted on GitHub Pages. This is done using the [`gh-pages`](https://github.com/tschaub/gh-pages) package. GitHub actions installs builds the UI and pushes it to `gh-pages` branch, which is the source branch for the repository's GitHub Pages configuration.
+
+See the workflow in [.github/workflows/deploy.yml](/.github/workflows/deploy.yml).
