@@ -119,7 +119,7 @@ Requirements:
 
 - Nodejs (I'm using Nodejs 14) and npm
 - Bash (only used in the loop running the whole test suite)
-- Docker (engine version `v20.10.6` is what I'm using) and docker compose, so Docker Desktop version `>= 3.2.1`
+- Docker (engine version `v20.10.7` is what I'm using) and docker compose, so Docker Desktop version `>= 3.2.1`
 
 1. Clone this repo and change into it
 
