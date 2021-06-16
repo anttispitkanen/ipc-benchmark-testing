@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "sync-data": "mkdir -p visualization-ui/src/data && rm -f visualization-ui/src/data/* && cp results/*.publish.json visualization-ui/src/data",
     "cli": "npm run tsc && node cli.js",
-    "full-test-suite": "bash ./run-test-suite.sh",
+    "full-test-suite": "npm run tsc && node runTestSuite.js",
     "test:benchmark": "docker compose -f ./ipc-methods/benchmark/docker-compose.yml up",
     "test:benchmark:raw": "npm run tsc && node --max-old-space-size=1536 ./ipc-methods/benchmark/main.js",
     "test:unix-socket": "docker compose -f ./ipc-methods/unix-socket/docker-compose.yml up",
