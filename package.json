@@ -6,6 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "sync-data": "mkdir -p visualization-ui/src/data && rm -f visualization-ui/src/data/* && cp results/*.publish.json visualization-ui/src/data",
+    "cli": "npm run tsc && node cli.js",
     "full-test-suite": "bash ./run-test-suite.sh",
     "test:benchmark": "docker compose -f ./ipc-methods/benchmark/docker-compose.yml up",
     "test:benchmark:raw": "npm run tsc && node --max-old-space-size=1536 ./ipc-methods/benchmark/main.js",
@@ -28,7 +29,8 @@
     "test:https": "docker compose -f ./ipc-methods/https/docker-compose.yml up",
     "test:https:server": "KEY_PATH=./ipc-methods/https/localhost.pem CERT_PATH=./ipc-methods/https/localhost-cert.pem node --max-old-space-size=1536 ./ipc-methods/https/server.js",
     "test:https:main": "CERT_PATH=./ipc-methods/https/localhost-cert.pem THE_OPERATION_ENDPOINT_HOSTNAME=localhost THE_OPERATION_ENDPOINT_PORT=3000 node --max-old-space-size=1536 ./ipc-methods/https/main.js",
-    "test:https:raw": "npm run tsc && concurrently \"npm run test:https:server\" \"npm run test:https:main\""
+    "test:https:raw": "npm run tsc && concurrently \"npm run test:https:server\" \"npm run test:https:main\"",
+    "analyze": "npm run tsc && node ./shared/analyze.js && prettier --write results/*"
   },
   "repository": {
     "type": "git",
@@ -44,6 +46,7 @@
   "devDependencies": {
     "@types/express": "^4.17.12",
     "@types/node": "^14.14.37",
+    "@types/prompts": "^2.0.13",
     "concurrently": "^6.2.0",
     "prettier": "^2.3.0",
     "typescript": "^4.2.4"
@@ -51,6 +54,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "express": "^4.17.1",
-    "ipc-benchmark-testing-types": "file:types"
+    "ipc-benchmark-testing-types": "file:types",
+    "prompts": "^2.4.1"
   }
 }

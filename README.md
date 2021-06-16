@@ -96,18 +96,9 @@ openssl req -x509 -newkey rsa:4096 -keyout <hostname>.pem -out <hostname>-cert.p
 
 There are separate key-cert-pairs for hostnames `localhost` and `the_operation`, used outside and inside Docker respectively.
 
-#### Implementing data transport methods and such
+#### Roadmap
 
 See https://github.com/anttispitkanen/ipc-benchmark-testing/projects/1 for ideas and their status.
-
-- [x] "Raw HTTP" ([`http`](/ipc-methods/http)) using the Nodejs native `http` module
-- [x] "Nicer HTTP" using express and axios ([`http-express-axios`](/ipc-methods/http-express-axios)), as one often would in Nodejs development
-- [x] HTTPS
-- [x] TCP
-- [ ] UDP
-- [ ] gRPC
-- [x] Unix socket
-- [ ] Build a web UI for viewing and comparing results
 
 ## Results and conclusions
 
@@ -118,24 +109,97 @@ See the visualized results at https://anttispitkanen.github.io/ipc-benchmark-tes
 Requirements:
 
 - Nodejs (I'm using Nodejs 14) and npm
-- Bash (only used in the loop running the whole test suite)
 - Docker (engine version `v20.10.7` is what I'm using) and docker compose, so Docker Desktop version `>= 3.2.1`
 
 1. Clone this repo and change into it
 
-```
+```bash
 git clone git@github.com:anttispitkanen/ipc-benchmark-testing.git
 cd ipc-benchmark-testing
 ```
 
 2. Install the dependencies
 
-```
+```bash
 npm install
 ```
 
-3. Run the test suite (includes transpiling TypeScript to JavaScript first)
+3. Install the `types` dependencies and transpile the types
 
+The [types](/types) directory is its own npm package that is shared to the root (test suite) and [visualization-ui](/visualization-ui). If you want to e.g. add a new IPC method or mock data size, that needs to be changed here. Otherwise you only need to do this once (for the test runs, `shared/Dockerfile` takes care of transpiling the types).
+
+```bash
+cd types
+npm install # install dependencies
+npm run tsc # transpile to JavaScript
 ```
+
+### Running the tests
+
+There's an interactive test runner that can be started with
+
+```bash
+npm run cli
+```
+
+![CLI example GIF](/ipc-cli.gif 'CLI example GIF')
+
+Or you can run the **full test suite** (each IPC method for each mock data size 5 times), in a random order to avoid host machine affecting the performance, with
+
+```bash
 npm run full-test-suite
 ```
+
+The results are written in `/results` directory, in a file named `<date>.raw.json`, and those need to be analyzed.
+
+### "Analyzing" the results
+
+_This is a part that needs refactoring for sure._
+
+The analysis can be done by running
+
+```bash
+INPUT_FILE=../results/<date>.raw.json npm run analyze
+```
+
+The analysis produces a file named `<date>.analyzed.json`.
+
+### Viewing the results in UI
+
+_This is a part that needs refactoring for sure._
+
+Everything in `/results` is gitignored by default, except files explicitly named `*.publish.json`. So in order to "publish" something to the UI, you need to rename whichever file you want as `<date>.analyzed.publish.json`. Note that there should be no point in publishing the `.raw.json` files.
+
+The published results need to be manually synced to the UI, that lives in the subdirectory [visualization-ui](/visualization-ui). For this there is a script:
+
+```bash
+npm run sync-data
+```
+
+which duplicates the result file to the UI `data` directory, where it can be required from.
+
+### Running the UI
+
+The visualization UI lives in its own subdirectory.
+
+```bash
+cd visualization-ui
+npm install # install dependencies
+npm start # start the local UI in http://localhost:3333
+```
+
+In order to add new data to the UI you need to explicitly require the data in [App.tsx](/visualization-ui/src/App.tsx) and add to the `availableDatasets` array like so:
+
+```typescript
+import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
+
+const availableDatasets: TDataAndDate[] = [
+  // ...previous data...
+  {
+    data: data_2021_06_16 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-16',
+  },
+];
+```
+
+This will hopefully be refactored into something less manual and bulky.
