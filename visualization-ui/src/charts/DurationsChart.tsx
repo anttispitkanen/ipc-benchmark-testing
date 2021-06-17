@@ -5,6 +5,7 @@ import {
   EMockDataSize,
   EIPCMethod,
 } from 'ipc-benchmark-testing-types';
+import { TDataRenderingProps } from '../App';
 
 const colors = [
   {
@@ -105,18 +106,12 @@ const options = {
   },
 };
 
-const VerticalBar = ({
-  dataProp,
-  mockDataSizeProp,
-}: {
-  dataProp: TStatisticsForIPCMethodWithComparisons[];
-  mockDataSizeProp: EMockDataSize;
-}) => {
+const VerticalBar = ({ dataProp, mockDataSizeProp }: TDataRenderingProps) => {
   const chartData = chartCompatibleData(dataProp, mockDataSizeProp);
 
   return (
     <div id="durations-chart">
-      <h3 className="title">Durations by IPC method</h3>
+      <h3>Durations by IPC method</h3>
 
       <Bar
         type="bar"

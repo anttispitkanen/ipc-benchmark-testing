@@ -91,3 +91,20 @@ p {
 #durations-chart {
   margin: 40px 0;
 }
+
+#comparisons-table-wrapper {
+  margin-bottom: 40px;
+  overflow-x: scroll;
+}
+
+#comparisons-table {
+  width: 760px;
+}
+
+table,
+th,
+td {
+  border: 1px solid lightgray;
+  border-collapse: collapse;
+  padding: 10px;
+}

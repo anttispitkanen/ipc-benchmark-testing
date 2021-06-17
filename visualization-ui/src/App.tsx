@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import DurationsChart from './charts/DurationsChart';
 import {
   TStatisticsForIPCMethodWithComparisons,
   EMockDataSize,
 } from 'ipc-benchmark-testing-types';
+import DurationsChart from './charts/DurationsChart';
+import ComparisonsTable from './table/ComparisonsTable';
 
 // Make all desired datasets available by importing here
 import data_2021_06_09 from './data/2021-6-9.analyzed.publish.json';
@@ -44,6 +45,11 @@ const availableDatasets: TDataAndDate[] = [
     date: '2021-06-17',
   },
 ];
+
+export type TDataRenderingProps = {
+  dataProp: TStatisticsForIPCMethodWithComparisons[];
+  mockDataSizeProp: EMockDataSize;
+};
 
 function App() {
   const [selectedDataset, setSelectedDataset] = useState<TDataAndDate>(
@@ -256,6 +262,11 @@ function App() {
             />
 
             <DurationsChart
+              dataProp={selectedDataset.data}
+              mockDataSizeProp={selectedMockDataSize}
+            />
+
+            <ComparisonsTable
               dataProp={selectedDataset.data}
               mockDataSizeProp={selectedMockDataSize}
             />
