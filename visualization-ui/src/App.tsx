@@ -11,6 +11,7 @@ import data_2021_06_10 from './data/2021-6-10.analyzed.publish.json';
 import data_2021_06_13 from './data/2021-6-13.analyzed.publish.json';
 import data_2021_06_14 from './data/2021-6-14.analyzed.publish.json';
 import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
+import data_2021_06_17 from './data/2021-6-17.analyzed.publish.json';
 
 type TDataAndDate = {
   data: TStatisticsForIPCMethodWithComparisons[];
@@ -37,6 +38,10 @@ const availableDatasets: TDataAndDate[] = [
   {
     data: data_2021_06_16 as unknown as TStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-16',
+  },
+  {
+    data: data_2021_06_17 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-17',
   },
 ];
 

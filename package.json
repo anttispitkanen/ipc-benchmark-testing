@@ -30,7 +30,7 @@
     "test:https:server": "KEY_PATH=./ipc-methods/https/localhost.pem CERT_PATH=./ipc-methods/https/localhost-cert.pem node --max-old-space-size=1536 ./ipc-methods/https/server.js",
     "test:https:main": "CERT_PATH=./ipc-methods/https/localhost-cert.pem THE_OPERATION_ENDPOINT_HOSTNAME=localhost THE_OPERATION_ENDPOINT_PORT=3000 node --max-old-space-size=1536 ./ipc-methods/https/main.js",
     "test:https:raw": "npm run tsc && concurrently \"npm run test:https:server\" \"npm run test:https:main\"",
-    "analyze": "npm run tsc && node ./shared/analyze.js && prettier --write results/*"
+    "analyze": "npm run tsc && node ./shared/analyze.js"
   },
   "repository": {
     "type": "git",

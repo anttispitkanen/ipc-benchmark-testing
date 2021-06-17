@@ -82,5 +82,5 @@ const fileName =
 
 fs.writeFileSync(
   path.join(__dirname, '..', 'results', fileName),
-  JSON.stringify(analyzedResults),
+  JSON.stringify(analyzedResults, null, 2),
 );

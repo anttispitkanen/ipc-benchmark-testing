@@ -67,7 +67,7 @@ export const documentResults = (
 
   fs.writeFileSync(
     path.join(__dirname, '..', 'results', fileName),
-    JSON.stringify(appendedResults),
+    JSON.stringify(appendedResults, null, 2),
   );
 };
 
