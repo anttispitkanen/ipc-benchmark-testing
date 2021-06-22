@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/ipc-benchmark-testing/static/css/main.9113cf39.chunk.css",
-    "main.js": "/ipc-benchmark-testing/static/js/main.c77ac350.chunk.js",
-    "main.js.map": "/ipc-benchmark-testing/static/js/main.c77ac350.chunk.js.map",
-    "runtime-main.js": "/ipc-benchmark-testing/static/js/runtime-main.bde0084c.js",
-    "runtime-main.js.map": "/ipc-benchmark-testing/static/js/runtime-main.bde0084c.js.map",
-    "static/js/2.76961495.chunk.js": "/ipc-benchmark-testing/static/js/2.76961495.chunk.js",
-    "static/js/2.76961495.chunk.js.map": "/ipc-benchmark-testing/static/js/2.76961495.chunk.js.map",
-    "static/js/3.273cfe33.chunk.js": "/ipc-benchmark-testing/static/js/3.273cfe33.chunk.js",
-    "static/js/3.273cfe33.chunk.js.map": "/ipc-benchmark-testing/static/js/3.273cfe33.chunk.js.map",
+    "main.css": "/ipc-benchmark-testing/static/css/main.61167299.chunk.css",
+    "main.js": "/ipc-benchmark-testing/static/js/main.26ee5d31.chunk.js",
+    "main.js.map": "/ipc-benchmark-testing/static/js/main.26ee5d31.chunk.js.map",
+    "runtime-main.js": "/ipc-benchmark-testing/static/js/runtime-main.c9853d35.js",
+    "runtime-main.js.map": "/ipc-benchmark-testing/static/js/runtime-main.c9853d35.js.map",
+    "static/js/2.44d365dc.chunk.js": "/ipc-benchmark-testing/static/js/2.44d365dc.chunk.js",
+    "static/js/2.44d365dc.chunk.js.map": "/ipc-benchmark-testing/static/js/2.44d365dc.chunk.js.map",
+    "static/js/3.7013d356.chunk.js": "/ipc-benchmark-testing/static/js/3.7013d356.chunk.js",
+    "static/js/3.7013d356.chunk.js.map": "/ipc-benchmark-testing/static/js/3.7013d356.chunk.js.map",
     "index.html": "/ipc-benchmark-testing/index.html",
-    "static/css/main.9113cf39.chunk.css.map": "/ipc-benchmark-testing/static/css/main.9113cf39.chunk.css.map",
-    "static/js/2.76961495.chunk.js.LICENSE.txt": "/ipc-benchmark-testing/static/js/2.76961495.chunk.js.LICENSE.txt",
+    "static/css/main.61167299.chunk.css.map": "/ipc-benchmark-testing/static/css/main.61167299.chunk.css.map",
+    "static/js/2.44d365dc.chunk.js.LICENSE.txt": "/ipc-benchmark-testing/static/js/2.44d365dc.chunk.js.LICENSE.txt",
     "static/media/index.css": "/ipc-benchmark-testing/static/media/hero.4cd784fd.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bde0084c.js",
-    "static/js/2.76961495.chunk.js",
-    "static/css/main.9113cf39.chunk.css",
-    "static/js/main.c77ac350.chunk.js"
+    "static/js/runtime-main.c9853d35.js",
+    "static/js/2.44d365dc.chunk.js",
+    "static/css/main.61167299.chunk.css",
+    "static/js/main.26ee5d31.chunk.js"
   ]
 }
