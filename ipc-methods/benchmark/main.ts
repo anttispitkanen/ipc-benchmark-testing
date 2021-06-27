@@ -2,10 +2,11 @@ import { TMockData, EIPCMethod } from 'ipc-benchmark-testing-types';
 import { mainProcess } from '../../shared/mainProcess';
 import { TheOperation } from '../../shared/TheOperation';
 
-/**
- * Run TheOperation in the same process.
- */
-const runTheOperation = (data: TMockData[]) =>
-  Promise.resolve(TheOperation(data));
+const TheOperationWrapper = {
+  // Run TheOperation in the same process.
+  runTheOperation: (data: TMockData[]) => Promise.resolve(TheOperation(data)),
+  // No other container/process to close
+  close: () => Promise.resolve(),
+};
 
-mainProcess(runTheOperation, EIPCMethod.BENCHMARK);
+mainProcess(TheOperationWrapper, EIPCMethod.BENCHMARK);

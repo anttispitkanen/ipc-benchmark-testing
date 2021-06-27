@@ -14,9 +14,9 @@ const testRuns: TTestRunConfig[] = [];
 
 Object.values(EIPCMethod).forEach(method => {
   Object.values(EMockDataSize).forEach(mockDataSize => {
-    for (let i = 1; i <= 5; i++) {
-      testRuns.push({ method, mockDataSize });
-    }
+    // for (let i = 1; i <= 5; i++) {
+    testRuns.push({ method, mockDataSize });
+    // }
   });
 });
 

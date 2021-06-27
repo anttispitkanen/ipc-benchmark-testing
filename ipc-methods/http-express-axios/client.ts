@@ -15,3 +15,9 @@ export const httpExpressAxiosTransportMethod = async (
 
   return response.data;
 };
+
+export const close = async () => {
+  await axios.get(
+    `http://${THE_OPERATION_ENDPOINT_HOSTNAME}:${THE_OPERATION_ENDPOINT_PORT}`,
+  );
+};

@@ -1,5 +1,10 @@
 import { EIPCMethod } from 'ipc-benchmark-testing-types';
 import { mainProcess } from '../../shared/mainProcess';
-import { httpsTransportMethod } from './client';
+import { httpsTransportMethod, close } from './client';
 
-mainProcess(httpsTransportMethod, EIPCMethod.HTTPS);
+const TheOperationWrapper = {
+  runTheOperation: httpsTransportMethod,
+  close,
+};
+
+mainProcess(TheOperationWrapper, EIPCMethod.HTTPS);

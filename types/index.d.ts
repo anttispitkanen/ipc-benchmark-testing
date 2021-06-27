@@ -37,7 +37,10 @@ export declare type TTheOperationResults = {
     commentWithLongestName: TMockData;
     topFiveWordsInBody: TBodyWordStats[];
 };
-export declare type TTheOperationWrapper = (data: TMockData[]) => Promise<TTheOperationResults>;
+export declare type TTheOperationWrapper = {
+    runTheOperation: (data: TMockData[]) => Promise<TTheOperationResults>;
+    close: () => Promise<void>;
+};
 export declare type TStatistics = {
     durationMs: number;
     TheOperationDurationMs: number;
@@ -49,8 +52,8 @@ export declare type TStatisticsWithTimestamp = TStatistics & {
 };
 export declare type TStatisticsForMockDataSize = {
     mockDataSize: EMockDataSize;
-    runs: TStatisticsWithTimestamp[];
-    averages: TStatistics;
+    timestamp: Date;
+    runs: TStatistics[];
 };
 export declare type TStatisticsForIPCMethod = {
     ipcMethod: EIPCMethod;
@@ -64,11 +67,18 @@ export declare type TComparisonToBenchmark = {
     overheadDurationToBenchmarkMs: number;
     overheadDurationToBenchmarkPct: number;
 };
-export declare type TStatisticsForMockDataSizeWithComparisons = TStatisticsForMockDataSize & {
+export declare type TAnalyzedStatisticsForMockDataSize = TStatisticsForMockDataSize & {
+    averages: TStatistics;
+};
+export declare type TAnalyzedStatisticsForMockDataSizeWithComparisons = TAnalyzedStatisticsForMockDataSize & {
     comparisonToBenchmark: TComparisonToBenchmark;
 };
-export declare type TStatisticsForIPCMethodWithComparisons = {
+export declare type TAnalyzedStatisticsForIPCMethod = {
     ipcMethod: EIPCMethod;
-    statisticsByMockDataSize: TStatisticsForMockDataSizeWithComparisons[];
+    statisticsByMockDataSize: TAnalyzedStatisticsForMockDataSize[];
+};
+export declare type TAnalyzedStatisticsForIPCMethodWithComparisons = {
+    ipcMethod: EIPCMethod;
+    statisticsByMockDataSize: TAnalyzedStatisticsForMockDataSizeWithComparisons[];
 };
 export {};

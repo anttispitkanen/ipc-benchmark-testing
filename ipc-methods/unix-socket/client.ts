@@ -12,6 +12,7 @@ if (!THE_OPERATION_SOCKET_PATH || THE_OPERATION_SOCKET_PATH.length === 0) {
 }
 
 const DELIMITER = '###';
+const END_COMMAND = 'END_COMMAND';
 
 export const unixSocketTransportMethod = (
   mockData: TMockData[],
@@ -20,7 +21,6 @@ export const unixSocketTransportMethod = (
     const client = new net.Socket();
 
     client.connect(THE_OPERATION_SOCKET_PATH, () => {
-      console.log('Connected!');
       client.write(JSON.stringify(mockData) + DELIMITER);
     });
 
@@ -40,5 +40,18 @@ export const unixSocketTransportMethod = (
 
         resolve(json);
       }
+    });
+  });
+
+export const close = (): Promise<void> =>
+  new Promise(resolve => {
+    const client = new net.Socket();
+
+    client.connect(THE_OPERATION_SOCKET_PATH, () => {
+      client.write(END_COMMAND);
+    });
+
+    client.on('end', () => {
+      resolve();
     });
   });

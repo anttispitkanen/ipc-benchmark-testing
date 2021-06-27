@@ -1,5 +1,10 @@
 import { EIPCMethod } from 'ipc-benchmark-testing-types';
 import { mainProcess } from '../../shared/mainProcess';
-import { unixSocketTransportMethod } from './client';
+import { unixSocketTransportMethod, close } from './client';
 
-mainProcess(unixSocketTransportMethod, EIPCMethod.UNIX_SOCKET);
+const TheOperationWrapper = {
+  runTheOperation: unixSocketTransportMethod,
+  close,
+};
+
+mainProcess(TheOperationWrapper, EIPCMethod.UNIX_SOCKET);

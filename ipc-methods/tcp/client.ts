@@ -9,6 +9,7 @@ const { THE_OPERATION_ENDPOINT_HOSTNAME, THE_OPERATION_ENDPOINT_PORT } =
   process.env;
 
 const DELIMITER = '###';
+const END_COMMAND = 'END_COMMAND';
 
 export const tcpTransportMethod = (
   mockData: TMockData[],
@@ -20,7 +21,6 @@ export const tcpTransportMethod = (
       parseInt(THE_OPERATION_ENDPOINT_PORT || '0', 10),
       THE_OPERATION_ENDPOINT_HOSTNAME || '',
       () => {
-        console.log('Connected!');
         client.write(JSON.stringify(mockData) + DELIMITER);
       },
     );
@@ -39,5 +39,22 @@ export const tcpTransportMethod = (
 
         resolve(json);
       }
+    });
+  });
+
+export const close = (): Promise<void> =>
+  new Promise(resolve => {
+    const client = new net.Socket();
+
+    client.connect(
+      parseInt(THE_OPERATION_ENDPOINT_PORT || '0', 10),
+      THE_OPERATION_ENDPOINT_HOSTNAME || '',
+      () => {
+        client.write(END_COMMAND);
+      },
+    );
+
+    client.on('end', () => {
+      resolve();
     });
   });

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  TStatisticsForIPCMethodWithComparisons,
+  TAnalyzedStatisticsForIPCMethodWithComparisons,
   EMockDataSize,
 } from 'ipc-benchmark-testing-types';
 import DurationsChart from './charts/DurationsChart';
@@ -13,41 +13,46 @@ import data_2021_06_13 from './data/2021-6-13.analyzed.publish.json';
 import data_2021_06_14 from './data/2021-6-14.analyzed.publish.json';
 import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
 import data_2021_06_17 from './data/2021-6-17.analyzed.publish.json';
+import data_2021_06_28 from './data/2021-6-28.analyzed.publish.json';
 
 type TDataAndDate = {
-  data: TStatisticsForIPCMethodWithComparisons[];
+  data: TAnalyzedStatisticsForIPCMethodWithComparisons[];
   date: string; // like 2021-05-31
 };
 
 const availableDatasets: TDataAndDate[] = [
   {
-    data: data_2021_06_09 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    data: data_2021_06_09 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-09',
   },
   {
-    data: data_2021_06_10 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    data: data_2021_06_10 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-10',
   },
   {
-    data: data_2021_06_13 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    data: data_2021_06_13 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-13',
   },
   {
-    data: data_2021_06_14 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    data: data_2021_06_14 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-14',
   },
   {
-    data: data_2021_06_16 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    data: data_2021_06_16 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-16',
   },
   {
-    data: data_2021_06_17 as unknown as TStatisticsForIPCMethodWithComparisons[],
+    data: data_2021_06_17 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-17',
+  },
+  {
+    data: data_2021_06_28 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-28',
   },
 ];
 
 export type TDataRenderingProps = {
-  dataProp: TStatisticsForIPCMethodWithComparisons[];
+  dataProp: TAnalyzedStatisticsForIPCMethodWithComparisons[];
   mockDataSizeProp: EMockDataSize;
 };
 

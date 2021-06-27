@@ -9,6 +9,7 @@ import { TheOperation } from '../../shared/TheOperation';
 const PORT = 3000;
 
 const DELIMITER = '###';
+const END_COMMAND = 'END_COMMAND';
 
 const server = net.createServer(socket => {
   let requestData = '';
@@ -17,12 +18,18 @@ const server = net.createServer(socket => {
     requestData += data.toString();
 
     if (requestData.indexOf(DELIMITER) !== -1) {
-      const json = JSON.parse(requestData.split(DELIMITER)[0]) as TMockData[];
+      const [prev, next] = requestData.split(DELIMITER);
+
+      requestData = next;
+
+      const json = JSON.parse(prev) as TMockData[];
 
       const result = TheOperation(json);
 
       socket.write(JSON.stringify(result) + DELIMITER);
+    }
 
+    if (requestData === END_COMMAND) {
       socket.end();
       console.log('My work here is done');
       process.exit(0);

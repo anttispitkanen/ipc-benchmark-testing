@@ -1,5 +1,10 @@
 import { EIPCMethod } from 'ipc-benchmark-testing-types';
 import { mainProcess } from '../../shared/mainProcess';
-import { httpExpressAxiosTransportMethod } from './client';
+import { httpExpressAxiosTransportMethod, close } from './client';
 
-mainProcess(httpExpressAxiosTransportMethod, EIPCMethod.HTTP_EXPRESS_AXIOS);
+const TheOperationWrapper = {
+  runTheOperation: httpExpressAxiosTransportMethod,
+  close,
+};
+
+mainProcess(TheOperationWrapper, EIPCMethod.HTTP_EXPRESS_AXIOS);

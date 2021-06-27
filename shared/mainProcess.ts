@@ -15,6 +15,7 @@ import {
 import { loadMockData } from './mockData';
 import { timestamp } from './timestamp';
 import { documentResults } from './documentResults';
+import { analyze } from './analyze';
 
 const MOCK_DATA_SIZE = (process.env.MOCK_DATA_SIZE ||
   EMockDataSize.MEDIUM) as EMockDataSize;
@@ -28,22 +29,22 @@ const mainProcessRunner = async (
 ): Promise<TStatistics> => {
   const startMainProcess = timestamp();
 
-  const result = await TheOperationWrapper(mockData);
+  const result = await TheOperationWrapper.runTheOperation(mockData);
 
   const endMainProcess = timestamp();
-
-  console.log(result);
 
   const durationMs = endMainProcess - startMainProcess;
   const TheOperationDurationMs = result.durationMs;
   const overheadDurationMs = durationMs - TheOperationDurationMs;
   const overheadPercentage = (overheadDurationMs / durationMs) * 100;
 
-  console.log(`mainProcess took in total ${durationMs} milliseconds.`);
-  console.log(`TheOperation took ${TheOperationDurationMs} milliseconds.`);
-  console.log(
-    `The overhead was ${overheadDurationMs} milliseconds, or ${overheadPercentage} %`,
-  );
+  // Debug logging
+  // console.log(result);
+  // console.log(`mainProcess took in total ${durationMs} milliseconds.`);
+  // console.log(`TheOperation took ${TheOperationDurationMs} milliseconds.`);
+  // console.log(
+  //   `The overhead was ${overheadDurationMs} milliseconds, or ${overheadPercentage} %`,
+  // );
 
   return {
     durationMs,
@@ -61,12 +62,28 @@ export const mainProcess = (
   TheOperationWrapper: TTheOperationWrapper,
   ipcMethod: EIPCMethod,
 ) => {
-  // Wait five seconds before launching main process, to give potential
+  // Wait three seconds before launching main process, to give potential
   // side processes / sidecar containers some time to start.
   setTimeout(async () => {
-    const statistics = await mainProcessRunner(TheOperationWrapper);
+    const resultsArr: TStatistics[] = [];
+    for (let i = 1; i <= 50; i++) {
+      const statistics = await mainProcessRunner(TheOperationWrapper);
+
+      resultsArr.push(statistics);
+    }
 
     // Write the results in a file
-    documentResults(DATE, ipcMethod, MOCK_DATA_SIZE, statistics);
-  }, 5000);
+    const rawResults = documentResults(
+      DATE,
+      ipcMethod,
+      MOCK_DATA_SIZE,
+      resultsArr,
+    );
+
+    // Analyze the results and write to a separate file
+    analyze(DATE, rawResults);
+
+    // Close the other container/process if there is one
+    await TheOperationWrapper.close();
+  }, 3000);
 };

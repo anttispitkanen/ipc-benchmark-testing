@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import {
-  TStatisticsForIPCMethodWithComparisons,
+  TAnalyzedStatisticsForIPCMethodWithComparisons,
   EMockDataSize,
   EIPCMethod,
 } from 'ipc-benchmark-testing-types';
@@ -35,7 +35,7 @@ const colors = [
 ];
 
 const propDataToChartData = (
-  propData: TStatisticsForIPCMethodWithComparisons[],
+  propData: TAnalyzedStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
 ): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => ({
   TheOperationDurationMs: propData.map(
@@ -65,7 +65,7 @@ const datasetsBase: {
 ];
 
 const chartCompatibleData = (
-  data: TStatisticsForIPCMethodWithComparisons[],
+  data: TAnalyzedStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
 ) => {
   /**

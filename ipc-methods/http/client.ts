@@ -40,3 +40,14 @@ export const httpTransportMethod = (
 
     req.end();
   });
+
+export const close = (): Promise<void> =>
+  new Promise(resolve => {
+    const req = http.request({ ...options, method: 'GET' }, res => {
+      res.on('end', () => {
+        resolve();
+      });
+    });
+
+    req.end();
+  });

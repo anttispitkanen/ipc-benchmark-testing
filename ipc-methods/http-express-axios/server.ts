@@ -10,8 +10,11 @@ app.post('/', (req, res) => {
   const rawData = req.body as TMockData[];
 
   res.json(TheOperation(rawData));
+});
 
+app.get('/', (req, res) => {
   console.log('My work here is done');
+  res.sendStatus(200);
   process.exit(0);
 });
 

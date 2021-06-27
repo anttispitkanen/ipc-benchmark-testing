@@ -8,15 +8,14 @@ import {
   EMockDataSize,
   TStatistics,
   TStatisticsForIPCMethod,
-  TStatisticsWithTimestamp,
 } from 'ipc-benchmark-testing-types';
 
 export const documentResults = (
   date: Date,
   ipcMethod: EIPCMethod,
   mockDataSize: EMockDataSize,
-  statistics: TStatistics,
-) => {
+  runsArr: TStatistics[],
+): TStatisticsForIPCMethod[] => {
   const fileName = `${date.getFullYear()}-${
     date.getMonth() + 1
   }-${date.getDate()}.raw.json`;
@@ -33,17 +32,12 @@ export const documentResults = (
       statisticsByMockDataSize: Object.values(EMockDataSize).map(
         mockDataSize => ({
           mockDataSize,
-          runs: [] as TStatisticsWithTimestamp[],
-          averages: {} as TStatistics,
+          timestamp: date,
+          runs: [] as TStatistics[],
         }),
       ),
     }));
   }
-
-  const statisticsWithTimestamp: TStatisticsWithTimestamp = {
-    ...statistics,
-    timestamp: date,
-  };
 
   const appendedResults = results.map(r =>
     r.ipcMethod === ipcMethod
@@ -53,11 +47,7 @@ export const documentResults = (
             s.mockDataSize === mockDataSize
               ? {
                   ...s,
-                  runs: [...s.runs, statisticsWithTimestamp],
-                  averages: calculateAverages([
-                    ...s.runs,
-                    statisticsWithTimestamp,
-                  ]),
+                  runs: [...s.runs, ...runsArr],
                 }
               : s,
           ),
@@ -69,32 +59,6 @@ export const documentResults = (
     path.join(__dirname, '..', 'results', fileName),
     JSON.stringify(appendedResults, null, 2),
   );
-};
 
-const calculateAverages = (
-  statisticsArr: TStatisticsWithTimestamp[],
-): TStatistics => {
-  const averages: TStatistics = {
-    durationMs: 0,
-    TheOperationDurationMs: 0,
-    overheadDurationMs: 0,
-    overheadPercentage: 0,
-  };
-  const length = statisticsArr.length;
-
-  // aggregate sums...
-  statisticsArr.forEach(stats => {
-    averages.durationMs += stats.durationMs;
-    averages.TheOperationDurationMs += stats.TheOperationDurationMs;
-    averages.overheadDurationMs += stats.overheadDurationMs;
-    averages.overheadPercentage += stats.overheadPercentage;
-  });
-
-  // ...and divide to averages
-  averages.durationMs /= length;
-  averages.TheOperationDurationMs /= length;
-  averages.overheadDurationMs /= length;
-  averages.overheadPercentage /= length;
-
-  return averages;
+  return appendedResults;
 };

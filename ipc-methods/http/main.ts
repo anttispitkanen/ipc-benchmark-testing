@@ -1,5 +1,10 @@
 import { EIPCMethod } from 'ipc-benchmark-testing-types';
 import { mainProcess } from '../../shared/mainProcess';
-import { httpTransportMethod } from './client';
+import { httpTransportMethod, close } from './client';
 
-mainProcess(httpTransportMethod, EIPCMethod.HTTP);
+const TheOperationWrapper = {
+  runTheOperation: httpTransportMethod,
+  close,
+};
+
+mainProcess(TheOperationWrapper, EIPCMethod.HTTP);

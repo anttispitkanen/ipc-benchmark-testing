@@ -45,3 +45,14 @@ export const httpsTransportMethod = (
 
     req.end();
   });
+
+export const close = (): Promise<void> =>
+  new Promise(resolve => {
+    const req = https.request({ ...options, method: 'GET' }, res => {
+      res.on('end', () => {
+        resolve();
+      });
+    });
+
+    req.end();
+  });
