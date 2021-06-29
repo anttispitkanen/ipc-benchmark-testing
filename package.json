@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "publish-results": "gh-pages -d results -b results -a",
     "sync-data": "mkdir -p visualization-ui/src/data && rm -f visualization-ui/src/data/* && cp results/*.publish.json visualization-ui/src/data",
     "cli": "npm run tsc && node cli.js",
     "full-test-suite": "npm run tsc && node runTestSuite.js",
@@ -49,6 +50,7 @@
     "@types/prompts": "^2.0.13",
     "@types/react-table": "^7.7.1",
     "concurrently": "^6.2.0",
+    "gh-pages": "^3.2.3",
     "prettier": "^2.3.0",
     "typescript": "^4.2.4"
   },
