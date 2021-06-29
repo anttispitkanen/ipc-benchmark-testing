@@ -1,0 +1,452 @@
+[
+  {
+    "ipcMethod": "benchmark",
+    "statisticsByMockDataSize": [
+      {
+        "mockDataSize": "small",
+        "runs": [
+          {
+            "durationMs": 2.8942080000415444,
+            "TheOperationDurationMs": 1.9932080004364252,
+            "overheadDurationMs": 0.9009999996051192,
+            "overheadPercentage": 31.131141907982634,
+            "timestamp": "2021-06-10T08:54:31.547Z"
+          },
+          {
+            "durationMs": 2.471208999864757,
+            "TheOperationDurationMs": 1.6516249999403954,
+            "overheadDurationMs": 0.8195839999243617,
+            "overheadPercentage": 33.16530491630677,
+            "timestamp": "2021-06-10T08:54:39.161Z"
+          },
+          {
+            "durationMs": 2.5686670001596212,
+            "TheOperationDurationMs": 1.6336670005694032,
+            "overheadDurationMs": 0.9349999995902181,
+            "overheadPercentage": 36.40020288858445,
+            "timestamp": "2021-06-10T08:54:46.628Z"
+          },
+          {
+            "durationMs": 3.017833000048995,
+            "TheOperationDurationMs": 2.1718330001458526,
+            "overheadDurationMs": 0.8459999999031425,
+            "overheadPercentage": 28.033360357892818,
+            "timestamp": "2021-06-10T08:54:54.079Z"
+          },
+          {
+            "durationMs": 2.550708000548184,
+            "TheOperationDurationMs": 1.776290999725461,
+            "overheadDurationMs": 0.7744170008227229,
+            "overheadPercentage": 30.360864538641408,
+            "timestamp": "2021-06-10T08:55:01.525Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 2.7005250001326204,
+          "TheOperationDurationMs": 1.8453248001635074,
+          "overheadDurationMs": 0.8552001999691129,
+          "overheadPercentage": 31.81817492188162
+        }
+      },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 37.239208000013605,
+            "TheOperationDurationMs": 36.15137499989942,
+            "overheadDurationMs": 1.0878330001141876,
+            "overheadPercentage": 2.9212033728370113,
+            "timestamp": "2021-06-09T21:04:06.856Z"
+          },
+          {
+            "durationMs": 27.796207999810576,
+            "TheOperationDurationMs": 27.41904200054705,
+            "overheadDurationMs": 0.377165999263525,
+            "overheadPercentage": 1.356897312274017,
+            "timestamp": "2021-06-10T08:55:09.138Z"
+          },
+          {
+            "durationMs": 34.31900000013411,
+            "TheOperationDurationMs": 33.72341699991375,
+            "overheadDurationMs": 0.5955830002203584,
+            "overheadPercentage": 1.7354322684752788,
+            "timestamp": "2021-06-10T08:55:16.613Z"
+          },
+          {
+            "durationMs": 34.76033399999142,
+            "TheOperationDurationMs": 34.17570900078863,
+            "overheadDurationMs": 0.5846249992027879,
+            "overheadPercentage": 1.6818739405752896,
+            "timestamp": "2021-06-10T08:55:24.111Z"
+          },
+          {
+            "durationMs": 34.31462499964982,
+            "TheOperationDurationMs": 33.68637500051409,
+            "overheadDurationMs": 0.6282499991357327,
+            "overheadPercentage": 1.8308520030224544,
+            "timestamp": "2021-06-10T08:55:31.632Z"
+          },
+          {
+            "durationMs": 34.19400000013411,
+            "TheOperationDurationMs": 33.610208000056446,
+            "overheadDurationMs": 0.5837920000776649,
+            "overheadPercentage": 1.707293677473753,
+            "timestamp": "2021-06-10T08:55:39.083Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 33.77056249995561,
+          "TheOperationDurationMs": 33.12768766695323,
+          "overheadDurationMs": 0.642874833002376,
+          "overheadPercentage": 1.8722587624429672
+        }
+      },
+      {
+        "mockDataSize": "large",
+        "runs": [
+          {
+            "durationMs": 76.95045800041407,
+            "TheOperationDurationMs": 76.48066700063646,
+            "overheadDurationMs": 0.46979099977761507,
+            "overheadPercentage": 0.6105109858801453,
+            "timestamp": "2021-06-10T08:55:46.659Z"
+          },
+          {
+            "durationMs": 77.60541700012982,
+            "TheOperationDurationMs": 77.1731670005247,
+            "overheadDurationMs": 0.43224999960511923,
+            "overheadPercentage": 0.5569843141289945,
+            "timestamp": "2021-06-10T08:55:54.163Z"
+          },
+          {
+            "durationMs": 74.4917500000447,
+            "TheOperationDurationMs": 74.03566600009799,
+            "overheadDurationMs": 0.45608399994671345,
+            "overheadPercentage": 0.6122610892433589,
+            "timestamp": "2021-06-10T08:56:01.649Z"
+          },
+          {
+            "durationMs": 82.18083299975842,
+            "TheOperationDurationMs": 81.72795800026506,
+            "overheadDurationMs": 0.4528749994933605,
+            "overheadPercentage": 0.5510713179248156,
+            "timestamp": "2021-06-10T08:56:09.148Z"
+          },
+          {
+            "durationMs": 80.2193329995498,
+            "TheOperationDurationMs": 79.8062089998275,
+            "overheadDurationMs": 0.41312399972230196,
+            "overheadPercentage": 0.5149930624885903,
+            "timestamp": "2021-06-10T08:56:16.562Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 78.28955819997937,
+          "TheOperationDurationMs": 77.84473340027034,
+          "overheadDurationMs": 0.44482479970902206,
+          "overheadPercentage": 0.5691641539331809
+        }
+      }
+    ]
+  },
+  {
+    "ipcMethod": "http",
+    "statisticsByMockDataSize": [
+      {
+        "mockDataSize": "small",
+        "runs": [
+          {
+            "durationMs": 26.904291999526322,
+            "TheOperationDurationMs": 0.8722919998690486,
+            "overheadDurationMs": 26.031999999657273,
+            "overheadPercentage": 96.75779611712359,
+            "timestamp": "2021-06-10T08:56:25.007Z"
+          },
+          {
+            "durationMs": 33.26433300040662,
+            "TheOperationDurationMs": 1.3912499994039536,
+            "overheadDurationMs": 31.87308300100267,
+            "overheadPercentage": 95.81759237623389,
+            "timestamp": "2021-06-10T08:56:33.405Z"
+          },
+          {
+            "durationMs": 19.139791000634432,
+            "TheOperationDurationMs": 0.6694170003756881,
+            "overheadDurationMs": 18.470374000258744,
+            "overheadPercentage": 96.5024853178726,
+            "timestamp": "2021-06-10T08:56:41.834Z"
+          },
+          {
+            "durationMs": 31.946874999441206,
+            "TheOperationDurationMs": 0.8886249996721745,
+            "overheadDurationMs": 31.058249999769032,
+            "overheadPercentage": 97.21842903355112,
+            "timestamp": "2021-06-10T08:56:50.200Z"
+          },
+          {
+            "durationMs": 34.90775000024587,
+            "TheOperationDurationMs": 0.9574580006301403,
+            "overheadDurationMs": 33.95029199961573,
+            "overheadPercentage": 97.25717641319365,
+            "timestamp": "2021-06-10T08:56:58.621Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 29.23260820005089,
+          "TheOperationDurationMs": 0.955808399990201,
+          "overheadDurationMs": 28.27679980006069,
+          "overheadPercentage": 96.71069585159496
+        }
+      },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 72.32045800006017,
+            "TheOperationDurationMs": 23.91104199993424,
+            "overheadDurationMs": 48.40941600012593,
+            "overheadPercentage": 66.93737476065992,
+            "timestamp": "2021-06-09T21:04:36.760Z"
+          },
+          {
+            "durationMs": 60.37537499982864,
+            "TheOperationDurationMs": 21.485208000056446,
+            "overheadDurationMs": 38.89016699977219,
+            "overheadPercentage": 64.4139551926304,
+            "timestamp": "2021-06-10T08:57:07.052Z"
+          },
+          {
+            "durationMs": 53.68374999985099,
+            "TheOperationDurationMs": 20.926665999926627,
+            "overheadDurationMs": 32.75708399992436,
+            "overheadPercentage": 61.01862109114078,
+            "timestamp": "2021-06-10T08:57:15.381Z"
+          },
+          {
+            "durationMs": 53.93179100006819,
+            "TheOperationDurationMs": 21.142749999649823,
+            "overheadDurationMs": 32.789041000418365,
+            "overheadPercentage": 60.797241093619355,
+            "timestamp": "2021-06-10T08:57:23.777Z"
+          },
+          {
+            "durationMs": 45.4171660002321,
+            "TheOperationDurationMs": 18.71495799999684,
+            "overheadDurationMs": 26.70220800023526,
+            "overheadPercentage": 58.793206075647255,
+            "timestamp": "2021-06-10T08:57:32.164Z"
+          },
+          {
+            "durationMs": 54.51862500049174,
+            "TheOperationDurationMs": 23.28150000050664,
+            "overheadDurationMs": 31.2371249999851,
+            "overheadPercentage": 57.29624509000979,
+            "timestamp": "2021-06-10T08:57:40.617Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 56.70786083342197,
+          "TheOperationDurationMs": 21.577020666678436,
+          "overheadDurationMs": 35.13084016674353,
+          "overheadPercentage": 61.54277388395125
+        }
+      },
+      {
+        "mockDataSize": "large",
+        "runs": [
+          {
+            "durationMs": 92.8307500006631,
+            "TheOperationDurationMs": 55.13425000011921,
+            "overheadDurationMs": 37.69650000054389,
+            "overheadPercentage": 40.607772748011435,
+            "timestamp": "2021-06-10T08:57:49.086Z"
+          },
+          {
+            "durationMs": 90.95333299972117,
+            "TheOperationDurationMs": 50.34820799995214,
+            "overheadDurationMs": 40.60512499976903,
+            "overheadPercentage": 44.64391096024322,
+            "timestamp": "2021-06-10T08:57:57.504Z"
+          },
+          {
+            "durationMs": 90.68912499956787,
+            "TheOperationDurationMs": 48.4967080000788,
+            "overheadDurationMs": 42.19241699948907,
+            "overheadPercentage": 46.52422988940528,
+            "timestamp": "2021-06-10T08:58:05.970Z"
+          },
+          {
+            "durationMs": 92.32062499970198,
+            "TheOperationDurationMs": 50.79000000003725,
+            "overheadDurationMs": 41.530624999664724,
+            "overheadPercentage": 44.98520780139735,
+            "timestamp": "2021-06-10T08:58:14.303Z"
+          },
+          {
+            "durationMs": 91.53974999953061,
+            "TheOperationDurationMs": 49.954749999567866,
+            "overheadDurationMs": 41.58499999996275,
+            "overheadPercentage": 45.42835216414288,
+            "timestamp": "2021-06-10T08:58:22.745Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 91.66671659983695,
+          "TheOperationDurationMs": 50.944783199951054,
+          "overheadDurationMs": 40.72193339988589,
+          "overheadPercentage": 44.43789471264004
+        }
+      }
+    ]
+  },
+  {
+    "ipcMethod": "http-express-axios",
+    "statisticsByMockDataSize": [
+      {
+        "mockDataSize": "small",
+        "runs": [
+          {
+            "durationMs": 43.29858399927616,
+            "TheOperationDurationMs": 0.6137499995529652,
+            "overheadDurationMs": 42.684833999723196,
+            "overheadPercentage": 98.58251715676609,
+            "timestamp": "2021-06-10T08:58:31.204Z"
+          },
+          {
+            "durationMs": 51.522208999842405,
+            "TheOperationDurationMs": 0.6068749995902181,
+            "overheadDurationMs": 50.91533400025219,
+            "overheadPercentage": 98.82210989906882,
+            "timestamp": "2021-06-10T08:58:39.556Z"
+          },
+          {
+            "durationMs": 49.74816600047052,
+            "TheOperationDurationMs": 0.5608749995008111,
+            "overheadDurationMs": 49.18729100096971,
+            "overheadPercentage": 98.87257150445404,
+            "timestamp": "2021-06-10T08:58:47.928Z"
+          },
+          {
+            "durationMs": 52.44395800027996,
+            "TheOperationDurationMs": 0.6409590002149343,
+            "overheadDurationMs": 51.80299900006503,
+            "overheadPercentage": 98.77782107862356,
+            "timestamp": "2021-06-10T08:58:56.318Z"
+          },
+          {
+            "durationMs": 51.36370799969882,
+            "TheOperationDurationMs": 0.5960829993709922,
+            "overheadDurationMs": 50.767625000327826,
+            "overheadPercentage": 98.83948604455409,
+            "timestamp": "2021-06-10T08:59:04.671Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 49.67532499991357,
+          "TheOperationDurationMs": 0.6037083996459842,
+          "overheadDurationMs": 49.07161660026759,
+          "overheadPercentage": 98.77890113669332
+        }
+      },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 82.13137500011362,
+            "TheOperationDurationMs": 16.670708999969065,
+            "overheadDurationMs": 65.46066600014456,
+            "overheadPercentage": 79.70238657279755,
+            "timestamp": "2021-06-09T21:04:59.535Z"
+          },
+          {
+            "durationMs": 68.17833400052041,
+            "TheOperationDurationMs": 15.93458400014788,
+            "overheadDurationMs": 52.24375000037253,
+            "overheadPercentage": 76.62808246381285,
+            "timestamp": "2021-06-10T08:59:13.256Z"
+          },
+          {
+            "durationMs": 67.00299999956042,
+            "TheOperationDurationMs": 17.390709000639617,
+            "overheadDurationMs": 49.6122909989208,
+            "overheadPercentage": 74.04488007887153,
+            "timestamp": "2021-06-10T08:59:21.773Z"
+          },
+          {
+            "durationMs": 65.92104199994355,
+            "TheOperationDurationMs": 16.82325000036508,
+            "overheadDurationMs": 49.097791999578476,
+            "overheadPercentage": 74.47969648237738,
+            "timestamp": "2021-06-10T08:59:30.150Z"
+          },
+          {
+            "durationMs": 67.26175000052899,
+            "TheOperationDurationMs": 17.436666999943554,
+            "overheadDurationMs": 49.82508300058544,
+            "overheadPercentage": 74.07640003448257,
+            "timestamp": "2021-06-10T08:59:38.532Z"
+          },
+          {
+            "durationMs": 67.9257089998573,
+            "TheOperationDurationMs": 17.223416999913752,
+            "overheadDurationMs": 50.702291999943554,
+            "overheadPercentage": 74.64374350520224,
+            "timestamp": "2021-06-10T08:59:46.915Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 69.73686833342072,
+          "TheOperationDurationMs": 16.913222666829824,
+          "overheadDurationMs": 52.82364566659089,
+          "overheadPercentage": 75.59586485625735
+        }
+      },
+      {
+        "mockDataSize": "large",
+        "runs": [
+          {
+            "durationMs": 97.98929200042039,
+            "TheOperationDurationMs": 41.92066599987447,
+            "overheadDurationMs": 56.06862600054592,
+            "overheadPercentage": 57.21913574016371,
+            "timestamp": "2021-06-10T08:59:55.406Z"
+          },
+          {
+            "durationMs": 99.31099999975413,
+            "TheOperationDurationMs": 40.85629100073129,
+            "overheadDurationMs": 58.45470899902284,
+            "overheadPercentage": 58.86025616413848,
+            "timestamp": "2021-06-10T09:00:03.771Z"
+          },
+          {
+            "durationMs": 95.34687499981374,
+            "TheOperationDurationMs": 41.04562500026077,
+            "overheadDurationMs": 54.301249999552965,
+            "overheadPercentage": 56.95126347838778,
+            "timestamp": "2021-06-10T09:00:12.202Z"
+          },
+          {
+            "durationMs": 99.73000000044703,
+            "TheOperationDurationMs": 42.30462499987334,
+            "overheadDurationMs": 57.425375000573695,
+            "overheadPercentage": 57.580843277164625,
+            "timestamp": "2021-06-10T09:00:20.655Z"
+          },
+          {
+            "durationMs": 101.10462599992752,
+            "TheOperationDurationMs": 41.22970900032669,
+            "overheadDurationMs": 59.87491699960083,
+            "overheadPercentage": 59.2207492065138,
+            "timestamp": "2021-06-10T09:00:29.141Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 98.69635860007256,
+          "TheOperationDurationMs": 41.47138320021331,
+          "overheadDurationMs": 57.22497539985925,
+          "overheadPercentage": 57.96644957327368
+        }
+      }
+    ]
+  }
+]

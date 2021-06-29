@@ -1,0 +1,82 @@
+[
+  {
+    "ipcMethod": "benchmark",
+    "statisticsByMockDataSize": [
+      { "mockDataSize": "small", "runs": [], "averages": {} },
+      { "mockDataSize": "medium", "runs": [], "averages": {} },
+      { "mockDataSize": "large", "runs": [], "averages": {} }
+    ]
+  },
+  {
+    "ipcMethod": "tcp",
+    "statisticsByMockDataSize": [
+      { "mockDataSize": "small", "runs": [], "averages": {} },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 62.57695797085762,
+            "TheOperationDurationMs": 26.265083998441696,
+            "overheadDurationMs": 36.311873972415924,
+            "overheadPercentage": 58.027547438989494,
+            "timestamp": "2021-06-12T19:46:56.800Z"
+          },
+          {
+            "durationMs": 53.58687499910593,
+            "TheOperationDurationMs": 21.151624999940395,
+            "overheadDurationMs": 32.435249999165535,
+            "overheadPercentage": 60.528347659210766,
+            "timestamp": "2021-06-12T19:50:38.904Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 58.081916484981775,
+          "TheOperationDurationMs": 23.708354499191046,
+          "overheadDurationMs": 34.37356198579073,
+          "overheadPercentage": 59.27794754910013
+        }
+      },
+      { "mockDataSize": "large", "runs": [], "averages": {} }
+    ]
+  },
+  {
+    "ipcMethod": "http",
+    "statisticsByMockDataSize": [
+      { "mockDataSize": "small", "runs": [], "averages": {} },
+      {
+        "mockDataSize": "medium",
+        "runs": [
+          {
+            "durationMs": 63.85587501525879,
+            "TheOperationDurationMs": 23.130792021751404,
+            "overheadDurationMs": 40.725082993507385,
+            "overheadPercentage": 63.77656399473949,
+            "timestamp": "2021-06-12T19:47:50.636Z"
+          },
+          {
+            "durationMs": 58.874458000063896,
+            "TheOperationDurationMs": 23.798209004104137,
+            "overheadDurationMs": 35.07624899595976,
+            "overheadPercentage": 59.57804145886437,
+            "timestamp": "2021-06-12T19:51:04.694Z"
+          }
+        ],
+        "averages": {
+          "durationMs": 61.36516650766134,
+          "TheOperationDurationMs": 23.46450051292777,
+          "overheadDurationMs": 37.90066599473357,
+          "overheadPercentage": 61.677302726801926
+        }
+      },
+      { "mockDataSize": "large", "runs": [], "averages": {} }
+    ]
+  },
+  {
+    "ipcMethod": "http-express-axios",
+    "statisticsByMockDataSize": [
+      { "mockDataSize": "small", "runs": [], "averages": {} },
+      { "mockDataSize": "medium", "runs": [], "averages": {} },
+      { "mockDataSize": "large", "runs": [], "averages": {} }
+    ]
+  }
+]
