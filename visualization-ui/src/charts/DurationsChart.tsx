@@ -34,7 +34,7 @@ const colors = [
   },
 ];
 
-const propDataToChartData = (
+const propDataToChartDataAverages = (
   propData: TAnalyzedStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
 ): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => ({
@@ -47,6 +47,22 @@ const propDataToChartData = (
     d =>
       d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
         ?.averages.overheadDurationMs || 0,
+  ),
+});
+
+const propDataToChartDataColdStarts = (
+  propData: TAnalyzedStatisticsForIPCMethodWithComparisons[],
+  mockDataSize: EMockDataSize,
+): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => ({
+  TheOperationDurationMs: propData.map(
+    d =>
+      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
+        ?.runs[0].TheOperationDurationMs || 0,
+  ),
+  overheadDurationMs: propData.map(
+    d =>
+      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
+        ?.runs[0].overheadDurationMs || 0,
   ),
 });
 
@@ -67,6 +83,7 @@ const datasetsBase: {
 const chartCompatibleData = (
   data: TAnalyzedStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
+  onlyColdStarts: boolean,
 ) => {
   /**
    * Not all methods that exist have data. This is because the methods are
@@ -77,7 +94,9 @@ const chartCompatibleData = (
     method => data.some(d => d.ipcMethod === method),
   );
 
-  const chartData = propDataToChartData(data, mockDataSize);
+  const chartData = onlyColdStarts
+    ? propDataToChartDataColdStarts(data, mockDataSize)
+    : propDataToChartDataAverages(data, mockDataSize);
 
   return {
     labels: IPC_METHODS_WITH_DATA,
@@ -106,18 +125,36 @@ const options = {
   },
 };
 
-const VerticalBar = ({ dataProp, mockDataSizeProp }: TDataRenderingProps) => {
-  const chartData = chartCompatibleData(dataProp, mockDataSizeProp);
+const DurationsChart = ({
+  dataProp,
+  mockDataSizeProp,
+}: TDataRenderingProps) => {
+  const chartDataColdStart = chartCompatibleData(
+    dataProp,
+    mockDataSizeProp,
+    true,
+  );
+  const chartDataFull = chartCompatibleData(dataProp, mockDataSizeProp, false);
 
   return (
     <div id="durations-chart">
       <h3>Durations by IPC method</h3>
 
+      <h4>Cold start durations</h4>
       <Bar
         type="bar"
         width={800}
         height={500}
-        data={chartData}
+        data={chartDataColdStart}
+        options={options}
+      />
+
+      <h4>Averages over 50 concurrent invocations</h4>
+      <Bar
+        type="bar"
+        width={800}
+        height={500}
+        data={chartDataFull}
         options={options}
       />
 
@@ -153,4 +190,4 @@ const VerticalBar = ({ dataProp, mockDataSizeProp }: TDataRenderingProps) => {
   );
 };
 
-export default VerticalBar;
+export default DurationsChart;

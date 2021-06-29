@@ -14,6 +14,7 @@ import data_2021_06_14 from './data/2021-6-14.analyzed.publish.json';
 import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
 import data_2021_06_17 from './data/2021-6-17.analyzed.publish.json';
 import data_2021_06_28 from './data/2021-6-28.analyzed.publish.json';
+import data_2021_06_30 from './data/2021-6-30.analyzed.publish.json';
 
 type TDataAndDate = {
   data: TAnalyzedStatisticsForIPCMethodWithComparisons[];
@@ -48,6 +49,10 @@ const availableDatasets: TDataAndDate[] = [
   {
     data: data_2021_06_28 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-28',
+  },
+  {
+    data: data_2021_06_30 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
+    date: '2021-06-30',
   },
 ];
 
@@ -269,6 +274,13 @@ function App() {
             <DurationsChart
               dataProp={selectedDataset.data}
               mockDataSizeProp={selectedMockDataSize}
+            />
+
+            <OptionsSelectors
+              selectedDataset={selectedDataset}
+              setSelectedDataset={setSelectedDataset}
+              selectedMockDataSize={selectedMockDataSize}
+              setSelectedMockDataSize={setSelectedMockDataSize}
             />
 
             <ComparisonsTable
