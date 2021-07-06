@@ -19,7 +19,8 @@ const path = require("path");
 const createResultsIndex = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const files = yield fs.promises.readdir(path.join('results'));
-        const analyzedFiles = files.filter(file => /.analyzed.json/.test(file));
+        // const analyzedFiles = files.filter(file => /.analyzed.json/.test(file));
+        const analyzedFiles = files; // FIXME: change when on-the-fly analysis is implemented
         fs.writeFileSync(path.join('results', 'index.json'), JSON.stringify(analyzedFiles, null, 2));
     }
     catch (err) {
