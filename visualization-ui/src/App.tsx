@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TStatisticsForIPCMethodWithComparisons,
   EMockDataSize,
@@ -6,45 +6,10 @@ import {
 import DurationsChart from './charts/DurationsChart';
 import ComparisonsTable from './table/ComparisonsTable';
 
-// Make all desired datasets available by importing here
-import data_2021_06_09 from './data/2021-6-9.analyzed.publish.json';
-import data_2021_06_10 from './data/2021-6-10.analyzed.publish.json';
-import data_2021_06_13 from './data/2021-6-13.analyzed.publish.json';
-import data_2021_06_14 from './data/2021-6-14.analyzed.publish.json';
-import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
-import data_2021_06_17 from './data/2021-6-17.analyzed.publish.json';
-
 type TDataAndDate = {
   data: TStatisticsForIPCMethodWithComparisons[];
   date: string; // like 2021-05-31
 };
-
-const availableDatasets: TDataAndDate[] = [
-  {
-    data: data_2021_06_09 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-09',
-  },
-  {
-    data: data_2021_06_10 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-10',
-  },
-  {
-    data: data_2021_06_13 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-13',
-  },
-  {
-    data: data_2021_06_14 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-14',
-  },
-  {
-    data: data_2021_06_16 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-16',
-  },
-  {
-    data: data_2021_06_17 as unknown as TStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-17',
-  },
-];
 
 export type TDataRenderingProps = {
   dataProp: TStatisticsForIPCMethodWithComparisons[];
@@ -53,11 +18,51 @@ export type TDataRenderingProps = {
 
 function App() {
   const [selectedDataset, setSelectedDataset] = useState<TDataAndDate>(
-    availableDatasets[availableDatasets.length - 1],
+    {} as TDataAndDate,
   );
 
   const [selectedMockDataSize, setSelectedMockDataSize] =
-    useState<EMockDataSize>('medium' as EMockDataSize.MEDIUM);
+    useState<EMockDataSize>(EMockDataSize.MEDIUM);
+
+  const [loadingData, setLoadingData] = useState<boolean>(true);
+
+  const [availableDatasets, setAvailableDatasets] = useState<TDataAndDate[]>(
+    [],
+  );
+
+  useEffect(() => {
+    fetch(
+      'https://raw.githubusercontent.com/anttispitkanen/ipc-benchmark-testing/results/index.json',
+    )
+      .then(res => res.json())
+      .then(async (resultsIndex: string[]) => {
+        const resultsAsJson: {
+          resultFile: string;
+          data: TStatisticsForIPCMethodWithComparisons[];
+        }[] = await Promise.all(
+          resultsIndex.map(async resultFile => {
+            const res = await fetch(
+              `https://raw.githubusercontent.com/anttispitkanen/ipc-benchmark-testing/results/${resultFile}`,
+            );
+            return {
+              resultFile,
+              data: await res.json(),
+            };
+          }),
+        );
+
+        const usableResults = resultsAsJson.map(({ data, resultFile }) => ({
+          data,
+          date: resultFile.split('.')[0],
+        }));
+
+        setAvailableDatasets(usableResults);
+
+        setSelectedDataset(usableResults[usableResults.length - 1]);
+
+        setLoadingData(false);
+      });
+  }, []);
 
   return (
     <div className="App-wrapper">
@@ -254,29 +259,37 @@ function App() {
           <section>
             <h2>Results</h2>
 
-            <OptionsSelectors
-              selectedDataset={selectedDataset}
-              setSelectedDataset={setSelectedDataset}
-              selectedMockDataSize={selectedMockDataSize}
-              setSelectedMockDataSize={setSelectedMockDataSize}
-            />
+            {loadingData ? (
+              'Loading...'
+            ) : (
+              <>
+                <OptionsSelectors
+                  availableDatasets={availableDatasets}
+                  selectedDataset={selectedDataset}
+                  setSelectedDataset={setSelectedDataset}
+                  selectedMockDataSize={selectedMockDataSize}
+                  setSelectedMockDataSize={setSelectedMockDataSize}
+                />
 
-            <DurationsChart
-              dataProp={selectedDataset.data}
-              mockDataSizeProp={selectedMockDataSize}
-            />
+                <DurationsChart
+                  dataProp={selectedDataset.data}
+                  mockDataSizeProp={selectedMockDataSize}
+                />
 
-            <ComparisonsTable
-              dataProp={selectedDataset.data}
-              mockDataSizeProp={selectedMockDataSize}
-            />
+                <ComparisonsTable
+                  dataProp={selectedDataset.data}
+                  mockDataSizeProp={selectedMockDataSize}
+                />
 
-            <OptionsSelectors
-              selectedDataset={selectedDataset}
-              setSelectedDataset={setSelectedDataset}
-              selectedMockDataSize={selectedMockDataSize}
-              setSelectedMockDataSize={setSelectedMockDataSize}
-            />
+                <OptionsSelectors
+                  availableDatasets={availableDatasets}
+                  selectedDataset={selectedDataset}
+                  setSelectedDataset={setSelectedDataset}
+                  selectedMockDataSize={selectedMockDataSize}
+                  setSelectedMockDataSize={setSelectedMockDataSize}
+                />
+              </>
+            )}
           </section>
         </div>
       </div>
@@ -287,11 +300,13 @@ function App() {
 export default App;
 
 const OptionsSelectors = ({
+  availableDatasets,
   selectedDataset,
   setSelectedDataset,
   selectedMockDataSize,
   setSelectedMockDataSize,
 }: {
+  availableDatasets: TDataAndDate[];
   selectedDataset: TDataAndDate;
   setSelectedDataset: (dataset: TDataAndDate) => void;
   selectedMockDataSize: EMockDataSize;
