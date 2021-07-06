@@ -1,4 +1,4 @@
-name: Deploy UI
+name: Run test suite
 
 on:
   push:
@@ -12,7 +12,8 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Install top level dependencies
-        run: npm ci
+        run: |
+          npm ci
 
       - name: Transpile the types package
         run: |
@@ -20,15 +21,14 @@ jobs:
           npm ci
           npm run tsc
 
-      - name: TESTING, run the test suite
-        run: npm run full-test-suite
+      # - name: Run the test suite
+      #   run: npm run full-test-suite
 
-      - name: list and print result
+      - name: Create results index and publish
         run: |
-          ls -la results
-          echo ""
-          cat results/*
-
-      - name: give a friendly reminder
-        run: |
-          echo "TODO: do something with the results"
+          npm run tsc
+          npm run index-results
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run publish-results -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -10,7 +10,8 @@ const createResultsIndex = async () => {
   try {
     const files = await fs.promises.readdir(path.join('results'));
 
-    const analyzedFiles = files.filter(file => /.analyzed.json/.test(file));
+    // const analyzedFiles = files.filter(file => /.analyzed.json/.test(file));
+    const analyzedFiles = files; // FIXME: change when on-the-fly analysis is implemented
 
     fs.writeFileSync(
       path.join('results', 'index.json'),
