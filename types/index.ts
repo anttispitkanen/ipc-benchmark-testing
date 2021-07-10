@@ -60,6 +60,8 @@ export type TStatisticsWithTimestamp = TStatistics & {
 export type TStatisticsForMockDataSize = {
   mockDataSize: EMockDataSize;
   timestamp: Date;
+  numberOfRuns: number;
+  totalDurationMs: number;
   runs: TStatistics[];
 };
 

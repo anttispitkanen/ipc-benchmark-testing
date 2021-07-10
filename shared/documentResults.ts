@@ -15,6 +15,8 @@ export const documentResults = (
   ipcMethod: EIPCMethod,
   mockDataSize: EMockDataSize,
   runsArr: TStatistics[],
+  numberOfRuns: number,
+  totalDurationMs: number,
 ): TStatisticsForIPCMethod[] => {
   const fileName = `${date.getFullYear()}-${
     date.getMonth() + 1
@@ -34,6 +36,8 @@ export const documentResults = (
           mockDataSize,
           timestamp: date,
           runs: [] as TStatistics[],
+          numberOfRuns: 0,
+          totalDurationMs: 0,
         }),
       ),
     }));
@@ -48,6 +52,8 @@ export const documentResults = (
               ? {
                   ...s,
                   runs: [...s.runs, ...runsArr],
+                  numberOfRuns,
+                  totalDurationMs,
                 }
               : s,
           ),

@@ -53,6 +53,8 @@ export declare type TStatisticsWithTimestamp = TStatistics & {
 export declare type TStatisticsForMockDataSize = {
     mockDataSize: EMockDataSize;
     timestamp: Date;
+    numberOfRuns: number;
+    totalDurationMs: number;
     runs: TStatistics[];
 };
 export declare type TStatisticsForIPCMethod = {

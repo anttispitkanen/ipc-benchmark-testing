@@ -54,6 +54,8 @@ const mainProcessRunner = async (
   };
 };
 
+const NUMBER_OF_RUNS = 50; // TODO: parametrize
+
 /**
  * Each IPC can import this function and give the desired data transport method
  * as a dependency injection.
@@ -65,12 +67,18 @@ export const mainProcess = (
   // Wait three seconds before launching main process, to give potential
   // side processes / sidecar containers some time to start.
   setTimeout(async () => {
+    const fullTestRunStart = timestamp();
+
     const resultsArr: TStatistics[] = [];
-    for (let i = 1; i <= 50; i++) {
+    for (let i = 1; i <= NUMBER_OF_RUNS; i++) {
       const statistics = await mainProcessRunner(TheOperationWrapper);
 
       resultsArr.push(statistics);
     }
+
+    const fullTestRunEnd = timestamp();
+
+    console.log(`Whole test run took ${fullTestRunEnd - fullTestRunStart} ms`); // FIXME:
 
     // Write the results in a file
     const rawResults = documentResults(
@@ -78,6 +86,8 @@ export const mainProcess = (
       ipcMethod,
       MOCK_DATA_SIZE,
       resultsArr,
+      NUMBER_OF_RUNS,
+      fullTestRunEnd - fullTestRunStart,
     );
 
     // Analyze the results and write to a separate file
