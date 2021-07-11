@@ -73,7 +73,8 @@ export declare type TAnalyzedStatisticsForMockDataSize = TStatisticsForMockDataS
     averages: TStatistics;
 };
 export declare type TAnalyzedStatisticsForMockDataSizeWithComparisons = TAnalyzedStatisticsForMockDataSize & {
-    comparisonToBenchmark: TComparisonToBenchmark;
+    coldStartComparisonToBenchmark: TComparisonToBenchmark;
+    averageComparisonToBenchmark: TComparisonToBenchmark;
 };
 export declare type TAnalyzedStatisticsForIPCMethod = {
     ipcMethod: EIPCMethod;

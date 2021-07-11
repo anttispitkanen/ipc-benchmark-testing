@@ -17,10 +17,15 @@ type TTableData = {
   overheadPercentage: number;
 };
 
-const tableDataByMockDataSize = ({
-  dataProp,
-  mockDataSizeProp,
-}: TDataRenderingProps): TTableData[] =>
+enum ETableDataType {
+  AVERAGES = 'averages',
+  COLD_STARTS = 'cold-starts',
+}
+
+const tableDataByMockDataSize = (
+  { dataProp, mockDataSizeProp }: TDataRenderingProps,
+  tableDataType: ETableDataType,
+): TTableData[] =>
   dataProp.map(d => {
     const { averages, comparisonToBenchmark } = d.statisticsByMockDataSize.find(
       s => s.mockDataSize === mockDataSizeProp,
@@ -112,13 +117,25 @@ export default function ComparisonsTable({
   return (
     <div>
       <h3>Durations compared</h3>
+      {/* <h4>Cold starts</h4>
+      <Table
+        columns={columns}
+        data={tableDataByMockDataSize(
+          { dataProp, mockDataSizeProp },
+          ETableDataType.COLD_STARTS,
+        )}
+      /> */}
+
       <h4>
         Averages over {dataProp[0].statisticsByMockDataSize[0].numberOfRuns}{' '}
         concurrent runs
       </h4>
       <Table
         columns={columns}
-        data={tableDataByMockDataSize({ dataProp, mockDataSizeProp })}
+        data={tableDataByMockDataSize(
+          { dataProp, mockDataSizeProp },
+          ETableDataType.AVERAGES,
+        )}
       />
     </div>
   );
