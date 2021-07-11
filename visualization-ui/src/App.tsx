@@ -7,13 +7,6 @@ import DurationsChart from './charts/DurationsChart';
 import ComparisonsTable from './table/ComparisonsTable';
 
 // Make all desired datasets available by importing here
-import data_2021_06_09 from './data/2021-6-9.analyzed.publish.json';
-import data_2021_06_10 from './data/2021-6-10.analyzed.publish.json';
-import data_2021_06_13 from './data/2021-6-13.analyzed.publish.json';
-import data_2021_06_14 from './data/2021-6-14.analyzed.publish.json';
-import data_2021_06_16 from './data/2021-6-16.analyzed.publish.json';
-import data_2021_06_17 from './data/2021-6-17.analyzed.publish.json';
-import data_2021_06_28 from './data/2021-6-28.analyzed.publish.json';
 import data_2021_06_30 from './data/2021-6-30.analyzed.publish.json';
 import data_2021_07_10 from './data/2021-7-10.analyzed.publish.json';
 import data_2021_07_11 from './data/2021-7-11.analyzed.publish.json';
@@ -24,34 +17,6 @@ type TDataAndDate = {
 };
 
 const availableDatasets: TDataAndDate[] = [
-  {
-    data: data_2021_06_09 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-09',
-  },
-  {
-    data: data_2021_06_10 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-10',
-  },
-  {
-    data: data_2021_06_13 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-13',
-  },
-  {
-    data: data_2021_06_14 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-14',
-  },
-  {
-    data: data_2021_06_16 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-16',
-  },
-  {
-    data: data_2021_06_17 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-17',
-  },
-  {
-    data: data_2021_06_28 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
-    date: '2021-06-28',
-  },
   {
     data: data_2021_06_30 as unknown as TAnalyzedStatisticsForIPCMethodWithComparisons[],
     date: '2021-06-30',
@@ -194,6 +159,20 @@ function App() {
               <li>
                 Overhead percentage, i.e. how many percent of the whole duration
                 was in the overhead
+              </li>
+            </ul>
+
+            <p>There are two different cases that are analyzed:</p>
+            <ul>
+              <li>
+                <b>Cold start</b>, the first run. Both containers are already up
+                and running, but the initial connection between them needs to be
+                established.
+              </li>
+              <li>
+                <b>Averages</b> over <i>N</i> concurrent runs, simulating a
+                steady load. Cold start is essentially the first of these{' '}
+                <i>N</i> runs.
               </li>
             </ul>
           </section>

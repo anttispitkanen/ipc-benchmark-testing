@@ -50,6 +50,11 @@ The actual test runs a "main process" script, that loads the mock data into memo
 - Overhead duration = whole duration - TheOperation duration
 - Overhead percentage, i.e. how many percent of the whole duration was in the overhead
 
+There are two different cases that are analyzed:
+
+- **Cold start**, the first run. Both containers are already up and running, but the initial connection between them needs to be established.
+- **Averages** over _N_ concurrent runs, simulating a steady load. Cold start is essentially the first of these _N_ runs.
+
 "Main process" also writes the results into a file per data transport method and mock data size for further analysis and comparison.
 
 `npm run full-test-suite` runs all the mock data size & data transport method permutations 5 times. Averages are calculated. Results are saved in a file named `<date>.raw.json`.
