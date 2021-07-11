@@ -9,62 +9,43 @@ import { TDataRenderingProps } from '../App';
 
 const colors = [
   {
-    background: 'rgba(255, 99, 132, 0.2)',
-    border: 'rgba(255, 99, 132, 1)',
-  },
-  {
-    background: 'rgba(54, 162, 235, 0.2)',
-    border: 'rgba(54, 162, 235, 1)',
-  },
-  {
-    background: 'rgba(255, 206, 86, 0.2)',
-    border: 'rgba(255, 206, 86, 1)',
+    background: 'rgba(255, 159, 64, 0.2)',
+    border: 'rgba(255, 159, 64, 1)',
   },
   {
     background: 'rgba(75, 192, 192, 0.2)',
     border: 'rgba(75, 192, 192, 1)',
   },
-  {
-    background: 'rgba(153, 102, 255, 0.2)',
-    border: 'rgba(153, 102, 255, 1)',
-  },
-  {
-    background: 'rgba(255, 159, 64, 0.2)',
-    border: 'rgba(255, 159, 64, 1)',
-  },
 ];
 
-const propDataToChartDataAverages = (
-  propData: TAnalyzedStatisticsForIPCMethodWithComparisons[],
-  mockDataSize: EMockDataSize,
-): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => ({
-  TheOperationDurationMs: propData.map(
-    d =>
-      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
-        ?.averages.TheOperationDurationMs || 0,
-  ),
-  overheadDurationMs: propData.map(
-    d =>
-      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
-        ?.averages.overheadDurationMs || 0,
-  ),
-});
+enum EChartDataType {
+  AVERAGES = 'averages',
+  COLD_STARTS = 'cold-starts',
+}
 
-const propDataToChartDataColdStarts = (
+const propDataToChartData = (
   propData: TAnalyzedStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
-): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => ({
-  TheOperationDurationMs: propData.map(
-    d =>
-      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
-        ?.runs[0].TheOperationDurationMs || 0,
-  ),
-  overheadDurationMs: propData.map(
-    d =>
-      d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize)
-        ?.runs[0].overheadDurationMs || 0,
-  ),
-});
+  chartDataType: EChartDataType,
+): { TheOperationDurationMs: number[]; overheadDurationMs: number[] } => {
+  const stats = propData.map(d =>
+    d.statisticsByMockDataSize.find(s => s.mockDataSize === mockDataSize),
+  );
+
+  const TheOperationDurationMs = stats?.map(s =>
+    chartDataType === EChartDataType.AVERAGES
+      ? s?.averages.TheOperationDurationMs || 0
+      : s?.runs[0].TheOperationDurationMs || 0,
+  );
+
+  const overheadDurationMs = stats?.map(s =>
+    chartDataType === EChartDataType.AVERAGES
+      ? s?.averages.overheadDurationMs || 0
+      : s?.runs[0].overheadDurationMs || 0,
+  );
+
+  return { TheOperationDurationMs, overheadDurationMs };
+};
 
 const datasetsBase: {
   label: string;
@@ -83,7 +64,7 @@ const datasetsBase: {
 const chartCompatibleData = (
   data: TAnalyzedStatisticsForIPCMethodWithComparisons[],
   mockDataSize: EMockDataSize,
-  onlyColdStarts: boolean,
+  chartDataType: EChartDataType,
 ) => {
   /**
    * Not all methods that exist have data. This is because the methods are
@@ -94,9 +75,7 @@ const chartCompatibleData = (
     method => data.some(d => d.ipcMethod === method),
   );
 
-  const chartData = onlyColdStarts
-    ? propDataToChartDataColdStarts(data, mockDataSize)
-    : propDataToChartDataAverages(data, mockDataSize);
+  const chartData = propDataToChartData(data, mockDataSize, chartDataType);
 
   return {
     labels: IPC_METHODS_WITH_DATA,
@@ -132,9 +111,15 @@ const DurationsChart = ({
   const chartDataColdStart = chartCompatibleData(
     dataProp,
     mockDataSizeProp,
-    true,
+    EChartDataType.COLD_STARTS,
   );
-  const chartDataFull = chartCompatibleData(dataProp, mockDataSizeProp, false);
+  const chartDataAverages = chartCompatibleData(
+    dataProp,
+    mockDataSizeProp,
+    EChartDataType.AVERAGES,
+  );
+
+  const { numberOfRuns } = dataProp[0].statisticsByMockDataSize[0];
 
   return (
     <div id="durations-chart">
@@ -149,12 +134,12 @@ const DurationsChart = ({
         options={options}
       />
 
-      <h4>Averages over 50 concurrent invocations</h4>
+      <h4>Averages over {numberOfRuns} concurrent invocations</h4>
       <Bar
         type="bar"
         width={800}
         height={500}
-        data={chartDataFull}
+        data={chartDataAverages}
         options={options}
       />
 
@@ -185,6 +170,16 @@ const DurationsChart = ({
         took. So basically it shows the cost of serializing the data and passing
         it back and forth between the containers (or just between the two
         functions in benchmark's case).
+      </p>
+
+      <p>
+        <b>Cold start durations</b> are measured by the first run, assuming both
+        containers are already running.
+      </p>
+
+      <p>
+        <b>Averages over {numberOfRuns} concurrent executions</b> measures the
+        performance under concurrent load.
       </p>
     </div>
   );

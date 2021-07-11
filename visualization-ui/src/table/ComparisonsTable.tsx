@@ -112,6 +112,10 @@ export default function ComparisonsTable({
   return (
     <div>
       <h3>Durations compared</h3>
+      <h4>
+        Averages over {dataProp[0].statisticsByMockDataSize[0].numberOfRuns}{' '}
+        concurrent runs
+      </h4>
       <Table
         columns={columns}
         data={tableDataByMockDataSize({ dataProp, mockDataSizeProp })}
