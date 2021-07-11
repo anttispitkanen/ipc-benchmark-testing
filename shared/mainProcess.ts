@@ -54,7 +54,7 @@ const mainProcessRunner = async (
   };
 };
 
-const NUMBER_OF_RUNS = 50; // TODO: parametrize
+const NUMBER_OF_RUNS = 100; // TODO: parametrize
 
 /**
  * Each IPC can import this function and give the desired data transport method
@@ -78,7 +78,7 @@ export const mainProcess = (
 
     const fullTestRunEnd = timestamp();
 
-    console.log(`Whole test run took ${fullTestRunEnd - fullTestRunStart} ms`); // FIXME:
+    console.log(`Whole test run took ${fullTestRunEnd - fullTestRunStart} ms`);
 
     // Write the results in a file
     const rawResults = documentResults(
