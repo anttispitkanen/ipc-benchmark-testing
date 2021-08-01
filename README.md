@@ -149,7 +149,7 @@ npm run cli
 
 ![CLI example GIF](/ipc-cli.gif 'CLI example GIF')
 
-Or you can run the **full test suite** (each IPC method for each mock data size 5 times), in a random order to avoid host machine affecting the performance, with
+Or you can run the **full test suite** (each IPC method for each mock data size), in a random order to avoid host machine affecting the performance, with
 
 ```bash
 npm run full-test-suite
